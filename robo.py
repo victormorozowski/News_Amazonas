@@ -5,39 +5,61 @@ from email.utils import parsedate_to_datetime
 
 try:
     from gnews import GNews
-    google_news = GNews(language='pt', country='BR', period='1d', max_results=10)
+    google_news = GNews(language='pt', country='BR', period='1d', max_results=8)
 except Exception as e:
     print(f"Aviso ao inicializar GNews: {e}")
     google_news = None
 
 TEMAS_BUSCA = [
-    "Superintendência da Polícia Federal no Amazonas",
-    "Superintendente da Polícia Federal no Amazonas",
-    "Delegada de Polícia Federal Danielle de Meneses Oliveira Mady",
-    "Tráfico de drogas no Amazonas",
-    "Apreensão de drogas no Amazonas",
-    "Segurança Pública no Amazonas",
-    "Desmatamento no Amazonas",
-    "Queimadas no Amazonas",
-    "Garimpo ilegal no Amazonas",
-    "Extração de ouro no Amazonas",
-    "Prisão no Amazonas",
+    "Polícia Federal Amazonas",
+    "Superintendência Polícia Federal Amazonas",
+    "Delegada Danielle de Meneses Oliveira Mady",
+    "Danielle Mady Polícia Federal",
+    "Tráfico de drogas Amazonas",
+    "Apreensão de drogas Amazonas",
+    "Segurança Pública Amazonas",
+    "Desmatamento Amazonas",
+    "Queimadas Amazonas",
+    "Garimpo ilegal Amazonas",
+    "Extração de ouro Amazonas",
+    "Prisão Amazonas",
     "Pirataria fluvial Amazonas",
-    "Política no Amazonas fatos relevantes",
-    "Polícia Civil do Amazonas",
-    "Polícia Militar do Amazonas",
-    "Polícia Federal do Amazonas",
-    "Operações da Polícia Federal Amazonas",
-    "Órgãos Federais atuantes no Amazonas",
+    "Política Amazonas",
+    "Polícia Civil Amazonas",
+    "Polícia Militar Amazonas",
+    "Operações Polícia Federal Amazonas",
+    "Órgãos Federais Amazonas",
 ]
 
-# Palavras obrigatórias para garantir que a notícia é do Amazonas
-TERMOS_OBRIGATORIOS = ["amazonas", "manaus", "am", "pf-am", "dpf"]
+# Lista completa de municípios e termos do Amazonas
+MUNICIPIOS_AM = [
+    "alvarães", "amaturá", "anamã", "anori", "apuí", "atalaia do norte", "autazes", 
+    "barcelos", "barreirinha", "benjamin constant", "beruri", "boa vista do ramos", 
+    "boca do acre", "borba", "caapiranga", "canutama", "carauari", "careiro", 
+    "careiro da várzea", "coari", "codajás", "eirunepé", "envira", "fonte boa", 
+    "guajará", "humaitá", "ipixuna", "iranduba", "itacoatiara", "itamarati", 
+    "itapiranga", "japurá", "juruá", "jutaí", "lábrea", "manacapuru", "manaquiri", 
+    "manaus", "manicoré", "maraã", "maués", "nhamundá", "nova olinda do norte", 
+    "novo airão", "novo aripuanã", "parintins", "pauini", "presidente figueiredo", 
+    "rio preto da eva", "santa isabel do rio negro", "santo antônio do içá", 
+    "são gabriel da cachoeira", "são paulo de olivença", "são sebastião do uatumã", 
+    "silves", "tabatinga", "tapauá", "tefé", "tonantins", "uarini", "urucará", 
+    "urucurituba", "amazonas", "am", "alto solimões", "rio negro", "rio solimões"
+]
 
-def validar_relevancia_amazonas(titulo, resumo):
-    texto_completo = f"{titulo} {resumo}".lower()
-    # Verifica se pelo menos um termo geográfico do Amazonas está presente
-    return any(termo in texto_completo for termo in TERMOS_OBRIGATORIOS)
+def validar_relevancia_noticia(titulo, resumo):
+    texto = f"{titulo} {resumo}".lower()
+    
+    # Exceção inteligente: Se a notícia cita a superintendente por variações do nome ou cargo, é aprovada diretamente
+    termos_superintendente = [
+        "danielle mady", "danielle de meneses", "delegada danielle", 
+        "superintendente danielle", "danielle meneses"
+    ]
+    if any(termo in texto for termo in termos_superintendente):
+        return True
+    
+    # Regra padrão: O texto deve obrigatoriamente ter ligação com o Amazonas ou municípios
+    return any(mun in texto for mun in MUNICIPIOS_AM)
 
 def formatar_data_brasil(data_str):
     if not data_str:
@@ -85,7 +107,7 @@ def buscar_noticias():
     data_execucao = datetime.now().strftime('%d/%m/%Y %H:%M')
     data_hoje = datetime.now().strftime('%Y-%m-%d')
 
-    print(f"Iniciando varredura com filtro rigoroso - {data_execucao}\n" + "=" * 50)
+    print(f"Iniciando varredura refinada - {data_execucao}\n" + "=" * 50)
 
     if not google_news:
         print("Erro crítico: GNews não foi carregado corretamente.")
@@ -128,8 +150,8 @@ def buscar_noticias():
                     descricao = artigo.get('description', '')
                     resumo = descricao if descricao else f"Notícia referente a {tema}."
 
-                    # FILTRO RIGOROSO: Descarta se não for do Amazonas (exceto para nomes próprios diretos como o da Delegada)
-                    if "danielle" not in tema.lower() and not validar_relevancia_amazonas(titulo, resumo):
+                    # Validação refinada (municípios/AM + exceção flexível para a superintendente)
+                    if not validar_relevancia_noticia(titulo, resumo):
                         continue
 
                     links_processados.add(link)
@@ -175,7 +197,7 @@ def buscar_noticias():
     with open('historico_geral.json', 'w', encoding='utf-8') as f:
         json.dump(historico, f, ensure_ascii=False, indent=4)
 
-    print("\nVarredura com filtro concluída com sucesso!")
+    print("\nVarredura concluída com sucesso!")
 
 if __name__ == '__main__':
     buscar_noticias()
