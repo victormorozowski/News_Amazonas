@@ -10,11 +10,11 @@ except Exception as e:
     print(f"Aviso ao inicializar GNews: {e}")
     google_news = None
 
+# Lista de temas unificada e limpa (sem duplicações visuais)
 TEMAS_BUSCA = [
     "Polícia Federal Amazonas",
     "Superintendência Polícia Federal Amazonas",
-    "Delegada Danielle de Meneses Oliveira Mady",
-    "Danielle Mady Polícia Federal",
+    "Superintendente da Polícia Federal no Amazonas Danielle Mady",
     "Tráfico de drogas Amazonas",
     "Apreensão de drogas Amazonas",
     "Segurança Pública Amazonas",
@@ -55,10 +55,10 @@ CERNE_TEMATICO = [
     "garimpo", "ouro", "desmatamento", "queimada", "ambiental", "meio ambiente", 
     "pirataria", "fluvial", "justiça", "ministério", "governo", "deputado", 
     "senador", "vereador", "prefeito", "política", "político", "corregedoria", 
-    "supremo", "tribunal", "juiz", "operação"
+    "supremo", "tribunal", "juiz"
 ]
 
-# Termos de ruído absoluto que devem ser eliminados (ex: notícias de escolas, bibliotecas e vestibulares de fora)
+# Termos de ruído absoluto que devem ser eliminados (notícias irrelevantes de fora)
 TERMOS_RUIDO = [
     "vestibular", "biblioteca", "escola municipal", "ensino fundamental", 
     "educação inclusiva", "formatura", "teatro", "exposição cultural", 
@@ -68,12 +68,12 @@ TERMOS_RUIDO = [
 def validar_relevancia_noticia(titulo, resumo, link):
     texto = f"{titulo} {resumo}".lower()
     
-    # 1. Se contiver termos clássicos de ruído irrelevante (ex: vestibular, biblioteca escolar), rejeita direto
+    # 1. Se contiver termos clássicos de ruído irrelevante, rejeita direto
     for ruido in TERMOS_RUIDO:
         if ruido in texto:
             return False
 
-    # 2. Exceção direta para a Superintendente (se citada por nome ou cargo, é altamente relevante)
+    # 2. Exceção direta se citar a Superintendente por nome ou cargo
     termos_superintendente = [
         "danielle mady", "danielle de meneses", "delegada danielle", 
         "superintendente danielle", "danielle meneses"
@@ -137,7 +137,7 @@ def buscar_noticias():
     data_execucao = datetime.now().strftime('%d/%m/%Y %H:%M')
     data_hoje = datetime.now().strftime('%Y-%m-%d')
 
-    print(f"Iniciando varredura com camada semântica - {data_execucao}\n" + "=" * 50)
+    print(f"Iniciando varredura com triagem semântica - {data_execucao}\n" + "=" * 50)
 
     if not google_news:
         print("Erro crítico: GNews não foi carregado corretamente.")
@@ -180,7 +180,7 @@ def buscar_noticias():
                     descricao = artigo.get('description', '')
                     resumo = descricao if descricao else f"Notícia referente a {tema}."
 
-                    # Validação semântica estrita: exige vínculo ao AM + cerne temático + ausência de ruído
+                    # Validação semântica e estrutural
                     if not validar_relevancia_noticia(titulo, resumo, link):
                         continue
 
