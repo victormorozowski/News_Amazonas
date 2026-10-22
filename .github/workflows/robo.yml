@@ -1,0 +1,37 @@
+name: Robô de Notícias Amazonas
+
+on:
+  schedule:
+    - cron: '0,30 11-3 * * *'
+  
+  workflow_dispatch:
+
+jobs:
+  executar-robo:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Copiar código do repositório
+      uses: actions/checkout@v4
+
+    - name: Configurar ambiente Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Instalar dependências
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Executar o Robô de Notícias
+      run: python robo.py
+
+    - name: Salvar as notícias atualizadas no repositório
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "Atualização automática de notícias e histórico"
+        file_pattern: "*.json"
