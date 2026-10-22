@@ -2,9 +2,13 @@ from datetime import datetime, timedelta
 import json
 import os
 from email.utils import parsedate_to_datetime
-from gnews import GNews
 
-google_news = GNews(language='pt', country='BR', period='1d', max_results=10)
+try:
+    from gnews import GNews
+    google_news = GNews(language='pt', country='BR', period='1d', max_results=5)
+except Exception as e:
+    print(f"Aviso ao inicializar GNews: {e}")
+    google_news = None
 
 TEMAS_BUSCA = [
     "Superintendência da Polícia Federal no Amazonas",
@@ -49,9 +53,7 @@ def formatar_data_brasil(data_str):
         ("minutes", "minutos"), ("minute", "minuto"),
         ("days ago", "dias atrás"), ("day ago", "dia atrás"),
         ("days", "dias"), ("day", "dia"),
-        ("weeks ago", "semanas atrás"), ("week ago", "semana atrás"),
-        ("weeks", "semanas"), ("week", "semana"),
-        ("months ago", "meses atrás"), ("month ago", "mês atrás"),
+        ("weeks ago", "semanas atras"), ("week ago", "semana atrás"),
         ("ago", "atrás"), ("yesterday", "ontem"), ("today", "hoje")
     ]
     
@@ -69,16 +71,6 @@ def converter_data_para_ordenacao(data_str):
             return dt_utc
     except:
         pass
-    
-    try:
-        for fmt in ('%Y-%m-%dT%H:%M:%SZ', '%d/%m/%Y %H:%M'):
-            try:
-                return datetime.strptime(str(data_str).strip(), fmt)
-            except ValueError:
-                continue
-    except:
-        pass
-        
     return datetime.min
 
 def buscar_noticias():
@@ -86,6 +78,10 @@ def buscar_noticias():
     data_hoje = datetime.now().strftime('%Y-%m-%d')
 
     print(f"Iniciando varredura de notícias - {data_execucao}\n" + "=" * 50)
+
+    if not google_news:
+        print("Erro crítico: GNews não foi carregado corretamente.")
+        return
 
     dados_existentes_hoje = {}
     if os.path.exists('noticias_atualizadas.json'):
