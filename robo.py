@@ -10,7 +10,7 @@ except Exception as e:
     print(f"Aviso ao inicializar GNews: {e}")
     google_news = None
 
-# Lista de temas unificada e limpa (sem duplicações visuais)
+# Parâmetros de busca refinados e blindados (removidos termos genéricos e soltos)
 TEMAS_BUSCA = [
     "Polícia Federal Amazonas",
     "Superintendência Polícia Federal Amazonas",
@@ -22,9 +22,10 @@ TEMAS_BUSCA = [
     "Queimadas Amazonas",
     "Garimpo ilegal Amazonas",
     "Extração de ouro Amazonas",
-    "Prisão Amazonas",
+    "Mandado de prisão Polícia Amazonas",
+    "Operação policial Amazonas",
     "Pirataria fluvial Amazonas",
-    "Política Amazonas",
+    "Investigação política Amazonas",
     "Polícia Civil Amazonas",
     "Polícia Militar Amazonas",
     "Operações Polícia Federal Amazonas",
@@ -47,28 +48,28 @@ MUNICIPIOS_AM = [
     "urucurituba", "amazonas", "am", "alto solimões", "rio negro", "rio solimões"
 ]
 
-# Palavras-chave obrigatórias do cerne operacional/institucional (a notícia deve conter pelo menos uma)
+# Palavras-chave obrigatórias do cerne operacional/institucional
 CERNE_TEMATICO = [
     "polícia", "policial", "delegado", "delegada", "pf", "prf", "federal", "civil", 
     "militar", "operação", "investigação", "investigado", "prisão", "preso", 
     "apreensão", "apreendido", "droga", "drogas", "tráfico", "crime", "criminoso", 
     "garimpo", "ouro", "desmatamento", "queimada", "ambiental", "meio ambiente", 
     "pirataria", "fluvial", "justiça", "ministério", "governo", "deputado", 
-    "senador", "vereador", "prefeito", "política", "político", "corregedoria", 
-    "supremo", "tribunal", "juiz"
+    "senador", "vereador", "prefeito", "corregedoria", "supremo", "tribunal", "juiz"
 ]
 
-# Termos de ruído absoluto que devem ser eliminados (notícias irrelevantes de fora)
+# Termos de ruído absoluto ampliados (elimina prefeituras, educação e cultura de fora)
 TERMOS_RUIDO = [
     "vestibular", "biblioteca", "escola municipal", "ensino fundamental", 
     "educação inclusiva", "formatura", "teatro", "exposição cultural", 
-    "campeonato municipal", "festa de", "campeonato de futebol"
+    "campeonato municipal", "festa de", "campeonato de futebol", 
+    "concurso público municipal", "matrícula escolar", "merenda escolar"
 ]
 
 def validar_relevancia_noticia(titulo, resumo, link):
     texto = f"{titulo} {resumo}".lower()
     
-    # 1. Se contiver termos clássicos de ruído irrelevante, rejeita direto
+    # 1. Barreiras contra ruídos institucionais/educacionais
     for ruido in TERMOS_RUIDO:
         if ruido in texto:
             return False
@@ -86,7 +87,7 @@ def validar_relevancia_noticia(titulo, resumo, link):
     if not tem_vinculo_am:
         return False
 
-    # 4. O texto DEVE obrigatoriamente tocar no cerne temático (segurança, polícia, meio ambiente, política, operações)
+    # 4. O texto DEVE obrigatoriamente tocar no cerne temático
     tem_cerne = any(cerne in texto for cerne in CERNE_TEMATICO)
     
     return tem_cerne
@@ -137,7 +138,7 @@ def buscar_noticias():
     data_execucao = datetime.now().strftime('%d/%m/%Y %H:%M')
     data_hoje = datetime.now().strftime('%Y-%m-%d')
 
-    print(f"Iniciando varredura com triagem semântica - {data_execucao}\n" + "=" * 50)
+    print(f"Iniciando varredura com parâmetros refinados - {data_execucao}\n" + "=" * 50)
 
     if not google_news:
         print("Erro crítico: GNews não foi carregado corretamente.")
@@ -180,7 +181,6 @@ def buscar_noticias():
                     descricao = artigo.get('description', '')
                     resumo = descricao if descricao else f"Notícia referente a {tema}."
 
-                    # Validação semântica e estrutural
                     if not validar_relevancia_noticia(titulo, resumo, link):
                         continue
 
