@@ -22,7 +22,10 @@
                 <div class="h-3 w-3 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_12px_rgba(16,185,129,0.5)]"></div>
                 <div>
                     <h1 class="text-base font-bold tracking-wide text-slate-100 flex items-center gap-2">
-                        Painel de Monitoramento <span class="text-xs font-semibold px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">AMAZONAS</span>
+                        Painel de Monitoramento 
+                        <span class="text-xs font-semibold px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">AMAZONAS</span>
+                        <!-- Badge de Notificação Geral no Topo -->
+                        <span id="badge-geral-topo" class="hidden text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-500 text-white shadow-[0_0_10px_rgba(239,68,68,0.5)] animate-bounce"></span>
                     </h1>
                     <p class="text-[11px] text-slate-400 flex flex-wrap items-center gap-2">
                         <span>Inteligência Operacional</span> • 
@@ -110,6 +113,7 @@
         let modoAtual = 'diario';
         let temaSelecionado = 'TODOS';
         let termoBusca = '';
+        let ultimasVistas = {}; // Armazena os links visualizados por tema
 
         function iniciarRelogios() {
             function atualizar() {
@@ -119,8 +123,8 @@
                 const dataBrasilia = agora.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
                 const horaBrasilia = agora.toLocaleTimeString('pt-BR', { timeZone: 'America/Sao_Paulo' });
                 
-                document.getElementById('relogio-manaus').innerText = `Manaus: ${dataManaus} • ${horaManaus}`;
-                document.getElementById('relogio-brasilia').innerText = `Brasília: ${dataBrasilia} • ${horaBrasilia}`;
+                document.getElementById('relogio-manaus').innerText = `Manaus: ${dataManaus} •${horaManaus}`;
+                document.getElementById('relogio-brasilia').innerText = `Brasília: ${dataBrasilia} •${horaBrasilia}`;
             }
             atualizar();
             setInterval(atualizar, 1000);
@@ -129,6 +133,12 @@
         async function inicializarPainel() {
             iniciarRelogios();
             try {
+                // Carregar cache salvo no navegador
+                const salvo = localStorage.getItem('news_am_vistas');
+                if (salvo) {
+                    ultimasVistas = JSON.parse(salvo);
+                }
+
                 const respDiario = await fetch('noticias_atualizadas.json?t=' + new Date().getTime());
                 if (respDiario.ok) dadosAtuais = await respDiario.json();
 
@@ -142,6 +152,7 @@
                 atualizarTermometroFluxo();
                 renderizarAbasTemas();
                 renderizarConteudo();
+                atualizarBadgesNovidades();
             } catch (erro) {
                 document.getElementById('container-noticias').innerHTML = `
                     <div class="bg-red-950/20 border border-red-900/50 text-red-300 p-6 rounded-xl text-center max-w-md mx-auto my-12">
@@ -150,6 +161,61 @@
                     </div>
                 `;
             }
+        }
+
+        function calcularNovidadesPorTema() {
+            let contagemNovasPorTema = {};
+            let totalNovasGeral = 0;
+
+            for (let [tema, noticias] of Object.entries(dadosAtuais)) {
+                if (Array.isArray(noticias)) {
+                    let vistasNesteTema = ultimasVistas[tema] || [];
+                    let novas = noticias.filter(n => !vistasNesteTema.includes(n.link));
+                    if (novas.length > 0) {
+                        contagemNovasPorTema[tema] = novas.length;
+                        totalNovasGeral += novas.length;
+                    }
+                }
+            }
+            return { contagemNovasPorTema, totalNovasGeral };
+        }
+
+        function atualizarBadgesNovidades() {
+            if (modoAtual !== 'diario') {
+                document.getElementById('badge-geral-topo').classList.add('hidden');
+                return;
+            }
+
+            const { totalNovasGeral } = calcularNovidadesPorTema();
+            const badgeTopo = document.getElementById('badge-geral-topo');
+
+            if (totalNovasGeral > 0) {
+                badgeTopo.innerText = `+${totalNovasGeral} nova${totalNovasGeral > 1 ? 's' : ''}`;
+                badgeTopo.classList.remove('hidden');
+            } else {
+                badgeTopo.classList.add('hidden');
+            }
+        }
+
+        function marcarTemaComoVisto(tema) {
+            if (modoAtual !== 'diario') return;
+            
+            if (tema === 'TODOS') {
+                // Marca todas as notícias atuais de todos os temas como vistas
+                for (let [t, noticias] of Object.entries(dadosAtuais)) {
+                    if (Array.isArray(noticias)) {
+                        ultimasVistas[t] = noticias.map(n => n.link);
+                    }
+                }
+            } else {
+                if (Array.isArray(dadosAtuais[tema])) {
+                    ultimasVistas[tema] = dadosAtuais[tema].map(n => n.link);
+                }
+            }
+            
+            localStorage.setItem('news_am_vistas', JSON.stringify(ultimasVistas));
+            atualizarBadgesNovidades();
+            renderizarAbasTemas();
         }
 
         function atualizarTermometroFluxo() {
@@ -190,8 +256,7 @@
 
             document.getElementById('texto-status-fluxo').innerText = textoStatus;
             let barra = document.getElementById('barra-nivel-fluxo');
-            barra.className = `h-full rounded-full transition-all duration-700 ${corBarra}`;
-            barra.style.width = `${porcentagem}%`;
+            barra.className = `h-full rounded-full transition-all duration-700 ${corBarra}`; barra.style.width = `${porcentagem}%`;
         }
 
         function mudarModoVisualizacao(modo) {
@@ -210,10 +275,12 @@
                 painelHist.classList.add('hidden');
                 renderizarAbasTemas();
                 renderizarConteudo();
+                atualizarBadgesNovidades();
             } else {
                 btnHistorico.className = 'text-xs font-semibold px-4 py-2 rounded-lg bg-cyan-600 text-white whitespace-nowrap transition-all shadow-md shadow-cyan-950/50 flex items-center gap-1.5';
                 btnDiario.className = 'text-xs font-semibold px-4 py-2 rounded-lg bg-slate-800/80 text-slate-300 hover:bg-slate-800 hover:text-white whitespace-nowrap transition-all border border-slate-700/50 flex items-center gap-1.5';
                 painelHist.classList.remove('hidden');
+                document.getElementById('badge-geral-topo').classList.add('hidden');
                 popularSeletorDatas();
             }
         }
@@ -252,93 +319,19 @@
             const containerAbas = document.getElementById('container-abas-temas');
             containerAbas.innerHTML = '';
             const temas = ['TODOS', ...Object.keys(dadosAtuais)];
+            const { contagemNovasPorTema } = calcularNovidadesPorTema();
 
             temas.forEach(tema => {
                 let btn = document.createElement('button');
                 let ativo = temaSelecionado === tema;
-                btn.className = `text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap transition-all ${
-                    ativo ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 shadow-sm' : 'bg-slate-900/80 text-slate-400 hover:bg-slate-800 hover:text-slate-200 border border-slate-800'
-                }`;
-                btn.innerText = tema;
-                btn.onclick = () => {
-                    temaSelecionado = tema;
-                    renderizarAbasTemas();
-                    renderizarConteudo();
-                };
-                containerAbas.appendChild(btn);
-            });
-        }
-
-        function filtrarNoticias() {
-            termoBusca = document.getElementById('input-busca').value.toLowerCase();
-            renderizarConteudo();
-        }
-
-        function renderizarConteudo() {
-            const container = document.getElementById('container-noticias');
-            container.innerHTML = '';
-
-            let dadosParaExibir = temaSelecionado === 'TODOS' ? dadosAtuais : { [temaSelecionado]: dadosAtuais[temaSelecionado] };
-            document.getElementById('status-atualizacao').innerText = `${Object.keys(dadosAtuais).length} parâmetros monitorados`;
-
-            for (let [tema, noticias] of Object.entries(dadosParaExibir)) {
-                let secao = document.createElement('div');
-                secao.className = 'bg-slate-900/70 backdrop-blur border border-slate-800/80 rounded-2xl p-6 shadow-xl mb-6 transition-all';
-
-                let cabecalhoTema = document.createElement('div');
-                cabecalhoTema.className = 'flex justify-between items-center mb-5 pb-3 border-b border-slate-800';
-                cabecalhoTema.innerHTML = `<h2 class="text-sm font-bold tracking-wide text-cyan-400 flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-cyan-500"></span>${tema}</h2>`;
-                secao.appendChild(cabecalhoTema);
-
-                let conteudoDiv = document.createElement('div');
-
-                if (typeof noticias === 'string') {
-                    if (!termoBusca || tema.toLowerCase().includes(termoBusca)) {
-                        conteudoDiv.innerHTML = `<p class="text-xs text-slate-400 italic bg-slate-950/40 p-4 rounded-xl border border-slate-800/60">${noticias}</p>`;
-                    } else {
-                        conteudoDiv.innerHTML = `<p class="text-xs text-slate-500 italic">Nenhum resultado para o filtro.</p>`;
-                    }
-                } else if (Array.isArray(noticias)) {
-                    let noticiasFiltradas = noticias.filter(item => {
-                        if (!termoBusca) return true;
-                        return item.titulo.toLowerCase().includes(termoBusca) || item.resumo.toLowerCase().includes(termoBusca) || item.fonte.toLowerCase().includes(termoBusca);
-                    });
-
-                    if (noticiasFiltradas.length === 0) {
-                        conteudoDiv.innerHTML = `<p class="text-xs text-slate-500 italic py-2">Nenhuma ocorrência encontrada com o termo buscado neste tema.</p>`;
-                    } else {
-                        let listaCards = document.createElement('div');
-                        listaCards.className = 'grid grid-cols-1 md:grid-cols-2 gap-4';
-
-                        noticiasFiltradas.forEach(item => {
-                            let card = document.createElement('div');
-                            card.className = 'bg-slate-950/60 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between hover:border-cyan-500/40 hover:bg-slate-950/90 transition-all group shadow-sm';
-                            card.innerHTML = `
-                                <div>
-                                    <div class="flex justify-between items-start gap-2 mb-2.5">
-                                        <span class="text-[10px] font-semibold tracking-wider uppercase text-cyan-300/90 bg-cyan-950/40 px-2.5 py-1 rounded-md border border-cyan-800/40">${item.fonte}</span>
-                                        <span class="text-[11px] text-slate-400 font-mono">${item.data}</span>
-                                    </div>
-                                    <h3 class="text-xs font-bold text-slate-100 mb-2 leading-relaxed group-hover:text-cyan-200 transition-colors">${item.titulo}</h3>
-                                    <p class="text-xs text-slate-400 mb-4 leading-relaxed font-light">${item.resumo}</p>
-                                </div>
-                                <a href="${item.link}" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 transition-colors pt-2 border-t border-slate-900">
-                                    <span>Ler matéria completa</span>
-                                    <svg class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                                </a>
-                            `;
-                            listaCards.appendChild(card);
-                        });
-                        conteudoDiv.appendChild(listaCards);
-                    }
+                
+                let qtdNovas = 0;
+                if (tema === 'TODOS' && modoAtual === 'diario') {
+                    qtdNovas = Object.values(contagemNovasPorTema).reduce((a, b) => a + b, 0);
+                } else if (modoAtual === 'diario') {
+                    qtdNovas = contagemNovasPorTema[tema] || 0;
                 }
 
-                secao.appendChild(conteudoDiv);
-                container.appendChild(secao);
-            }
-        }
-
-        inicializarPainel();
-    </script>
-</body>
-</html>
+                btn.className = `text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap transition-all flex items-center gap-1.5 ${ ativo ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 shadow-sm' : 'bg-slate-900/80 text-slate-400 hover:bg-slate-800 hover:text-slate-200 border border-slate-800' }`;  let htmlTexto = `<span>${tema}</span>`;
+                if (qtdNovas > 0) {
+                    htmlTexto += `<span class="bg-red-500
