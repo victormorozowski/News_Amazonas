@@ -31,7 +31,7 @@ TEMAS_BUSCA = [
     "Órgãos Federais Amazonas",
 ]
 
-# Lista completa de municípios e termos do Amazonas
+# Lista completa de municípios e termos geográficos do Amazonas
 MUNICIPIOS_AM = [
     "alvarães", "amaturá", "anamã", "anori", "apuí", "atalaia do norte", "autazes", 
     "barcelos", "barreirinha", "benjamin constant", "beruri", "boa vista do ramos", 
@@ -47,19 +47,49 @@ MUNICIPIOS_AM = [
     "urucurituba", "amazonas", "am", "alto solimões", "rio negro", "rio solimões"
 ]
 
-def validar_relevancia_noticia(titulo, resumo):
+# Palavras-chave obrigatórias do cerne operacional/institucional (a notícia deve conter pelo menos uma)
+CERNE_TEMATICO = [
+    "polícia", "policial", "delegado", "delegada", "pf", "prf", "federal", "civil", 
+    "militar", "operação", "investigação", "investigado", "prisão", "preso", 
+    "apreensão", "apreendido", "droga", "drogas", "tráfico", "crime", "criminoso", 
+    "garimpo", "ouro", "desmatamento", "queimada", "ambiental", "meio ambiente", 
+    "pirataria", "fluvial", "justiça", "ministério", "governo", "deputado", 
+    "senador", "vereador", "prefeito", "política", "político", "corregedoria", 
+    "supremo", "tribunal", "juiz", "operação"
+]
+
+# Termos de ruído absoluto que devem ser eliminados (ex: notícias de escolas, bibliotecas e vestibulares de fora)
+TERMOS_RUIDO = [
+    "vestibular", "biblioteca", "escola municipal", "ensino fundamental", 
+    "educação inclusiva", "formatura", "teatro", "exposição cultural", 
+    "campeonato municipal", "festa de", "campeonato de futebol"
+]
+
+def validar_relevancia_noticia(titulo, resumo, link):
     texto = f"{titulo} {resumo}".lower()
     
-    # Exceção inteligente: Se a notícia cita a superintendente por variações do nome ou cargo, é aprovada diretamente
+    # 1. Se contiver termos clássicos de ruído irrelevante (ex: vestibular, biblioteca escolar), rejeita direto
+    for ruido in TERMOS_RUIDO:
+        if ruido in texto:
+            return False
+
+    # 2. Exceção direta para a Superintendente (se citada por nome ou cargo, é altamente relevante)
     termos_superintendente = [
         "danielle mady", "danielle de meneses", "delegada danielle", 
         "superintendente danielle", "danielle meneses"
     ]
     if any(termo in texto for termo in termos_superintendente):
         return True
+
+    # 3. O texto DEVE obrigatoriamente mencionar o Amazonas ou algum município
+    tem_vinculo_am = any(mun in texto for mun in MUNICIPIOS_AM)
+    if not tem_vinculo_am:
+        return False
+
+    # 4. O texto DEVE obrigatoriamente tocar no cerne temático (segurança, polícia, meio ambiente, política, operações)
+    tem_cerne = any(cerne in texto for cerne in CERNE_TEMATICO)
     
-    # Regra padrão: O texto deve obrigatoriamente ter ligação com o Amazonas ou municípios
-    return any(mun in texto for mun in MUNICIPIOS_AM)
+    return tem_cerne
 
 def formatar_data_brasil(data_str):
     if not data_str:
@@ -107,7 +137,7 @@ def buscar_noticias():
     data_execucao = datetime.now().strftime('%d/%m/%Y %H:%M')
     data_hoje = datetime.now().strftime('%Y-%m-%d')
 
-    print(f"Iniciando varredura refinada - {data_execucao}\n" + "=" * 50)
+    print(f"Iniciando varredura com camada semântica - {data_execucao}\n" + "=" * 50)
 
     if not google_news:
         print("Erro crítico: GNews não foi carregado corretamente.")
@@ -150,8 +180,8 @@ def buscar_noticias():
                     descricao = artigo.get('description', '')
                     resumo = descricao if descricao else f"Notícia referente a {tema}."
 
-                    # Validação refinada (municípios/AM + exceção flexível para a superintendente)
-                    if not validar_relevancia_noticia(titulo, resumo):
+                    # Validação semântica estrita: exige vínculo ao AM + cerne temático + ausência de ruído
+                    if not validar_relevancia_noticia(titulo, resumo, link):
                         continue
 
                     links_processados.add(link)
