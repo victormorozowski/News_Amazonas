@@ -24,7 +24,6 @@
                     <h1 class="text-base font-bold tracking-wide text-slate-100 flex items-center gap-2">
                         Painel de Monitoramento 
                         <span class="text-xs font-semibold px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">AMAZONAS</span>
-                        <!-- Badge de Notificação Geral no Topo -->
                         <span id="badge-geral-topo" class="hidden text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-500 text-white shadow-[0_0_10px_rgba(239,68,68,0.5)] animate-bounce"></span>
                     </h1>
                     <p class="text-[11px] text-slate-400 flex flex-wrap items-center gap-2">
@@ -113,7 +112,7 @@
         let modoAtual = 'diario';
         let temaSelecionado = 'TODOS';
         let termoBusca = '';
-        let ultimasVistas = {}; // Armazena os links visualizados por tema
+        let ultimasVistas = {};
 
         function iniciarRelogios() {
             function atualizar() {
@@ -123,8 +122,8 @@
                 const dataBrasilia = agora.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
                 const horaBrasilia = agora.toLocaleTimeString('pt-BR', { timeZone: 'America/Sao_Paulo' });
                 
-                document.getElementById('relogio-manaus').innerText = `Manaus: ${dataManaus} •${horaManaus}`;
-                document.getElementById('relogio-brasilia').innerText = `Brasília: ${dataBrasilia} •${horaBrasilia}`;
+                document.getElementById('relogio-manaus').innerText = `Manaus: ${dataManaus} • ${horaManaus}`;
+                document.getElementById('relogio-brasilia').innerText = `Brasília: ${dataBrasilia} • ${horaBrasilia}`;
             }
             atualizar();
             setInterval(atualizar, 1000);
@@ -133,14 +132,19 @@
         async function inicializarPainel() {
             iniciarRelogios();
             try {
-                // Carregar cache salvo no navegador
-                const salvo = localStorage.getItem('news_am_vistas');
-                if (salvo) {
-                    ultimasVistas = JSON.parse(salvo);
+                try {
+                    const salvo = localStorage.getItem('news_am_vistas_v2');
+                    if (salvo) ultimasVistas = JSON.parse(salvo);
+                } catch (e) {
+                    ultimasVistas = {};
                 }
 
                 const respDiario = await fetch('noticias_atualizadas.json?t=' + new Date().getTime());
-                if (respDiario.ok) dadosAtuais = await respDiario.json();
+                if (respDiario.ok) {
+                    dadosAtuais = await respDiario.json();
+                } else {
+                    dadosAtuais = {};
+                }
 
                 const respHist = await fetch('historico_geral.json?t=' + new Date().getTime());
                 if (respHist.ok) {
@@ -154,10 +158,11 @@
                 renderizarConteudo();
                 atualizarBadgesNovidades();
             } catch (erro) {
+                console.error("Erro ao inicializar:", erro);
                 document.getElementById('container-noticias').innerHTML = `
                     <div class="bg-red-950/20 border border-red-900/50 text-red-300 p-6 rounded-xl text-center max-w-md mx-auto my-12">
-                        <p class="font-semibold text-sm mb-1">Aguardando primeira execução do robô.</p>
-                        <p class="text-xs text-red-400/80">Vá na aba Actions do GitHub e execute o robô manualmente para gerar os dados.</p>
+                        <p class="font-semibold text-sm mb-1">Erro ao carregar os dados do painel.</p>
+                        <p class="text-xs text-red-400/80">Certifique-se de que o robô executou com sucesso na aba Actions do GitHub.</p>
                     </div>
                 `;
             }
@@ -167,10 +172,12 @@
             let contagemNovasPorTema = {};
             let totalNovasGeral = 0;
 
+            if (!dadosAtuais || typeof dadosAtuais !== 'object') return { contagemNovasPorTema, totalNovasGeral };
+
             for (let [tema, noticias] of Object.entries(dadosAtuais)) {
                 if (Array.isArray(noticias)) {
-                    let vistasNesteTema = ultimasVistas[tema] || [];
-                    let novas = noticias.filter(n => !vistasNesteTema.includes(n.link));
+                    let vistasNesteTema = Array.isArray(ultimasVistas[tema]) ? ultimasVistas[tema] : [];
+                    let novas = noticias.filter(n => n && n.link && !vistasNesteTema.includes(n.link));
                     if (novas.length > 0) {
                         contagemNovasPorTema[tema] = novas.length;
                         totalNovasGeral += novas.length;
@@ -198,40 +205,48 @@
         }
 
         function marcarTemaComoVisto(tema) {
-            if (modoAtual !== 'diario') return;
+            if (modoAtual !== 'diario' || !dadosAtuais) return;
             
-            if (tema === 'TODOS') {
-                // Marca todas as notícias atuais de todos os temas como vistas
-                for (let [t, noticias] of Object.entries(dadosAtuais)) {
-                    if (Array.isArray(noticias)) {
-                        ultimasVistas[t] = noticias.map(n => n.link);
+            try {
+                if (tema === 'TODOS') {
+                    for (let [t, noticias] of Object.entries(dadosAtuais)) {
+                        if (Array.isArray(noticias)) {
+                            ultimasVistas[t] = noticias.map(n => n.link).filter(Boolean);
+                        }
+                    }
+                } else {
+                    if (Array.isArray(dadosAtuais[tema])) {
+                        ultimasVistas[tema] = dadosAtuais[tema].map(n => n.link).filter(Boolean);
                     }
                 }
-            } else {
-                if (Array.isArray(dadosAtuais[tema])) {
-                    ultimasVistas[tema] = dadosAtuais[tema].map(n => n.link);
-                }
+                localStorage.setItem('news_am_vistas_v2', JSON.stringify(ultimasVistas));
+            } catch (e) {
+                console.error("Erro ao salvar localStorage:", e);
             }
-            
-            localStorage.setItem('news_am_vistas', JSON.stringify(ultimasVistas));
             atualizarBadgesNovidades();
             renderizarAbasTemas();
         }
 
         function atualizarTermometroFluxo() {
             let totalNoticiasHoje = 0;
-            for (let [tema, noticias] of Object.entries(dadosAtuais)) {
-                if (Array.isArray(noticias)) totalNoticiasHoje += noticias.length;
+            if (dadosAtuais && typeof dadosAtuais === 'object') {
+                for (let [tema, noticias] of Object.entries(dadosAtuais)) {
+                    if (Array.isArray(noticias)) totalNoticiasHoje += noticias.length;
+                }
             }
 
             let somaHistorica = 0, diasContados = 0;
-            for (let [data, relatorio] of Object.entries(historicoGeral)) {
-                let countDia = 0;
-                for (let [t, n] of Object.entries(relatorio)) {
-                    if (Array.isArray(n)) countDia += n.length;
+            if (historicoGeral && typeof historicoGeral === 'object') {
+                for (let [data, relatorio] of Object.entries(historicoGeral)) {
+                    let countDia = 0;
+                    if (relatorio && typeof relatorio === 'object') {
+                        for (let [t, n] of Object.entries(relatorio)) {
+                            if (Array.isArray(n)) countDia += n.length;
+                        }
+                    }
+                    somaHistorica += countDia;
+                    diasContados++;
                 }
-                somaHistorica += countDia;
-                diasContados++;
             }
 
             let mediaHistorica = diasContados > 0 ? somaHistorica / diasContados : 20;
@@ -256,7 +271,8 @@
 
             document.getElementById('texto-status-fluxo').innerText = textoStatus;
             let barra = document.getElementById('barra-nivel-fluxo');
-            barra.className = `h-full rounded-full transition-all duration-700 ${corBarra}`; barra.style.width = `${porcentagem}%`;
+            barra.className = `h-full rounded-full transition-all duration-700 ${corBarra}`;
+            barra.style.width = `${porcentagem}%`;
         }
 
         function mudarModoVisualizacao(modo) {
@@ -288,7 +304,7 @@
         function popularSeletorDatas() {
             const select = document.getElementById('select-data');
             select.innerHTML = '';
-            const datas = Object.keys(historicoGeral).sort().reverse();
+            const datas = Object.keys(historicoGeral || {}).sort().reverse();
 
             if (datas.length === 0) {
                 select.innerHTML = '<option value="">Nenhum histórico disponível</option>';
@@ -307,7 +323,7 @@
 
         function carregarHistoricoPorData() {
             const dataSelecionada = document.getElementById('select-data').value;
-            if (historicoGeral[dataSelecionada]) {
+            if (historicoGeral && historicoGeral[dataSelecionada]) {
                 dadosAtuais = historicoGeral[dataSelecionada];
                 atualizarTermometroFluxo();
                 renderizarAbasTemas();
@@ -318,7 +334,7 @@
         function renderizarAbasTemas() {
             const containerAbas = document.getElementById('container-abas-temas');
             containerAbas.innerHTML = '';
-            const temas = ['TODOS', ...Object.keys(dadosAtuais)];
+            const temas = ['TODOS', ...Object.keys(dadosAtuais || {})];
             const { contagemNovasPorTema } = calcularNovidadesPorTema();
 
             temas.forEach(tema => {
@@ -332,6 +348,107 @@
                     qtdNovas = contagemNovasPorTema[tema] || 0;
                 }
 
-                btn.className = `text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap transition-all flex items-center gap-1.5 ${ ativo ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 shadow-sm' : 'bg-slate-900/80 text-slate-400 hover:bg-slate-800 hover:text-slate-200 border border-slate-800' }`;  let htmlTexto = `<span>${tema}</span>`;
+                btn.className = `text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap transition-all flex items-center gap-1.5 ${
+                    ativo ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 shadow-sm' : 'bg-slate-900/80 text-slate-400 hover:bg-slate-800 hover:text-slate-200 border border-slate-800'
+                }`;
+                
+                let htmlTexto = `<span>${tema}</span>`;
                 if (qtdNovas > 0) {
-                    htmlTexto += `<span class="bg-red-500
+                    htmlTexto += `<span class="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.2 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.6)]">+${qtdNovas}</span>`;
+                }
+                btn.innerHTML = htmlTexto;
+
+                btn.onclick = () => {
+                    temaSelecionado = tema;
+                    marcarTemaComoVisto(tema);
+                    renderizarAbasTemas();
+                    renderizarConteudo();
+                };
+                containerAbas.appendChild(btn);
+            });
+        }
+
+        function filtrarNoticias() {
+            termoBusca = document.getElementById('input-busca').value.toLowerCase();
+            renderizarConteudo();
+        }
+
+        function renderizarConteudo() {
+            const container = document.getElementById('container-noticias');
+            container.innerHTML = '';
+
+            if (!dadosAtuais || typeof dadosAtuais !== 'object') {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic py-12 text-center">Nenhum dado disponível no momento.</p>`;
+                return;
+            }
+
+            let dadosParaExibir = temaSelecionado === 'TODOS' ? dadosAtuais : { [temaSelecionado]: dadosAtuais[temaSelecionado] };
+            document.getElementById('status-atualizacao').innerText = `${Object.keys(dadosAtuais).length} parâmetros monitorados`;
+
+            for (let [tema, noticias] of Object.entries(dadosParaExibir)) {
+                if (!noticias) continue;
+
+                let secao = document.createElement('div');
+                secao.className = 'bg-slate-900/70 backdrop-blur border border-slate-800/80 rounded-2xl p-6 shadow-xl mb-6 transition-all';
+
+                let cabecalhoTema = document.createElement('div');
+                cabecalhoTema.className = 'flex justify-between items-center mb-5 pb-3 border-b border-slate-800';
+                cabecalhoTema.innerHTML = `<h2 class="text-sm font-bold tracking-wide text-cyan-400 flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-cyan-500"></span>${tema}</h2>`;
+                secao.appendChild(cabecalhoTema);
+
+                let conteudoDiv = document.createElement('div');
+
+                if (typeof noticias === 'string') {
+                    if (!termoBusca || tema.toLowerCase().includes(termoBusca)) {
+                        conteudoDiv.innerHTML = `<p class="text-xs text-slate-400 italic bg-slate-950/40 p-4 rounded-xl border border-slate-800/60">${noticias}</p>`;
+                    } else {
+                        conteudoDiv.innerHTML = `<p class="text-xs text-slate-500 italic">Nenhum resultado para o filtro.</p>`;
+                    }
+                } else if (Array.isArray(noticias)) {
+                    let noticiasFiltradas = noticias.filter(item => {
+                        if (!item) return false;
+                        if (!termoBusca) return true;
+                        let t = (item.titulo || '').toLowerCase();
+                        let r = (item.resumo || '').toLowerCase();
+                        let f = (item.fonte || '').toLowerCase();
+                        return t.includes(termoBusca) || r.includes(termoBusca) || f.includes(termoBusca);
+                    });
+
+                    if (noticiasFiltradas.length === 0) {
+                        conteudoDiv.innerHTML = `<p class="text-xs text-slate-500 italic py-2">Nenhuma ocorrência encontrada com o termo buscado neste tema.</p>`;
+                    } else {
+                        let listaCards = document.createElement('div');
+                        listaCards.className = 'grid grid-cols-1 md:grid-cols-2 gap-4';
+
+                        noticiasFiltradas.forEach(item => {
+                            let card = document.createElement('div');
+                            card.className = 'bg-slate-950/60 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-between hover:border-cyan-500/40 hover:bg-slate-950/90 transition-all group shadow-sm';
+                            card.innerHTML = `
+                                <div>
+                                    <div class="flex justify-between items-start gap-2 mb-2.5">
+                                        <span class="text-[10px] font-semibold tracking-wider uppercase text-cyan-300/90 bg-cyan-950/40 px-2.5 py-1 rounded-md border border-cyan-800/40">${item.fonte || 'Fonte'}</span>
+                                        <span class="text-[11px] text-slate-400 font-mono">${item.data || ''}</span>
+                                    </div>
+                                    <h3 class="text-xs font-bold text-slate-100 mb-2 leading-relaxed group-hover:text-cyan-200 transition-colors">${item.titulo || 'Sem Título'}</h3>
+                                    <p class="text-xs text-slate-400 mb-4 leading-relaxed font-light">${item.resumo || ''}</p>
+                                </div>
+                                <a href="${item.link || '#'}" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 transition-colors pt-2 border-t border-slate-900">
+                                    <span>Ler matéria completa</span>
+                                    <svg class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                                </a>
+                            `;
+                            listaCards.appendChild(card);
+                        });
+                        conteudoDiv.appendChild(listaCards);
+                    }
+                }
+
+                secao.appendChild(conteudoDiv);
+                container.appendChild(secao);
+            }
+        }
+
+        inicializarPainel();
+    </script>
+</body>
+</html>
