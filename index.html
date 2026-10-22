@@ -405,8 +405,25 @@
                         conteudoDiv.innerHTML = `<p class="text-xs text-slate-500 italic">Nenhum resultado para o filtro.</p>`;
                     }
                 } else if (Array.isArray(noticias)) {
+                    // REGRA DE CORTE DE 12 HORAS (Apenas no modo diário) + TERMO DE BUSCA
+                    let agora = new Date();
+                    let dozeHorasAtrasMs = 12 * 60 * 60 * 1000;
+
                     let noticiasFiltradas = noticias.filter(item => {
                         if (!item) return false;
+
+                        // Se estiver no modo diário, aplica o corte de 12 horas
+                        if (modoAtual === 'diario' && item.data_original) {
+                            let dataPub = new Date(item.data_original);
+                            if (!isNaN(dataPub.getTime())) {
+                                let diferencaMs = agora - dataPub;
+                                if (diferencaMs > dozeHorasAtrasMs) {
+                                    return false; // Mais de 12 horas, some da aba principal
+                                }
+                            }
+                        }
+
+                        // Filtro por termo de busca digitado pelo usuário
                         if (!termoBusca) return true;
                         let t = (item.titulo || '').toLowerCase();
                         let r = (item.resumo || '').toLowerCase();
@@ -415,7 +432,7 @@
                     });
 
                     if (noticiasFiltradas.length === 0) {
-                        conteudoDiv.innerHTML = `<p class="text-xs text-slate-500 italic py-2">Nenhuma ocorrência encontrada com o termo buscado neste tema.</p>`;
+                        conteudoDiv.innerHTML = `<p class="text-xs text-slate-500 italic py-2">Nenhuma ocorrência recente nas últimas 12 horas neste tema.</p>`;
                     } else {
                         let listaCards = document.createElement('div');
                         listaCards.className = 'grid grid-cols-1 md:grid-cols-2 gap-4';
