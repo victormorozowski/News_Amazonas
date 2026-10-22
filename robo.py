@@ -5,7 +5,7 @@ from email.utils import parsedate_to_datetime
 
 try:
     from gnews import GNews
-    google_news = GNews(language='pt', country='BR', period='1d', max_results=5)
+    google_news = GNews(language='pt', country='BR', period='1d', max_results=10)
 except Exception as e:
     print(f"Aviso ao inicializar GNews: {e}")
     google_news = None
@@ -31,6 +31,14 @@ TEMAS_BUSCA = [
     "Órgãos Federais atuantes no Amazonas",
 ]
 
+# Palavras obrigatórias para garantir que a notícia é do Amazonas
+TERMOS_OBRIGATORIOS = ["amazonas", "manaus", "am", "pf-am", "dpf"]
+
+def validar_relevancia_amazonas(titulo, resumo):
+    texto_completo = f"{titulo} {resumo}".lower()
+    # Verifica se pelo menos um termo geográfico do Amazonas está presente
+    return any(termo in texto_completo for termo in TERMOS_OBRIGATORIOS)
+
 def formatar_data_brasil(data_str):
     if not data_str:
         return "Data não informada"
@@ -53,7 +61,7 @@ def formatar_data_brasil(data_str):
         ("minutes", "minutos"), ("minute", "minuto"),
         ("days ago", "dias atrás"), ("day ago", "dia atrás"),
         ("days", "dias"), ("day", "dia"),
-        ("weeks ago", "semanas atras"), ("week ago", "semana atrás"),
+        ("weeks ago", "semanas atrás"), ("week ago", "semana atrás"),
         ("ago", "atrás"), ("yesterday", "ontem"), ("today", "hoje")
     ]
     
@@ -77,7 +85,7 @@ def buscar_noticias():
     data_execucao = datetime.now().strftime('%d/%m/%Y %H:%M')
     data_hoje = datetime.now().strftime('%Y-%m-%d')
 
-    print(f"Iniciando varredura de notícias - {data_execucao}\n" + "=" * 50)
+    print(f"Iniciando varredura com filtro rigoroso - {data_execucao}\n" + "=" * 50)
 
     if not google_news:
         print("Erro crítico: GNews não foi carregado corretamente.")
@@ -115,16 +123,19 @@ def buscar_noticias():
                     
                     if link in links_processados:
                         continue
-                    links_processados.add(link)
 
                     titulo = artigo.get('title', 'Sem Título')
-                    fonte = artigo.get('publisher', {}).get('title', 'Fonte Desconhecida')
-                    
-                    data_crua = artigo.get('published date', '')
-                    data_pub = formatar_data_brasil(data_crua)
-                    
                     descricao = artigo.get('description', '')
                     resumo = descricao if descricao else f"Notícia referente a {tema}."
+
+                    # FILTRO RIGOROSO: Descarta se não for do Amazonas (exceto para nomes próprios diretos como o da Delegada)
+                    if "danielle" not in tema.lower() and not validar_relevancia_amazonas(titulo, resumo):
+                        continue
+
+                    links_processados.add(link)
+                    fonte = artigo.get('publisher', {}).get('title', 'Fonte Desconhecida')
+                    data_crua = artigo.get('published date', '')
+                    data_pub = formatar_data_brasil(data_crua)
 
                     noticias_tema.append({
                         'titulo': titulo,
@@ -164,7 +175,7 @@ def buscar_noticias():
     with open('historico_geral.json', 'w', encoding='utf-8') as f:
         json.dump(historico, f, ensure_ascii=False, indent=4)
 
-    print("\nVarredura concluída com sucesso!")
+    print("\nVarredura com filtro concluída com sucesso!")
 
 if __name__ == '__main__':
     buscar_noticias()
