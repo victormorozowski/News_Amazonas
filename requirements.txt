@@ -1,2 +1,3 @@
-gnews
-beautifulsoup4
+gnews==0.3.5
+beautifulsoup4==4.12.3
+requests==2.31.0
