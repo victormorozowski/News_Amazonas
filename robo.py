@@ -10,6 +10,7 @@ except Exception as e:
     print(f"Aviso ao inicializar GNews: {e}")
     google_news = None
 
+# Parâmetros temáticos regionais (com foco e prioridade em fontes do Amazonas)
 TEMAS_BUSCA = [
     "Polícia Federal Amazonas",
     "Superintendência Polícia Federal Amazonas",
@@ -33,12 +34,13 @@ TEMAS_BUSCA = [
     "site:cm7brasil.com amazonas",
 ]
 
+# Fontes Nacionais Prioritárias solicitadas (G1, UOL, R7, Metrópoles, CNN)
 FONTES_NACIONAIS = [
     {"nome": "G1", "termo": "site:g1.globo.com"},
-    {"nome": "R7", "termo": "site:r7.com"},
-    {"nome": "CNN Brasil", "termo": "site:cnnbrasil.com.br"},
     {"nome": "UOL", "termo": "site:uol.com.br"},
-    {"nome": "Metrópoles", "termo": "site:metropoles.com"}
+    {"nome": "R7", "termo": "site:r7.com"},
+    {"nome": "Metrópoles", "termo": "site:metropoles.com"},
+    {"nome": "CNN Brasil", "termo": "site:cnnbrasil.com.br"}
 ]
 
 MUNICIPIOS_AM = [
@@ -134,6 +136,7 @@ def buscar_noticias():
 
     relatorio_geral = {}
 
+    # Varredura temática regional
     for tema in TEMAS_BUSCA:
         try:
             artigos = google_news.get_news(tema)
@@ -163,6 +166,7 @@ def buscar_noticias():
         except:
             relatorio_geral[tema] = dados_existentes.get(tema, "Sem atualizações.")
 
+    # Varredura prioritária dos portais nacionais (G1, UOL, R7, Metrópoles, CNN)
     noticias_brasil = []
     for fonte_info in FONTES_NACIONAIS:
         try:
@@ -174,7 +178,7 @@ def buscar_noticias():
                         break
                     link = artigo.get('url', '#')
                     titulo = artigo.get('title', 'Sem Título')
-                    resumo = artigo.get('description', '') or "Destaque nacional."
+                    resumo = artigo.get('description', '') or "Destaque nacional prioritário."
                     noticia_obj = {
                         'titulo': titulo, 'resumo': resumo,
                         'data': formatar_data_brasil(artigo.get('published date', '')),
@@ -182,6 +186,8 @@ def buscar_noticias():
                         'fonte': artigo.get('publisher', {}).get('title', fonte_info["nome"]),
                         'link': link
                     }
+                    
+                    # Se menção nacional tocar no Amazonas, duplica para os temas regionais relevantes
                     if any(mun in f"{titulo} {resumo}".lower() for mun in MUNICIPIOS_AM):
                         for t_reg, l_not in relatorio_geral.items():
                             if t_reg in TEMAS_BUSCA[:18] and validar_relevancia_noticia(titulo, resumo, link):
@@ -189,6 +195,7 @@ def buscar_noticias():
                                     l_not.append(noticia_obj)
                                     l_not.sort(key=lambda x: converter_data_para_ordenacao(x.get('data_original')), reverse=True)
                                 break
+                                
                     noticias_brasil.append(noticia_obj)
                     contador += 1
         except:
@@ -198,7 +205,7 @@ def buscar_noticias():
         noticias_brasil.sort(key=lambda x: converter_data_para_ordenacao(x.get('data_original')), reverse=True)
         relatorio_geral["Principais Notícias do Brasil"] = noticias_brasil
     else:
-        relatorio_geral["Principais Notícias do Brasil"] = "Sem atualizações."
+        relatorio_geral["Principais Notícias do Brasil"] = "Sem atualizações nacionais."
 
     with open('noticias_atualizadas.json', 'w', encoding='utf-8') as f:
         json.dump(relatorio_geral, f, ensure_ascii=False, indent=4)
