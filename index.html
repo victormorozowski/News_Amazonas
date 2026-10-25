@@ -1,23 +1,429 @@
-} else if (Array.isArray(noticias)) {
-                    // FILTRO DE 12 HORAS + TERMO DE BUSCA
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Inteligência • Amazonas</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { height: 4px; width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-slate-950">
+    
+    <!-- Topo / Header Executivo -->
+    <header class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50 shadow-xl">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="h-3 w-3 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_12px_rgba(16,185,129,0.5)]"></div>
+                <div>
+                    <h1 class="text-base font-bold tracking-wide text-slate-100 flex items-center gap-2">
+                        Painel de Monitoramento 
+                        <span class="text-xs font-semibold px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">AMAZONAS</span>
+                        <span id="badge-geral-topo" class="hidden text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-500 text-white shadow-[0_0_10px_rgba(239,68,68,0.5)] animate-bounce"></span>
+                    </h1>
+                    <p class="text-[11px] text-slate-400 flex flex-wrap items-center gap-2">
+                        <span>Inteligência Operacional</span> • 
+                        <span id="relogio-manaus" class="text-slate-300 font-mono">Manaus: Carregando...</span> | 
+                        <span id="relogio-brasilia" class="text-cyan-300 font-mono">Brasília: Carregando...</span>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3 w-full md:w-auto">
+                <div class="relative w-full md:w-72">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-500">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    </span>
+                    <input type="text" id="input-busca" placeholder="Pesquisar termo nas notícias..." 
+                        class="bg-slate-950 border border-slate-800 text-xs pl-9 pr-3 py-2 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 w-full transition-all"
+                        oninput="filtrarNoticias()">
+                </div>
+                <div id="status-atualizacao" class="text-[11px] font-medium bg-slate-800/80 border border-slate-700/50 px-3 py-2 rounded-lg text-slate-300 whitespace-nowrap shadow-inner">
+                    Carregando...
+                </div>
+            </div>
+        </div>
+
+        <!-- Termômetro de Alerta e Volume de Notícias -->
+        <div id="barra-termometro-container" class="bg-slate-950/60 border-t border-slate-800/60 px-6 py-2">
+            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                <div class="flex items-center gap-2 text-slate-300 font-medium">
+                    <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    <span>Índice de Fluxo Operacional: <strong id="texto-status-fluxo" class="text-cyan-400">Calculando...</strong></span>
+                </div>
+                <div class="w-full sm:w-72 bg-slate-900 border border-slate-800 h-3 rounded-full overflow-hidden p-0.5 relative shadow-inner">
+                    <div id="barra-nivel-fluxo" class="h-full rounded-full transition-all duration-700 bg-emerald-500" style="width: 0%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barra de Abas (Modos + Temas) -->
+        <div class="bg-slate-900/60 border-t border-slate-800/80 px-6 py-2.5">
+            <div class="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto custom-scrollbar pb-1">
+                <button onclick="mudarModoVisualizacao('diario')" id="btn-modo-diario" class="text-xs font-semibold px-4 py-2 rounded-lg bg-cyan-600 text-white whitespace-nowrap transition-all shadow-md shadow-cyan-950/50 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+                    Monitoramento Atual
+                </button>
+                <button onclick="mudarModoVisualizacao('historico')" id="btn-modo-historico" class="text-xs font-semibold px-4 py-2 rounded-lg bg-slate-800/80 text-slate-300 hover:bg-slate-800 hover:text-white whitespace-nowrap transition-all border border-slate-700/50 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    Arquivo de Histórico
+                </button>
+                <div class="h-5 w-[1px] bg-slate-800 mx-1"></div>
+                <!-- Abas dos Temas -->
+                <div id="container-abas-temas" class="flex items-center gap-1.5"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="max-w-7xl mx-auto px-6 py-8 flex-grow w-full">
+        <!-- Seletor de Data para o Histórico -->
+        <div id="painel-seletor-historico" class="hidden mb-6 bg-slate-900/90 border border-slate-800 p-4 rounded-xl shadow-lg flex items-center gap-4">
+            <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <label for="select-data" class="text-xs font-semibold text-slate-300">Selecione a Data do Relatório:</label>
+            </div>
+            <select id="select-data" onchange="carregarHistoricoPorData()" class="bg-slate-950 border border-slate-800 text-xs px-3 py-2 rounded-lg text-slate-200 focus:outline-none focus:border-cyan-500 transition-all">
+                <option value="">Carregando datas...</option>
+            </select>
+        </div>
+
+        <div id="container-noticias" class="space-y-6">
+            <div class="text-center py-24 text-slate-500">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-2 border-cyan-500 border-t-transparent mb-4 shadow-[0_0_15px_rgba(6,182,212,0.3)]"></div>
+                <p class="text-xs tracking-wide">Carregando inteligência operacional...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-slate-900/50 border-t border-slate-800/60 mt-16 py-6 text-center text-xs text-slate-500">
+        Painel restrito de monitoramento de fontes públicas — Estado do Amazonas.
+    </footer>
+
+    <script>
+        let dadosAtuais = {};
+        let historicoGeral = {};
+        let modoAtual = 'diario';
+        let temaSelecionado = 'TODOS';
+        let termoBusca = '';
+        let ultimasVistas = {};
+
+        function iniciarRelogios() {
+            function atualizar() {
+                const agora = new Date();
+                const dataManaus = agora.toLocaleDateString('pt-BR', { timeZone: 'America/Manaus' });
+                const horaManaus = agora.toLocaleTimeString('pt-BR', { timeZone: 'America/Manaus' });
+                const dataBrasilia = agora.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+                const horaBrasilia = agora.toLocaleTimeString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+                
+                document.getElementById('relogio-manaus').innerText = `Manaus: ${dataManaus} • ${horaManaus}`;
+                document.getElementById('relogio-brasilia').innerText = `Brasília: ${dataBrasilia} • ${horaBrasilia}`;
+            }
+            atualizar();
+            setInterval(atualizar, 1000);
+        }
+
+        async function inicializarPainel() {
+            iniciarRelogios();
+            try {
+                try {
+                    const salvo = localStorage.getItem('news_am_vistas_v2');
+                    if (salvo) ultimasVistas = JSON.parse(salvo);
+                } catch (e) {
+                    ultimasVistas = {};
+                }
+
+                const respDiario = await fetch('noticias_atualizadas.json?t=' + new Date().getTime());
+                if (respDiario.ok) {
+                    dadosAtuais = await respDiario.json();
+                } else {
+                    dadosAtuais = {};
+                }
+
+                const respHist = await fetch('historico_geral.json?t=' + new Date().getTime());
+                if (respHist.ok) {
+                    historicoGeral = await respHist.json();
+                } else {
+                    historicoGeral = { [new Date().toISOString().split('T')[0]]: dadosAtuais };
+                }
+
+                atualizarTermometroFluxo();
+                renderizarAbasTemas();
+                renderizarConteudo();
+                atualizarBadgesNovidades();
+            } catch (erro) {
+                console.error("Erro ao inicializar:", erro);
+                document.getElementById('container-noticias').innerHTML = `
+                    <div class="bg-red-950/20 border border-red-900/50 text-red-300 p-6 rounded-xl text-center max-w-md mx-auto my-12">
+                        <p class="font-semibold text-sm mb-1">Erro ao carregar os dados do painel.</p>
+                        <p class="text-xs text-red-400/80">Certifique-se de que o robô executou com sucesso na aba Actions do GitHub.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function calcularNovidadesPorTema() {
+            let contagemNovasPorTema = {};
+            let totalNovasGeral = 0;
+
+            if (!dadosAtuais || typeof dadosAtuais !== 'object') return { contagemNovasPorTema, totalNovasGeral };
+
+            for (let [tema, noticias] of Object.entries(dadosAtuais)) {
+                if (Array.isArray(noticias)) {
+                    let vistasNesteTema = Array.isArray(ultimasVistas[tema]) ? ultimasVistas[tema] : [];
+                    let novas = noticias.filter(n => n && n.link && !vistasNesteTema.includes(n.link));
+                    if (novas.length > 0) {
+                        contagemNovasPorTema[tema] = novas.length;
+                        totalNovasGeral += novas.length;
+                    }
+                }
+            }
+            return { contagemNovasPorTema, totalNovasGeral };
+        }
+
+        function atualizarBadgesNovidades() {
+            if (modoAtual !== 'diario') {
+                document.getElementById('badge-geral-topo').classList.add('hidden');
+                return;
+            }
+
+            const { totalNovasGeral } = calcularNovidadesPorTema();
+            const badgeTopo = document.getElementById('badge-geral-topo');
+
+            if (totalNovasGeral > 0) {
+                badgeTopo.innerText = `+${totalNovasGeral} nova${totalNovasGeral > 1 ? 's' : ''}`;
+                badgeTopo.classList.remove('hidden');
+            } else {
+                badgeTopo.classList.add('hidden');
+            }
+        }
+
+        function marcarTemaComoVisto(tema) {
+            if (modoAtual !== 'diario' || !dadosAtuais) return;
+            
+            try {
+                if (tema === 'TODOS') {
+                    for (let [t, noticias] of Object.entries(dadosAtuais)) {
+                        if (Array.isArray(noticias)) {
+                            ultimasVistas[t] = noticias.map(n => n.link).filter(Boolean);
+                        }
+                    }
+                } else {
+                    if (Array.isArray(dadosAtuais[tema])) {
+                        ultimasVistas[tema] = dadosAtuais[tema].map(n => n.link).filter(Boolean);
+                    }
+                }
+                localStorage.setItem('news_am_vistas_v2', JSON.stringify(ultimasVistas));
+            } catch (e) {
+                console.error("Erro ao salvar localStorage:", e);
+            }
+            atualizarBadgesNovidades();
+            renderizarAbasTemas();
+        }
+
+        function atualizarTermometroFluxo() {
+            let totalNoticiasHoje = 0;
+            if (dadosAtuais && typeof dadosAtuais === 'object') {
+                for (let [tema, noticias] of Object.entries(dadosAtuais)) {
+                    if (Array.isArray(noticias)) totalNoticiasHoje += noticias.length;
+                }
+            }
+
+            let somaHistorica = 0, diasContados = 0;
+            if (historicoGeral && typeof historicoGeral === 'object') {
+                for (let [data, relatorio] of Object.entries(historicoGeral)) {
+                    let countDia = 0;
+                    if (relatorio && typeof relatorio === 'object') {
+                        for (let [t, n] of Object.entries(relatorio)) {
+                            if (Array.isArray(n)) countDia += n.length;
+                        }
+                    }
+                    somaHistorica += countDia;
+                    diasContados++;
+                }
+            }
+
+            let mediaHistorica = diasContados > 0 ? somaHistorica / diasContados : 20;
+            if (mediaHistorica < 5) mediaHistorica = 20;
+
+            let razao = totalNoticiasHoje / (mediaHistorica * 1.5);
+            let porcentagem = Math.min(Math.max(razao * 100, 10), 100);
+
+            let corBarra = 'bg-emerald-500';
+            let textoStatus = 'Calmo / Normal';
+
+            if (porcentagem > 75) {
+                corBarra = 'bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]';
+                textoStatus = `Alto Fluxo (${totalNoticiasHoje} ocorrências)`;
+            } else if (porcentagem > 45) {
+                corBarra = 'bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]';
+                textoStatus = `Fluxo Moderado (${totalNoticiasHoje} ocorrências)`;
+            } else {
+                corBarra = 'bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]';
+                textoStatus = `Fluxo Reduzido (${totalNoticiasHoje} ocorrências)`;
+            }
+
+            document.getElementById('texto-status-fluxo').innerText = textoStatus;
+            let barra = document.getElementById('barra-nivel-fluxo');
+            barra.className = `h-full rounded-full transition-all duration-700 ${corBarra}`;
+            barra.style.width = `${porcentagem}%`;
+        }
+
+        function mudarModoVisualizacao(modo) {
+            modoAtual = modo;
+            temaSelecionado = 'TODOS';
+            document.getElementById('input-busca').value = '';
+            termoBusca = '';
+
+            const btnDiario = document.getElementById('btn-modo-diario');
+            const btnHistorico = document.getElementById('btn-modo-historico');
+            const painelHist = document.getElementById('painel-seletor-historico');
+
+            if (modo === 'diario') {
+                btnDiario.className = 'text-xs font-semibold px-4 py-2 rounded-lg bg-cyan-600 text-white whitespace-nowrap transition-all shadow-md shadow-cyan-950/50 flex items-center gap-1.5';
+                btnHistorico.className = 'text-xs font-semibold px-4 py-2 rounded-lg bg-slate-800/80 text-slate-300 hover:bg-slate-800 hover:text-white whitespace-nowrap transition-all border border-slate-700/50 flex items-center gap-1.5';
+                painelHist.classList.add('hidden');
+                renderizarAbasTemas();
+                renderizarConteudo();
+                atualizarBadgesNovidades();
+            } else {
+                btnHistorico.className = 'text-xs font-semibold px-4 py-2 rounded-lg bg-cyan-600 text-white whitespace-nowrap transition-all shadow-md shadow-cyan-950/50 flex items-center gap-1.5';
+                btnDiario.className = 'text-xs font-semibold px-4 py-2 rounded-lg bg-slate-800/80 text-slate-300 hover:bg-slate-800 hover:text-white whitespace-nowrap transition-all border border-slate-700/50 flex items-center gap-1.5';
+                painelHist.classList.remove('hidden');
+                document.getElementById('badge-geral-topo').classList.add('hidden');
+                popularSeletorDatas();
+            }
+        }
+
+        function popularSeletorDatas() {
+            const select = document.getElementById('select-data');
+            select.innerHTML = '';
+            const datas = Object.keys(historicoGeral || {}).sort().reverse();
+
+            if (datas.length === 0) {
+                select.innerHTML = '<option value="">Nenhum histórico disponível</option>';
+                return;
+            }
+
+            datas.forEach(data => {
+                let opt = document.createElement('option');
+                opt.value = data;
+                opt.innerText = data.split('-').reverse().join('/');
+                select.appendChild(opt);
+            });
+
+            carregarHistoricoPorData();
+        }
+
+        function carregarHistoricoPorData() {
+            const dataSelecionada = document.getElementById('select-data').value;
+            if (historicoGeral && historicoGeral[dataSelecionada]) {
+                dadosAtuais = historicoGeral[dataSelecionada];
+                atualizarTermometroFluxo();
+                renderizarAbasTemas();
+                renderizarConteudo();
+            }
+        }
+
+        function renderizarAbasTemas() {
+            const containerAbas = document.getElementById('container-abas-temas');
+            containerAbas.innerHTML = '';
+            const temas = ['TODOS', ...Object.keys(dadosAtuais || {})];
+            const { contagemNovasPorTema } = calcularNovidadesPorTema();
+
+            temas.forEach(tema => {
+                let btn = document.createElement('button');
+                let ativo = temaSelecionado === tema;
+                
+                let qtdNovas = 0;
+                if (tema === 'TODOS' && modoAtual === 'diario') {
+                    qtdNovas = Object.values(contagemNovasPorTema).reduce((a, b) => a + b, 0);
+                } else if (modoAtual === 'diario') {
+                    qtdNovas = contagemNovasPorTema[tema] || 0;
+                }
+
+                btn.className = `text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap transition-all flex items-center gap-1.5 ${
+                    ativo ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 shadow-sm' : 'bg-slate-900/80 text-slate-400 hover:bg-slate-800 hover:text-slate-200 border border-slate-800'
+                }`;
+                
+                let htmlTexto = `<span>${tema}</span>`;
+                if (qtdNovas > 0) {
+                    htmlTexto += `<span class="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.2 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.6)]">+${qtdNovas}</span>`;
+                }
+                btn.innerHTML = htmlTexto;
+
+                btn.onclick = () => {
+                    temaSelecionado = tema;
+                    marcarTemaComoVisto(tema);
+                    renderizarAbasTemas();
+                    renderizarConteudo();
+                };
+                containerAbas.appendChild(btn);
+            });
+        }
+
+        function filtrarNoticias() {
+            termoBusca = document.getElementById('input-busca').value.toLowerCase();
+            renderizarConteudo();
+        }
+
+        function renderizarConteudo() {
+            const container = document.getElementById('container-noticias');
+            container.innerHTML = '';
+
+            if (!dadosAtuais || typeof dadosAtuais !== 'object') {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic py-12 text-center">Nenhum dado disponível no momento.</p>`;
+                return;
+            }
+
+            let dadosParaExibir = temaSelecionado === 'TODOS' ? dadosAtuais : { [temaSelecionado]: dadosAtuais[temaSelecionado] };
+            document.getElementById('status-atualizacao').innerText = `${Object.keys(dadosAtuais).length} parâmetros monitorados`;
+
+            for (let [tema, noticias] of Object.entries(dadosParaExibir)) {
+                if (!noticias) continue;
+
+                let secao = document.createElement('div');
+                secao.className = 'bg-slate-900/70 backdrop-blur border border-slate-800/80 rounded-2xl p-6 shadow-xl mb-6 transition-all';
+
+                let cabecalhoTema = document.createElement('div');
+                cabecalhoTema.className = 'flex justify-between items-center mb-5 pb-3 border-b border-slate-800';
+                cabecalhoTema.innerHTML = `<h2 class="text-sm font-bold tracking-wide text-cyan-400 flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-cyan-500"></span>${tema}</h2>`;
+                secao.appendChild(cabecalhoTema);
+
+                let conteudoDiv = document.createElement('div');
+
+                if (typeof noticias === 'string') {
+                    if (!termoBusca || tema.toLowerCase().includes(termoBusca)) {
+                        conteudoDiv.innerHTML = `<p class="text-xs text-slate-400 italic bg-slate-950/40 p-4 rounded-xl border border-slate-800/60">${noticias}</p>`;
+                    } else {
+                        conteudoDiv.innerHTML = `<p class="text-xs text-slate-500 italic">Nenhum resultado para o filtro.</p>`;
+                    }
+                } else if (Array.isArray(noticias)) {
+                    // REGRA DE CORTE DE 12 HORAS (Apenas no modo diário) + TERMO DE BUSCA
                     let agora = new Date();
-                    let dozeHorasAtrasMs = 12 * 60 * 60 * 1000; // 12 horas em milissegundos
+                    let dozeHorasAtrasMs = 12 * 60 * 60 * 1000;
 
                     let noticiasFiltradas = noticias.filter(item => {
                         if (!item) return false;
 
-                        // Validação das 12 horas com base na data original da notícia
-                        if (item.data_original) {
+                        // Se estiver no modo diário, aplica o corte de 12 horas
+                        if (modoAtual === 'diario' && item.data_original) {
                             let dataPub = new Date(item.data_original);
                             if (!isNaN(dataPub.getTime())) {
                                 let diferencaMs = agora - dataPub;
                                 if (diferencaMs > dozeHorasAtrasMs) {
-                                    return false; // Descarta se tiver mais de 12 horas
+                                    return false; // Mais de 12 horas, some da aba principal
                                 }
                             }
                         }
 
-                        // Filtro por termo de busca digitado pelo usuário (se houver)
+                        // Filtro por termo de busca digitado pelo usuário
                         if (!termoBusca) return true;
                         let t = (item.titulo || '').toLowerCase();
                         let r = (item.resumo || '').toLowerCase();
@@ -53,3 +459,13 @@
                         conteudoDiv.appendChild(listaCards);
                     }
                 }
+
+                secao.appendChild(conteudoDiv);
+                container.appendChild(secao);
+            }
+        }
+
+        inicializarPainel();
+    </script>
+</body>
+</html>
