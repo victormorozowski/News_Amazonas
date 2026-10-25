@@ -10,7 +10,7 @@ except Exception as e:
     print(f"Aviso ao inicializar GNews: {e}")
     google_news = None
 
-# Parâmetros de busca refinados e blindados (removidos termos genéricos e soltos)
+# Temas que virarão as ABAS do site
 TEMAS_BUSCA = [
     "Polícia Federal Amazonas",
     "Superintendência Polícia Federal Amazonas",
@@ -29,10 +29,23 @@ TEMAS_BUSCA = [
     "Polícia Civil Amazonas",
     "Polícia Militar Amazonas",
     "Operações Polícia Federal Amazonas",
-    "Órgãos Federais Amazonas",
+    "Órgãos Federais Amazonas"
 ]
 
-# Lista completa de municípios e termos geográficos do Amazonas
+# Buscas ocultas do CM7 (não viram abas, alimentam as abas acima)
+BUSCAS_OCULTAS_CM7 = [
+    "site:cm7brasil.com polícia",
+    "site:cm7brasil.com amazonas"
+]
+
+FONTES_NACIONAIS = [
+    {"nome": "G1", "termo": "site:g1.globo.com"},
+    {"nome": "UOL", "termo": "site:uol.com.br"},
+    {"nome": "R7", "termo": "site:r7.com"},
+    {"nome": "Metrópoles", "termo": "site:metropoles.com"},
+    {"nome": "CNN Brasil", "termo": "site:cnnbrasil.com.br"}
+]
+
 MUNICIPIOS_AM = [
     "alvarães", "amaturá", "anamã", "anori", "apuí", "atalaia do norte", "autazes", 
     "barcelos", "barreirinha", "benjamin constant", "beruri", "boa vista do ramos", 
@@ -40,7 +53,7 @@ MUNICIPIOS_AM = [
     "careiro da várzea", "coari", "codajás", "eirunepé", "envira", "fonte boa", 
     "guajará", "humaitá", "ipixuna", "iranduba", "itacoatiara", "itamarati", 
     "itapiranga", "japurá", "juruá", "jutaí", "lábrea", "manacapuru", "manaquiri", 
-    "manaus", "manicoré", "maraã", "maués", "nhamundá", "nova olinda do norte", 
+    "manaú", "manaus", "manicoré", "maraã", "maués", "nhamundá", "nova olinda do norte", 
     "novo airão", "novo aripuanã", "parintins", "pauini", "presidente figueiredo", 
     "rio preto da eva", "santa isabel do rio negro", "santo antônio do içá", 
     "são gabriel da cachoeira", "são paulo de olivença", "são sebastião do uatumã", 
@@ -48,7 +61,6 @@ MUNICIPIOS_AM = [
     "urucurituba", "amazonas", "am", "alto solimões", "rio negro", "rio solimões"
 ]
 
-# Palavras-chave obrigatórias do cerne operacional/institucional
 CERNE_TEMATICO = [
     "polícia", "policial", "delegado", "delegada", "pf", "prf", "federal", "civil", 
     "militar", "operação", "investigação", "investigado", "prisão", "preso", 
@@ -58,7 +70,6 @@ CERNE_TEMATICO = [
     "senador", "vereador", "prefeito", "corregedoria", "supremo", "tribunal", "juiz"
 ]
 
-# Termos de ruído absoluto ampliados (elimina prefeituras, educação e cultura de fora)
 TERMOS_RUIDO = [
     "vestibular", "biblioteca", "escola municipal", "ensino fundamental", 
     "educação inclusiva", "formatura", "teatro", "exposição cultural", 
@@ -68,60 +79,34 @@ TERMOS_RUIDO = [
 
 def validar_relevancia_noticia(titulo, resumo, link):
     texto = f"{titulo} {resumo}".lower()
-    
-    # 1. Barreiras contra ruídos institucionais/educacionais
+    link_baixado = link.lower()
     for ruido in TERMOS_RUIDO:
         if ruido in texto:
             return False
-
-    # 2. Exceção direta se citar a Superintendente por nome ou cargo
-    termos_superintendente = [
-        "danielle mady", "danielle de meneses", "delegada danielle", 
-        "superintendente danielle", "danielle meneses"
-    ]
+    if "cm7brasil.com" in link_baixado:
+        tem_am = any(mun in texto for mun in MUNICIPIOS_AM) or "manaus" in texto or "amazonas" in texto
+        tem_cerne = any(cerne in texto for cerne in CERNE_TEMATICO)
+        if tem_am or tem_cerne:
+            return True
+    termos_superintendente = ["danielle mady", "danielle de meneses", "delegada danielle", "superintendente danielle"]
     if any(termo in texto for termo in termos_superintendente):
         return True
-
-    # 3. O texto DEVE obrigatoriamente mencionar o Amazonas ou algum município
     tem_vinculo_am = any(mun in texto for mun in MUNICIPIOS_AM)
     if not tem_vinculo_am:
         return False
-
-    # 4. O texto DEVE obrigatoriamente tocar no cerne temático
-    tem_cerne = any(cerne in texto for cerne in CERNE_TEMATICO)
-    
-    return tem_cerne
+    return any(cerne in texto for cerne in CERNE_TEMATICO)
 
 def formatar_data_brasil(data_str):
     if not data_str:
         return "Data não informada"
-    
     str_val = str(data_str).strip()
-    
     try:
         dt_utc = parsedate_to_datetime(str_val)
         if dt_utc:
-            dt_local = dt_utc - timedelta(hours=4)
-            return dt_local.strftime('%d/%m/%Y às %H:%M (GMT-4 Manaus)')
+            return (dt_utc - timedelta(hours=4)).strftime('%d/%m/%Y às %H:%M (GMT-4 Manaus)')
     except:
         pass
-    
-    texto = str_val.lower()
-    substituicoes = [
-        ("hours ago", "horas atrás"), ("hour ago", "hora atrás"),
-        ("hours", "horas"), ("hour", "hora"),
-        ("minutes ago", "minutos atrás"), ("minute ago", "minuto atrás"),
-        ("minutes", "minutos"), ("minute", "minuto"),
-        ("days ago", "dias atrás"), ("day ago", "dia atrás"),
-        ("days", "dias"), ("day", "dia"),
-        ("weeks ago", "semanas atrás"), ("week ago", "semana atrás"),
-        ("ago", "atrás"), ("yesterday", "ontem"), ("today", "hoje")
-    ]
-    
-    for ing, pt in substituicoes:
-        texto = texto.replace(ing, pt)
-    
-    return texto.strip().capitalize()
+    return str_val
 
 def converter_data_para_ordenacao(data_str):
     if not data_str:
@@ -135,25 +120,21 @@ def converter_data_para_ordenacao(data_str):
     return datetime.min
 
 def buscar_noticias():
-    data_execucao = datetime.now().strftime('%d/%m/%Y %H:%M')
-    data_hoje = datetime.now().strftime('%Y-%m-%d')
-
-    print(f"Iniciando varredura com parâmetros refinados - {data_execucao}\n" + "=" * 50)
-
     if not google_news:
-        print("Erro crítico: GNews não foi carregado corretamente.")
         return
-
-    dados_existentes_hoje = {}
+    dados_existentes = {}
     if os.path.exists('noticias_atualizadas.json'):
         try:
             with open('noticias_atualizadas.json', 'r', encoding='utf-8') as f:
-                dados_existentes_hoje = json.load(f)
+                dados_existentes = json.load(f)
+                # Remove as abas feias do histórico se existirem
+                dados_existentes.pop("site:cm7brasil.com polícia", None)
+                dados_existentes.pop("site:cm7brasil.com amazonas", None)
         except:
-            dados_existentes_hoje = {}
+            pass
 
     links_processados = set()
-    for tema, noticias in dados_existentes_hoje.items():
+    for noticias in dados_existentes.values():
         if isinstance(noticias, list):
             for n in noticias:
                 if 'link' in n:
@@ -161,55 +142,107 @@ def buscar_noticias():
 
     relatorio_geral = {}
 
+    # 1. Processa Temas Principais
     for tema in TEMAS_BUSCA:
-        print(f"Pesquisando: {tema}...")
         try:
             artigos = google_news.get_news(tema)
-            
-            noticias_tema = []
-            if tema in dados_existentes_hoje and isinstance(dados_existentes_hoje[tema], list):
-                noticias_tema = list(dados_existentes_hoje[tema])
-
+            noticias_tema = list(dados_existentes.get(tema, [])) if isinstance(dados_existentes.get(tema), list) else []
             if artigos:
                 for artigo in artigos:
                     link = artigo.get('url', '#')
-                    
                     if link in links_processados:
                         continue
-
                     titulo = artigo.get('title', 'Sem Título')
-                    descricao = artigo.get('description', '')
-                    resumo = descricao if descricao else f"Notícia referente a {tema}."
-
+                    resumo = artigo.get('description', '') or f"Notícia referente a {tema}."
                     if not validar_relevancia_noticia(titulo, resumo, link):
                         continue
-
                     links_processados.add(link)
-                    fonte = artigo.get('publisher', {}).get('title', 'Fonte Desconhecida')
-                    data_crua = artigo.get('published date', '')
-                    data_pub = formatar_data_brasil(data_crua)
-
                     noticias_tema.append({
-                        'titulo': titulo,
-                        'resumo': resumo,
-                        'data': data_pub,
-                        'data_original': str(data_crua),
-                        'fonte': fonte,
+                        'titulo': titulo, 'resumo': resumo,
+                        'data': formatar_data_brasil(artigo.get('published date', '')),
+                        'data_original': str(artigo.get('published date', '')),
+                        'fonte': artigo.get('publisher', {}).get('title', 'Fonte'),
                         'link': link
                     })
-
-            if noticias_tema and isinstance(noticias_tema, list):
+            if noticias_tema:
                 noticias_tema.sort(key=lambda x: converter_data_para_ordenacao(x.get('data_original')), reverse=True)
                 relatorio_geral[tema] = noticias_tema
             else:
                 relatorio_geral[tema] = "Sem atualizações relevantes nas últimas 24h."
+        except:
+            relatorio_geral[tema] = dados_existentes.get(tema, "Sem atualizações.")
 
-        except Exception as e:
-            print(f"Erro ao buscar o tema \"{tema}\": {e}")
-            if tema in dados_existentes_hoje:
-                relatorio_geral[tema] = dados_existentes_hoje[tema]
-            else:
-                relatorio_geral[tema] = "Sem atualizações relevantes nas últimas 24h."
+    # 2. Processa o CM7 em background e distribui nas abas corretas
+    for busca_cm7 in BUSCAS_OCULTAS_CM7:
+        try:
+            artigos_cm7 = google_news.get_news(busca_cm7)
+            if artigos_cm7:
+                for artigo in artigos_cm7:
+                    link = artigo.get('url', '#')
+                    if link in links_processados:
+                        continue
+                    titulo = artigo.get('title', 'Sem Título')
+                    resumo = artigo.get('description', '') or "Notícia CM7."
+                    if not validar_relevancia_noticia(titulo, resumo, link):
+                        continue
+                    
+                    links_processados.add(link)
+                    noticia_obj = {
+                        'titulo': titulo, 'resumo': resumo,
+                        'data': formatar_data_brasil(artigo.get('published date', '')),
+                        'data_original': str(artigo.get('published date', '')),
+                        'fonte': artigo.get('publisher', {}).get('title', 'CM7 Brasil'),
+                        'link': link
+                    }
+                    
+                    # Tenta jogar no Tráfico, se couber. Senão, joga em Segurança Pública.
+                    aba_destino = "Segurança Pública Amazonas"
+                    if "droga" in (titulo+resumo).lower():
+                        aba_destino = "Tráfico de drogas Amazonas"
+                        
+                    if isinstance(relatorio_geral.get(aba_destino), list):
+                        relatorio_geral[aba_destino].append(noticia_obj)
+                        relatorio_geral[aba_destino].sort(key=lambda x: converter_data_para_ordenacao(x.get('data_original')), reverse=True)
+        except:
+            pass
+
+    # 3. Processa Notícias Nacionais
+    noticias_brasil = []
+    for fonte_info in FONTES_NACIONAIS:
+        try:
+            artigos_portal = google_news.get_news(fonte_info["termo"])
+            if artigos_portal:
+                contador = 0
+                for artigo in artigos_portal:
+                    if contador >= 5:
+                        break
+                    link = artigo.get('url', '#')
+                    titulo = artigo.get('title', 'Sem Título')
+                    resumo = artigo.get('description', '') or "Destaque nacional."
+                    noticia_obj = {
+                        'titulo': titulo, 'resumo': resumo,
+                        'data': formatar_data_brasil(artigo.get('published date', '')),
+                        'data_original': str(artigo.get('published date', '')),
+                        'fonte': artigo.get('publisher', {}).get('title', fonte_info["nome"]),
+                        'link': link
+                    }
+                    if any(mun in f"{titulo} {resumo}".lower() for mun in MUNICIPIOS_AM):
+                        for t_reg, l_not in relatorio_geral.items():
+                            if t_reg in TEMAS_BUSCA[:18] and validar_relevancia_noticia(titulo, resumo, link):
+                                if isinstance(l_not, list) and not any(n.get('link') == link for n in l_not):
+                                    l_not.append(noticia_obj)
+                                    l_not.sort(key=lambda x: converter_data_para_ordenacao(x.get('data_original')), reverse=True)
+                                break
+                    noticias_brasil.append(noticia_obj)
+                    contador += 1
+        except:
+            pass
+
+    if noticias_brasil:
+        noticias_brasil.sort(key=lambda x: converter_data_para_ordenacao(x.get('data_original')), reverse=True)
+        relatorio_geral["Principais Notícias do Brasil"] = noticias_brasil
+    else:
+        relatorio_geral["Principais Notícias do Brasil"] = "Sem atualizações."
 
     with open('noticias_atualizadas.json', 'w', encoding='utf-8') as f:
         json.dump(relatorio_geral, f, ensure_ascii=False, indent=4)
@@ -220,14 +253,10 @@ def buscar_noticias():
             with open('historico_geral.json', 'r', encoding='utf-8') as f:
                 historico = json.load(f)
         except:
-            historico = {}
-
-    historico[data_hoje] = relatorio_geral
-
+            pass
+    historico[datetime.now().strftime('%Y-%m-%d')] = relatorio_geral
     with open('historico_geral.json', 'w', encoding='utf-8') as f:
         json.dump(historico, f, ensure_ascii=False, indent=4)
-
-    print("\nVarredura concluída com sucesso!")
 
 if __name__ == '__main__':
     buscar_noticias()
