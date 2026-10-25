@@ -5,7 +5,7 @@ from email.utils import parsedate_to_datetime
 
 try:
     from gnews import GNews
-    google_news = GNews(language='pt', country='BR', period='1d', max_results=15) # Aumentado para 15 para ter margem após filtrar esportes
+    google_news = GNews(language='pt', country='BR', period='1d', max_results=15)
 except Exception as e:
     print(f"Aviso ao inicializar GNews: {e}")
     google_news = None
@@ -68,7 +68,7 @@ CERNE_TEMATICO = [
     "senador", "vereador", "prefeito", "corregedoria", "supremo", "tribunal", "juiz"
 ]
 
-# Adicionado um bloqueio rigoroso para esportes
+# Filtro agressivo expandido para incluir ginástica, medalhas e outros desportos
 TERMOS_RUIDO = [
     "vestibular", "biblioteca", "escola municipal", "ensino fundamental", 
     "educação inclusiva", "formatura", "teatro", "exposição cultural", 
@@ -78,7 +78,11 @@ TERMOS_RUIDO = [
     "série a", "série b", "flamengo", "corinthians", "palmeiras", "são paulo",
     "vasco", "botafogo", "fluminense", "cruzeiro", "atlético-mg", "grêmio",
     "internacional", "esporte", "esportes", "tênis", "vôlei", "basquete", "nba",
-    "fórmula 1", "ufc", "mma", "olimpíadas", "atleta", "medalha", "torneio", "copa do mundo"
+    "fórmula 1", "ufc", "mma", "olimpíadas", "atleta", "medalha", "torneio", "copa do mundo",
+    "ginástica", "trave", "bronze", "prata", "ouro", "pódio", "mundial de", "campeonato",
+    "campeão", "campeã", "seleção", "liga", "clube", "partida", "jogo",
+    "golo", "gol", "placar", "resultado", "empate", "vitória", "derrota", "treinador", 
+    "técnico", "medalhista", "rebeca andrade", "flávia saraiva", "simone biles", "surfe", "skate"
 ]
 
 def validar_relevancia_noticia(titulo, resumo, link):
@@ -221,12 +225,12 @@ def buscar_noticias():
                     resumo = artigo.get('description', '') or "Destaque nacional."
                     texto_analise = f"{titulo} {resumo}".lower()
                     
-                    # FILTRO DE ESPORTES PARA O FEED NACIONAL
+                    # FILTRO DE DESPORTO APLICADO AQUI
                     if any(ruido in texto_analise for ruido in TERMOS_RUIDO):
-                        continue # Se tiver esporte ou ruído, ignora e vai para a próxima
+                        continue 
                     
                     if contador >= 5:
-                        break # Só pega 5 depois que garantir que não são esportes
+                        break 
                     
                     links_processados.add(link)
                     noticia_obj = {
