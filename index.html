@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Inteligência • Amazonas</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 p-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <h1 class="text-base font-bold text-slate-100 flex items-center gap-2">
+                Painel de Monitoramento <span class="text-xs px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">AMAZONAS</span>
+            </h1>
+            <input type="text" id="input-busca" placeholder="Pesquisar termo nas notícias..." 
+                class="bg-slate-950 border border-slate-800 text-xs px-3 py-2 rounded-lg text-slate-200 placeholder-slate-500 w-full md:w-72 focus:outline-none focus:border-cyan-500"
+                oninput="renderizarConteudo()">
+        </div>
+        <div class="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto pt-3" id="container-abas-temas"></div>
+    </header>
+    <main class="max-w-7xl mx-auto px-6 py-8 flex-grow w-full" id="container-noticias">
+        <div class="text-center py-24 text-slate-500 text-xs">Carregando painel operacional...</div>
+    </main>
+    <script>
+        let dadosAtuais = {};
+        let temaSelecionado = 'TODOS';
+
+        async function carregar() {
+            try {
+                let resp = await fetch('noticias_atualizadas.json?t=' + Date.now());
+                if (resp.ok) dadosAtuais = await resp.json();
+            } catch(e) {
+                dadosAtuais = { "Aviso": [{ titulo: "Sistema Inicializado", resumo: "Aguardando primeira execução do Actions.", data: "Agora", fonte: "Sistema", link: "#" }] };
+            }
+            renderizarAbas();
+            renderizarConteudo();
+        }
+
+        function renderizarAbas() {
+            const container = document.getElementById('container-abas-temas');
+            container.innerHTML = '';
+            ['TODOS', ...Object.keys(dadosAtuais)].forEach(tema => {
+                let btn = document.createElement('button');
+                btn.className = `text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap transition-all ${temaSelecionado === tema ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30' : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'}`;
+                btn.innerText = tema;
+                btn.onclick = () => { temaSelecionado = tema; renderizarAbas(); renderizarConteudo(); };
+                container.appendChild(btn);
+            });
+        }
+
+        function renderizarConteudo() {
+            const container = document.getElementById('container-noticias');
+            container.innerHTML = '';
+            let termo = document.getElementById('input-busca').value.toLowerCase();
+            let exibir = temaSelecionado === 'TODOS' ? dadosAtuais : { [temaSelecionado]: dadosAtuais[temaSelecionado] };
+
+            for (let [tema, noticias] of Object.entries(exibir)) {
+                if (!noticias) continue;
+                let secao = document.createElement('div');
+                secao.className = 'bg-slate-900/70 border border-slate-800 rounded-2xl p-6 shadow-xl mb-6';
+                secao.innerHTML = `<h2 class="text-sm font-bold text-cyan-400 mb-4 pb-2 border-b border-slate-800">${tema}</h2>`;
+                
+                let conteudo = document.createElement('div');
+                if (typeof noticias === 'string') {
+                    conteudo.innerHTML = `<p class="text-xs text-slate-400 italic">${noticias}</p>`;
+                } else if (Array.isArray(noticias)) {
+                    let filtradas = noticias.filter(i => !termo || (i.titulo+i.resumo).toLowerCase().includes(termo));
+                    if (filtradas.length === 0) {
+                        conteudo.innerHTML = `<p class="text-xs text-slate-500 italic">Nenhuma ocorrência recente.</p>`;
+                    } else {
+                        let grid = document.createElement('div');
+                        grid.className = 'grid grid-cols-1 md:grid-cols-2 gap-4';
+                        filtradas.forEach(item => {
+                            grid.innerHTML += `
+                                <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex justify-between items-start gap-2 mb-2">
+                                            <span class="text-[10px] uppercase text-cyan-300 bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-800/40">${item.fonte || 'Fonte'}</span>
+                                            <span class="text-[11px] text-slate-400 font-mono">${item.data || ''}</span>
+                                        </div>
+                                        <h3 class="text-xs font-bold text-slate-100 mb-2">${item.titulo || ''}</h3>
+                                        <p class="text-xs text-slate-400 mb-4">${item.resumo || ''}</p>
+                                    </div>
+                                    <a href="${item.link || '#'}" target="_blank" class="text-xs font-medium text-cyan-400 hover:text-cyan-300 pt-2 border-t border-slate-900 inline-block">Ler matéria completa →</a>
+                                </div>`;
+                        });
+                        conteudo.appendChild(grid);
+                    }
+                }
+                secao.appendChild(conteudo);
+                container.appendChild(secao);
+            }
+        }
+        carregar();
+    </script>
+</body>
+</html>
