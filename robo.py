@@ -5,12 +5,11 @@ from email.utils import parsedate_to_datetime
 
 try:
     from gnews import GNews
-    google_news = GNews(language='pt', country='BR', period='1d', max_results=8)
+    google_news = GNews(language='pt', country='BR', period='1d', max_results=15) # Aumentado para 15 para ter margem após filtrar esportes
 except Exception as e:
     print(f"Aviso ao inicializar GNews: {e}")
     google_news = None
 
-# Temas que virarão as ABAS do site
 TEMAS_BUSCA = [
     "Polícia Federal Amazonas",
     "Superintendência Polícia Federal Amazonas",
@@ -32,7 +31,6 @@ TEMAS_BUSCA = [
     "Órgãos Federais Amazonas"
 ]
 
-# Buscas ocultas do CM7 (não viram abas, alimentam as abas acima)
 BUSCAS_OCULTAS_CM7 = [
     "site:cm7brasil.com polícia",
     "site:cm7brasil.com amazonas"
@@ -70,11 +68,17 @@ CERNE_TEMATICO = [
     "senador", "vereador", "prefeito", "corregedoria", "supremo", "tribunal", "juiz"
 ]
 
+# Adicionado um bloqueio rigoroso para esportes
 TERMOS_RUIDO = [
     "vestibular", "biblioteca", "escola municipal", "ensino fundamental", 
     "educação inclusiva", "formatura", "teatro", "exposição cultural", 
-    "campeonato municipal", "festa de", "campeonato de futebol", 
-    "concurso público municipal", "matrícula escolar", "merenda escolar"
+    "campeonato municipal", "festa de", "concurso público municipal", 
+    "matrícula escolar", "merenda escolar",
+    "futebol", "brasileirão", "libertadores", "copa do brasil", "champions league",
+    "série a", "série b", "flamengo", "corinthians", "palmeiras", "são paulo",
+    "vasco", "botafogo", "fluminense", "cruzeiro", "atlético-mg", "grêmio",
+    "internacional", "esporte", "esportes", "tênis", "vôlei", "basquete", "nba",
+    "fórmula 1", "ufc", "mma", "olimpíadas", "atleta", "medalha", "torneio", "copa do mundo"
 ]
 
 def validar_relevancia_noticia(titulo, resumo, link):
@@ -127,7 +131,6 @@ def buscar_noticias():
         try:
             with open('noticias_atualizadas.json', 'r', encoding='utf-8') as f:
                 dados_existentes = json.load(f)
-                # Remove as abas feias do histórico se existirem
                 dados_existentes.pop("site:cm7brasil.com polícia", None)
                 dados_existentes.pop("site:cm7brasil.com amazonas", None)
         except:
@@ -142,7 +145,6 @@ def buscar_noticias():
 
     relatorio_geral = {}
 
-    # 1. Processa Temas Principais
     for tema in TEMAS_BUSCA:
         try:
             artigos = google_news.get_news(tema)
@@ -172,7 +174,6 @@ def buscar_noticias():
         except:
             relatorio_geral[tema] = dados_existentes.get(tema, "Sem atualizações.")
 
-    # 2. Processa o CM7 em background e distribui nas abas corretas
     for busca_cm7 in BUSCAS_OCULTAS_CM7:
         try:
             artigos_cm7 = google_news.get_news(busca_cm7)
@@ -195,7 +196,6 @@ def buscar_noticias():
                         'link': link
                     }
                     
-                    # Tenta jogar no Tráfico, se couber. Senão, joga em Segurança Pública.
                     aba_destino = "Segurança Pública Amazonas"
                     if "droga" in (titulo+resumo).lower():
                         aba_destino = "Tráfico de drogas Amazonas"
@@ -206,7 +206,6 @@ def buscar_noticias():
         except:
             pass
 
-    # 3. Processa Notícias Nacionais
     noticias_brasil = []
     for fonte_info in FONTES_NACIONAIS:
         try:
@@ -214,11 +213,22 @@ def buscar_noticias():
             if artigos_portal:
                 contador = 0
                 for artigo in artigos_portal:
-                    if contador >= 5:
-                        break
                     link = artigo.get('url', '#')
+                    if link in links_processados:
+                        continue
+                    
                     titulo = artigo.get('title', 'Sem Título')
                     resumo = artigo.get('description', '') or "Destaque nacional."
+                    texto_analise = f"{titulo} {resumo}".lower()
+                    
+                    # FILTRO DE ESPORTES PARA O FEED NACIONAL
+                    if any(ruido in texto_analise for ruido in TERMOS_RUIDO):
+                        continue # Se tiver esporte ou ruído, ignora e vai para a próxima
+                    
+                    if contador >= 5:
+                        break # Só pega 5 depois que garantir que não são esportes
+                    
+                    links_processados.add(link)
                     noticia_obj = {
                         'titulo': titulo, 'resumo': resumo,
                         'data': formatar_data_brasil(artigo.get('published date', '')),
@@ -226,7 +236,7 @@ def buscar_noticias():
                         'fonte': artigo.get('publisher', {}).get('title', fonte_info["nome"]),
                         'link': link
                     }
-                    if any(mun in f"{titulo} {resumo}".lower() for mun in MUNICIPIOS_AM):
+                    if any(mun in texto_analise for mun in MUNICIPIOS_AM):
                         for t_reg, l_not in relatorio_geral.items():
                             if t_reg in TEMAS_BUSCA[:18] and validar_relevancia_noticia(titulo, resumo, link):
                                 if isinstance(l_not, list) and not any(n.get('link') == link for n in l_not):
@@ -242,7 +252,7 @@ def buscar_noticias():
         noticias_brasil.sort(key=lambda x: converter_data_para_ordenacao(x.get('data_original')), reverse=True)
         relatorio_geral["Principais Notícias do Brasil"] = noticias_brasil
     else:
-        relatorio_geral["Principais Notícias do Brasil"] = "Sem atualizações."
+        relatorio_geral["Principais Notícias do Brasil"] = "Sem atualizações válidas."
 
     with open('noticias_atualizadas.json', 'w', encoding='utf-8') as f:
         json.dump(relatorio_geral, f, ensure_ascii=False, indent=4)
