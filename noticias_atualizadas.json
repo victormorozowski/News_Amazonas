@@ -1014,6 +1014,14 @@
     "Superintendente da Polícia Federal no Amazonas Danielle Mady": "Sem atualizações relevantes nas últimas 24h.",
     "Tráfico de drogas Amazonas": [
         {
+            "titulo": "Parceria entre Guarda de Manaus e PRF inclui cão em fiscalização de cargas - Informe Manaus",
+            "resumo": "Parceria entre Guarda de Manaus e PRF inclui cão em fiscalização de cargas  Informe Manaus",
+            "data": "03/11/2026 às 00:53 (GMT-4 Manaus)",
+            "data_original": "Tue, 03 Nov 2026 04:53:22 GMT",
+            "fonte": "Informe Manaus",
+            "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPSEp5ZUVjWDgwaEZ2TjNRN3M1WGNzZFRncnpKX2VCcHBBOFZONUZUNUZEZ0FtV21iV00zZzVxZ3RTYm92ekFWQzAxd21uNXNVS0FHd1IzOWJ6bjhvOVdsZUQ1ME5McEo1VkUyU1BlcWpFRnI0elYzNUkyLUktZXRzUVpnTlJrWE5LcUhxOHBWdEhlV3hUamQzM0NCdHJrVGdlelNpYXVsSVc1WTA?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
             "titulo": "Cadela policial encontra quase 6 kg de drogas escondidos em mochila dentro de barco no Amazonas - Portal Tucumã",
             "resumo": "Cadela policial encontra quase 6 kg de drogas escondidos em mochila dentro de barco no Amazonas  Portal Tucumã",
             "data": "02/11/2026 às 19:43 (GMT-4 Manaus)",
@@ -1030,12 +1038,28 @@
             "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNMGNRWC1YeHRYbzI0RmEwQVZFRFVsYXZDV0FLX3RCMXNxYk90WnRtQTFvRnU3SldxZ0dyM09VdlZMS0ttNVJ1MXlKakY5MzFKS1dlbTdQM0d2c1J2bE41dFpLN3ZUVzNPNUtIX1FQUHdhSFVqUm9Gbmo2dndub25XTndvY1R2Ulg0SVU0VktVZ2w2VGU3bnVyNVpHZ2otaS13QnBuSEJpWjlORmU4MktOT25vNHZ2LUg1cWZ6Vkxiaw?oc=5&hl=en-US&gl=US&ceid=US:en"
         },
         {
+            "titulo": "Homem é preso por matar rival após discussão em casa de farinha no Amazonas - Policial - Portal do Holanda",
+            "resumo": "Homem é preso por matar rival após discussão em casa de farinha no Amazonas - Policial  Portal do Holanda",
+            "data": "02/11/2026 às 17:38 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 21:38:00 GMT",
+            "fonte": "Portal do Holanda",
+            "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQMUxIUDBHMjZzUHU5ajVaNmRaNUE0TE1VdkVzWEwyX2hhUXMwOXpEYlVObk10MWVsMy1mWU5ROUpnS1N1M21sbkE4X3dBNWVqaVVLOGZzcDFkVmZPcVgxUl9ESTZBSUxGVWZ4ZWxvYWR1RWJMVENaZ3BSVjczSGRRSkV3MENDSkV3SjlQRGJ0dDAwMDFoVWFmbnE1cnpyRkF1YWExN1Jia2haNTd2bFRadExSV3p5WHBWSUM0?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
             "titulo": "Tios de criança de 2 anos morta a tiros são presos em Borba - Segundo a Segundo",
             "resumo": "Tios de criança de 2 anos morta a tiros são presos em Borba  Segundo a Segundo",
             "data": "02/11/2026 às 10:54 (GMT-4 Manaus)",
             "data_original": "Mon, 02 Nov 2026 14:54:44 GMT",
             "fonte": "Segundo a Segundo",
             "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9yU3VUckFWWEhfN1JLTmtTZHVvOFlpSXBDYUtEUkdyOXc5QjZfUjk1SmE3MzRKeGxpb2F3Tkw5QVFRVkRaQ2FERnA3akRCcmpWQUZOOEJkbHNVVG1kM2ZuNDBubnZvaWNkcjhlSFZLYkJHeEhfLW44MzNZbw?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "Homem morre após seis dias internado por acidente entre motos no Amazonas - Policial - Portal do Holanda",
+            "resumo": "Homem morre após seis dias internado por acidente entre motos no Amazonas - Policial  Portal do Holanda",
+            "data": "02/11/2026 às 09:58 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 13:58:00 GMT",
+            "fonte": "Portal do Holanda",
+            "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNcVpUMEFSQzJhTHZkZllFLWs0bzRFQU80dHBnNjI5eVpBbHc1NFQtN1ZVWC1aZ05lQmQ1Z1lzOHF3VlZYUjhZQnBwTndRSVdoajN6YU1vbUpCWE54bno5dzN4cVVGcWR6UU0yV21Td3JzOEpwejF5cTdKM2N1V0txdnlkcXVTVTNNMDZlZ1dQRmkzMnJOWUx3TXFtWXo4dDlaMUpOT0JlVGVQUTg0NEdHY3BpaUo1NnAz?oc=5&hl=en-US&gl=US&ceid=US:en"
         },
         {
             "titulo": "Operação apreende quase 6 quilos de drogas em barco no interior do AM - D24AM",
@@ -1496,6 +1520,30 @@
     ],
     "Apreensão de drogas Amazonas": [
         {
+            "titulo": "Ação da Rocam termina com apreensão de drogas e prisão em comunidade de Manaus - Policia24h",
+            "resumo": "Ação da Rocam termina com apreensão de drogas e prisão em comunidade de Manaus  Policia24h",
+            "data": "02/11/2026 às 20:28 (GMT-4 Manaus)",
+            "data_original": "Tue, 03 Nov 2026 00:28:22 GMT",
+            "fonte": "Policia24h",
+            "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQWEYwa056WXloVHUyS1JJV0tfaXNNbnlzN0t3eC0wWXMtSnJlY0FGR3dXTDZ4Y0RmY0hwcXZQMHlxZHdpQ2JpV21zYlVQTFdSUUpFQ0R4eDRzNDlOc3IzMllFUDFyMGpWQWRBYzZwVG9od0Y3bkZ6ZkNVd2ItczBPVE0xdTFpWUZ2dUlpMjhMTFJRNG5NSmxoNXc1S1ZLQnNRQlg1RHJrSlA?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "Fiscalização em embarcação apreende 5,8 kg de drogas em Boa Vista do Ramos - Policia24h",
+            "resumo": "Fiscalização em embarcação apreende 5,8 kg de drogas em Boa Vista do Ramos  Policia24h",
+            "data": "02/11/2026 às 20:27 (GMT-4 Manaus)",
+            "data_original": "Tue, 03 Nov 2026 00:27:53 GMT",
+            "fonte": "Policia24h",
+            "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPbjJkQVZtTUR6VW43U0U1bVQ5THcwMGtQMTZ5VW5ka3c1T2VaN1NUMVVESEtENFZlVG9xWTFIalZpOXBiVlFYRTdoQWUyNjlZcmhtdDlOTURUQVJOUTk2YTBjZks3cURXeXJnYmZYLTYxaXpGSnM2WFRIczB2OEtoc0FDUzFfcUE5MXJ1UGRBVjAyYzBhRGZzT2ZLTWZNY1R6TkE?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "Abordagem policial termina com detenção de suspeito na Constantino Nery, em Manaus - Policia24h",
+            "resumo": "Abordagem policial termina com detenção de suspeito na Constantino Nery, em Manaus  Policia24h",
+            "data": "02/11/2026 às 17:28 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 21:28:27 GMT",
+            "fonte": "Policia24h",
+            "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPblhaOU5naXA4YzlGUlpGRUJtQ3F1NXhqeU55akVzT0RDbzA0MWV4V2F5am9XTmc4eENkbC1HQWVPbUNzTnZyZ3FtSVgtQ29zdUtlNE8zLVJsRlVZc2JQSlpRY1JUU3NPVnZOcE5aejhNaFFGS2FZVDVVU3M1dllFY3JsTDI5WlJxOHpHMzN3MHNXTGliUnpmams2ZXAwREFEbTFMekUzN01CNWNV?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
             "titulo": "Operação Faro apreende 5,8 kg de drogas em Boa Vista do Ramos - Alvorada Parintins",
             "resumo": "Operação Faro apreende 5,8 kg de drogas em Boa Vista do Ramos  Alvorada Parintins",
             "data": "02/11/2026 às 11:34 (GMT-4 Manaus)",
@@ -1777,6 +1825,14 @@
         }
     ],
     "Segurança Pública Amazonas": [
+        {
+            "titulo": "Alerta mundial? EUA preparam bases militares para enfrentar 90 dias sem abastecimento externo enquanto população é orientada a estocar comida - Portal CM7",
+            "resumo": "Alerta mundial? EUA preparam bases militares para enfrentar 90 dias sem abastecimento externo enquanto população é orientada a estocar comida  Portal CM7",
+            "data": "02/11/2026 às 21:14 (GMT-4 Manaus)",
+            "data_original": "Tue, 03 Nov 2026 01:14:15 GMT",
+            "fonte": "Portal CM7",
+            "link": "https://news.google.com/rss/articles/CBMijwJBVV95cUxQcmZLdlg0X2d0ZEJIWWpvN2VTS1R4Q0tKRWJiTVZFRkVxSDlXbGRQbUtEVDdLY0hwdWVtTjVONzl5RHJqLWM4Uk5KRVlNS0hWemZBS0pGVEo3eDdrMnpGUUhiQ05qbzdjZW5LbE1uWC1uRVdhQUFnVjFCZ2FwTmpyVVRvdDlIZnlpYV9OUHF2XzJLLVR2a3htaU5CQzZMXzkxVXRwNlh4SW1RYVNhMWkxUmxkcXpqTjRQdHZwSk5IVy1HRGNHSGdmT2thNVE4dzJQTGc4cTBxckxxSUlmamI2bm8yT012LXowaEVRTHMtWUc5YUQ0RDMzVV9LZ1lXNGxZZjV0QzJZQnEtS3ZzQ0pJ?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
         {
             "titulo": "Omar propõe parceria com França contra queimadas - Portal Valor Amazônico",
             "resumo": "Omar propõe parceria com França contra queimadas  Portal Valor Amazônico",
@@ -3045,6 +3101,14 @@
         }
     ],
     "Queimadas Amazonas": [
+        {
+            "titulo": "Fumaça de queimadas deixa ar de Parintins em nível péssimo e Defesa Civil emite alerta severo - Portal CM7",
+            "resumo": "Fumaça de queimadas deixa ar de Parintins em nível péssimo e Defesa Civil emite alerta severo  Portal CM7",
+            "data": "02/11/2026 às 21:49 (GMT-4 Manaus)",
+            "data_original": "Tue, 03 Nov 2026 01:49:15 GMT",
+            "fonte": "Portal CM7",
+            "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxObWpUVmJuNmpobUhiZ2hHUUE0bTU3VGdFMGNObFotOGpaM0F1dThZVFh4eFRRX2FkRDU2RXJvbzEtRnJLU1U2V244bU1sYW90eTllOEFFeWlFZUxtSUR1MVlJSndKblZ1emVKUmVLN1dZeUJQNzFrajBTb1FVMGJSQW5ZZGRuRHBiaXVDRFpwNmdKQ2hRZ1NzMmx5dXJWSEJIc05nNk00aFhQT0l2dTJxOXlWbmV0Um5McUI3ZXpBeWFoU2I2S3NXaw?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
         {
             "titulo": "Queimadas deixam qualidade do ar péssima em cidades do Amazonas; veja onde a situação é mais grave - ncnews.com.br",
             "resumo": "Queimadas deixam qualidade do ar péssima em cidades do Amazonas; veja onde a situação é mais grave  ncnews.com.br",
@@ -6443,204 +6507,204 @@
     ],
     "Principais Notícias do Brasil": [
         {
-            "titulo": "Joanna De Assis: Diego Souza será julgado nesta terça por uso de licença falsa - UOL",
-            "resumo": "Joanna De Assis: Diego Souza será julgado nesta terça por uso de licença falsa  UOL",
-            "data": "02/11/2026 às 20:27 (GMT-4 Manaus)",
-            "data_original": "Tue, 03 Nov 2026 00:27:47 GMT",
+            "titulo": "Jeans claro ou escuro: qual combina mais com você? - R7",
+            "resumo": "Jeans claro ou escuro: qual combina mais com você?  R7",
+            "data": "02/11/2026 às 23:26 (GMT-4 Manaus)",
+            "data_original": "Tue, 03 Nov 2026 03:26:07 GMT",
+            "fonte": "R7",
+            "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQNmNLX1hUZmp0eTc0VUFCa2JzeGRreEFjVThaRWhiMUJZNzJEZ0RLQW02ckJVZWRiSmxESGxwX3pwUGtXbnRQaTNHQi1DYno2aDk1bDltb09IeWFwMHlldW1BdTlXRzZPdjhJZGpqaWcwNDlReGtFX29lcklQVlF6dW5QaG9wLTFIMVlXRExSZXVQclk?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "Eleições nos EUA: americanos vão às urnas em votação que pode redefinir o poder de Trump no Congresso - G1",
+            "resumo": "Eleições nos EUA: americanos vão às urnas em votação que pode redefinir o poder de Trump no Congresso  G1",
+            "data": "02/11/2026 às 23:00 (GMT-4 Manaus)",
+            "data_original": "Tue, 03 Nov 2026 03:00:01 GMT",
+            "fonte": "G1",
+            "link": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxPeHo2cXdyZ3pPM19OMWFXU0MyOTlvOXNXYUM5RDBralZ0cDYzWkM5SDFQdlFkTFBIeGR6VjBnUDQ4bkVvSndWR1BWMWVMWWtsd3NDLUVrQ3hQemZNZ0FSV25sOERqOU14NkZMTmpLUGRkTmJrMndUZS1CVnB2T3NpS2lxQ05FZ0pmS09DeXBzSFVLY2lBcU9MMkNmOGpqamZKaVFtYXRmVzlaWGlscFJIeWZ5em91TFZwUkZlTXkxZS0wT0FpaVBHTjQwbzl1a1BSeWFucXFLUDVOMEUtOUNTd0lOUFM5RW_SAfYBQVVfeXFMTmVJaU9qM2xOeGdWR3pXbVdOU2JzLWxJZlR1Z29pU2hUYndGUHZfUGF2LUJKYWY0YzA5TUFKUTZway1vbmwxUlp5N19iUy1XQ3l6MTFyZGIzOVdDU2t2WWNtNGoxQmk3Q3poN2FBRFlWUmRXSnFDeUIzbElXWUNYWmVGYk00UjFEZ2gxNGxHcUF5bXRpcWphMGVtTnJnRDIwdDVmcmtLYkZ0YUdQMjUyR2ZpTHI0bHlyM3ZESE1BTktlN2UzeFBJNjAzYzJBWE01bWluZWEwQ05pRUFhc0VKaXUySmtUMzgwbGRyZlg0b3MxXy1jLWFn?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "EUA atacaram a ilha de Qeshm, no Irã, diz jornal - G1",
+            "resumo": "EUA atacaram a ilha de Qeshm, no Irã, diz jornal  G1",
+            "data": "02/11/2026 às 20:56 (GMT-4 Manaus)",
+            "data_original": "Tue, 03 Nov 2026 00:56:58 GMT",
+            "fonte": "G1",
+            "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQaVQzSFA2WHBZQjdJc05od0JOTEZINVNjWk11RVlsTnJXR3RudzdfdXVWeFgwU1ZjV0IyNElQYWtOMEFqbkxuQTlySHZtT1pNMWVmb1E0YURNSUxxQnVCVFE5RHJ6OWlTa0k3bS1lWDFFOWx0Q2ZQN0l6dFVOMmRfNHFRQzY4djJuNndUeXgxaU9tTmo3SWU4TjJmc08tcFnSAa4BQVVfeXFMUDdBZE1LeVZIbS10bHJ5UlJwLXJsNTUzV2tPMlBXZ0pTUmhFaENfNGlJVWdzcDNNWGhtejdaWGdoYlB3OUNIZWlHYzBKNEltX2tPNk9FTXNaMkFHWGxDaXBhM3hPOS15ZGxnSHZTeWhJRWJWQ2VUTldsVWgzMWgwUlRZZnFQNHkwUW9zZGd6Y19zRnlmQnRZR2lOLWVSTjlOck51RzZURWNzMXg3OWx3?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "Suprema Corte rejeita tentativa de Trump de separar votos na Califórnia - CNN Brasil",
+            "resumo": "Suprema Corte rejeita tentativa de Trump de separar votos na Califórnia  CNN Brasil",
+            "data": "02/11/2026 às 20:34 (GMT-4 Manaus)",
+            "data_original": "Tue, 03 Nov 2026 00:34:30 GMT",
+            "fonte": "CNN Brasil",
+            "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPTW9ybHFmZUZDQ2pERFMxaE5HSlJyN21pelR1VG0zWnBiZWk0akRJejkyMWRyak5lMFl5YWJZVkIwb2RXMXlCOGZqMnRCRzRzM0h4SGMzVFk2eXdUNlAwUWd0LVE2enBraVktb3VZZ1hOdGtqSU5DNTVlaGJmMFBObzAzWE9UN3JpaFNVTHlGMlJ5ME4xOFZ4YkFOMDI5N05saXM2dE1uVTFWQ3N4bWxQbVhJNjlDQQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "Idoso é agredido com voadora e pisão na cabeça em Osasco; suspeito foi condenado por matar carroceiro com flechada em 2016 - G1",
+            "resumo": "Idoso é agredido com voadora e pisão na cabeça em Osasco; suspeito foi condenado por matar carroceiro com flechada em 2016  G1",
+            "data": "02/11/2026 às 19:44 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 23:44:09 GMT",
+            "fonte": "G1",
+            "link": "https://news.google.com/rss/articles/CBMijAJBVV95cUxOc2lYZjE5T0JBQjB0Tm5KblpKRWp2YlNhQUZ5SFAzYlRVRXNlT0FrcDZ6ZnRma1pFbEFCbGNvTENBdVloQlRkZEd2aTVJWXVNWEFvbDlKcEFwcHhHbWZvd0RCYVY5V05OVFlfZVM5SXZ0X1FRRkluWTlzYndZVHl0Nkk2M3Y0LXJHZjVlYjhHRkxqUnM1Q1BEWmhnY25VYTVIREo1dHE1TWVrQ0JXaTNFc1d5ZHYwQ2plTkRVeG4ybjF4T3NZdm1xNFphNWo0djNkRV9KYVd2SGkwblBJS09mWTYxSkFXY3RENTZnajhYV0pSVy1JUFRsTVBEYWJFRXVQbFFjaC1OdzRjM3c40gGbAkFVX3lxTE1WQWZDSFE2WmhpRm5PTlZ5SmxESlFOblNRSW96eWV2Z0phY2l6R21OV3dNTjBPRWNuYWYzV3dEazVEeVRtTXk3LUYwY0tOUjhpYnBQcmRNSnh0bkFqVThDUXJFUGdUM2ZBTEx2QVYycnNvTXZEZVQwRzlfLVpET1EyYXhseWNsUlBQM2h0TW9iSkpKS2xJeDZzTHRtd2daUlZnVUNMcEtFT2xKSGNodDl4Y1k3amVpYVYtYm5kMlJmSndISTVkN0NzTDVwV2VwOVlHWWNpR2VYRnE2aGlIaEpJMU5EdG50VkFOT2FBTFE4RHZyTFlmekk2VlllYVBzQ192WHJwQUJHU09KcW02NDZ4TmhmVm1EcWxsOTQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "Fundações de esquerda querem \"novo\" CMN e BC sem olhar só para inflação - CNN Brasil",
+            "resumo": "Fundações de esquerda querem \"novo\" CMN e BC sem olhar só para inflação  CNN Brasil",
+            "data": "02/11/2026 às 19:42 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 23:42:44 GMT",
+            "fonte": "CNN Brasil",
+            "link": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPQTRUVVQ1X090aTBJTkZWN1BmWjVRbzdBaGJpRXBrOTQybExCWnNYdV9OWjI1RTA3VVRieXE2bzEwMHhpcUpSWEhSSjZicGtOR09kUkxhcktVM1RYdlZfY3JwMG9nV0Nxa0NzVzBMdGRUSUpvQ2pEclRxQ0dZRGlWQ2pTdVNBWkJDRzdtUzk3NnB4ODM3V2dvN3paOXRZNGs5am1Td2pTNTJqTjk1ZTdKcUxyRlkyOFlEWVhESlFaNTdaZE40YzdjOWlxUWNrdVhlLTl6ZC0xUFNWZkZtNy11TGZ3Zw?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "Por que hackers atacam freezers de supermercados e como fazem isso - UOL",
+            "resumo": "Por que hackers atacam freezers de supermercados e como fazem isso  UOL",
+            "data": "02/11/2026 às 19:09 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 23:09:21 GMT",
             "fonte": "UOL",
-            "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPeVRtM2JxYWZQR1drWDVfQnJMVXlBZHJSc1FOaDNYVlhCdkh6U21tVEJLSm5zMGFfRlRxSlowQ0hFM29IeVJGQnJGUkFwaENTZXgtS3NiWHVVaFlSQk5FOE0ybkkzNHUxQ1g1b1N2YTZQalBjSV9pX1RWZkxBaVBHaFdraFVMT1EzN296RWFpcm5fRVo3WlVlWDA4X1dpdTlpS1hrMDFsSWROZVA0MXJVUEN5UzRwQ1NnX3NSUm9NZ0NtT1loUW5NN2RMTQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+            "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNWjV6cmxoSjBhbHZ6a2JWbGxTLXZYaWMwYnNXYWN5dVlPU2Jlb0EwTGNCNm5KYUdNalM1UWhrMlg4bEhNMmVfMDRVcHROcGdtSHhYQ3lvc2ZpWXk4UUFjN0Z0ampneloyNjdYcFFfbWRXT3drdWtvMnM1MkxsdnM1VGsyNXhObE9oczlzODZLVnpxTGQ2NkozdGd5UV9SVldpelAzd29KUDNOd25LdDFscHNLT0JsRUFlRzk0Qml4TXNYX1NDUktRWDZndjBZRUJZMUx4ZjRFdw?oc=5&hl=en-US&gl=US&ceid=US:en"
         },
         {
-            "titulo": "Reuters/Ipsos: aprovação de Trump segue baixa na véspera de eleição de meio de mandato - G1",
-            "resumo": "Reuters/Ipsos: aprovação de Trump segue baixa na véspera de eleição de meio de mandato  G1",
-            "data": "02/11/2026 às 18:34 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 22:34:19 GMT",
-            "fonte": "G1",
-            "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPUlh4U2twZ2ZBakVHc2dkTUtyVGlEUGFTWUVLSDNCbWZ3NGxmVl93cTFsYWk1Wi1IV2VoZXg3QWpMYkdJajhqODBZSXZMMDJGajd5Z0U5dFdSLVRoMmh6dkx2THF5dnQzNnJlTURGdm1XYnk5SUpvU2pSRElUODRhcGkwRTJJNVFoXzhMSXk4cjlpRnY4elhnbzhmeG83V0R3cmIxeGY0UVdxSGpXQkFQM09mZGNPZ2NxN3BRelZBcVJPN3Y5ck5GWF9ycGxVdXRNdFHSAeABQVVfeXFMT19mOGtaMzRuTGhCOXJQQ1NEbHR1ak5NeUVVMlA1eVBobkc2ZUktcWFGckZSOHpoMzduUXFxNURQRFJtUlBIWUdFc29JSmtJQ1NiRnlNT0pBbWQteC0yVGprRVg5M0wtdzh6Snd0dGRwQWVvbFpjRngxRjV5cXJ0ZnRoWVhlT3NMT3ZpZElQemNLbEd1QjNrMnhGakhKSS1iRWFlRG0zWFJrdUhPcHhuZDY3SVotQ1Jyd2lHZjktWDN2TUItczlNV0poZ2o1cm9CcjhMSFhCQnBMUmdsbGxyNVY?oc=5&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-            "titulo": "Cruz de madeira pega fogo em cemitério da Grande Florianópolis no Dia de Finados; VÍDEO - G1",
-            "resumo": "Cruz de madeira pega fogo em cemitério da Grande Florianópolis no Dia de Finados; VÍDEO  G1",
-            "data": "02/11/2026 às 18:15 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 22:15:19 GMT",
-            "fonte": "G1",
-            "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPdFVuWTRaSGN6bWswc0hHZEZXSEVQV1hjWWt0OVE0N1plNUFlaGptT1d5Q2tBSWx5Rk9aTThhVmVDYk1Da0tDbXcxMVVNVUFkQXJmX3N1dDhPdFdFanBhRTlwMzFWekNaVGxzT0luaGNIUTViRWJwNzBURjB3TE5BM2E2WUpIRXJqcExpakxfZU5QdXNIVHNMdkVLR3VNWEhzV1RlNmVfUFhMX2VQMW9YZVlCclFjVHdlRjI3WHBXby1GMzBWZEZMWkpCSEttaFJF0gHfAUFVX3lxTE1mQUp3bXdGYTkxM3llMWpDbUhnLW1neGJ4c0tTWFh5M29vZzIxS2JVMUFnVUVFcjhLWExaWnlqQ2F6aXFpajR0RG5VR0puc3N0RVJSQTJBN1I4bmJyZUF3ZlNvcnJuY25LTWltaF9xQ095cnNUVGs4Yll4a1ZxTDFZQ0pBbjhwMzA4X09QdzlYYTNQbkEtU05BdDlzcG9HMFNRdHNsM3ZaTU0tZFlDeFhteW1BRE94UjkxM1VhYnY3MTdNZ1lPTm9EbDNUSnB3NkF6Q29jUy05SmtoaWpiLWM?oc=5&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-            "titulo": "Veja qual foi o Poder da Chama Vermelha escolhido pelo público em A Fazenda 18 - R7",
-            "resumo": "Veja qual foi o Poder da Chama Vermelha escolhido pelo público em A Fazenda 18  R7",
-            "data": "02/11/2026 às 18:10 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 22:10:29 GMT",
-            "fonte": "R7",
-            "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQQmRZaVZJSnlDU3VQT2FTNTJGejJUMnk4eHBfSE1vS1dyODRnQlI3blpDRW9HNjRWRTRIclRuc3pRUlR5Q1FzYnB5SmVyZDlqVHYtMFpIYWg0dzNDQ2x5dWlYOW9laFlfbXRMazhQdV9CTXZUMHlIdXFhTHFyNl9GWWJiSmtSa0taZ3RsaXRwVmhZNUlYX0xua0JXX3FQWXpvT2lOdU1ueUhXVnN2eUdiWTY3R245MVRzZl9wNWNFUXJ1RmVWQ1U4SWRRS1ZKR0tVbTRMUElSQXJPX28?oc=5&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-            "titulo": "Ligeiro no labirinto! Daniel Erthal vence a Prova de Fogo em A Fazenda 18 - R7",
-            "resumo": "Ligeiro no labirinto! Daniel Erthal vence a Prova de Fogo em A Fazenda 18  R7",
-            "data": "02/11/2026 às 18:10 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 22:10:29 GMT",
-            "fonte": "R7",
-            "link": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOM0Nvdm1QbVRmS1pBM2pVS0V3T3VqN3d0WUlCMGNYQ2dUTnU4VS1ZTzN0dFI2WlJ5UlRUQ2owanVxaXJrNG10TXN2X0dBcXQ2S1lhTWlGcDFzdVpndUVMM0hEdDBkN2tZcFB6dHNIX2ZoQzhwX0dwOVJCMFhqMmZST01aSlRTTjNxQXE4d2paUWV2Ul9LeGVmSllSNmhmRW93Nnc0ZTd6ZGswN2pYZ0dOQktsMjROb2VaVktFRXE1NWQwMVV1UnRDS2ZNUkVhTlBRY3Zv?oc=5&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-            "titulo": "Apple supera expectativas de lucro com vendas do iPhone 18 Pro - UOL Economia",
-            "resumo": "Apple supera expectativas de lucro com vendas do iPhone 18 Pro  UOL Economia",
-            "data": "02/11/2026 às 17:57 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 21:57:34 GMT",
-            "fonte": "UOL Economia",
-            "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQaUVPN1UzY0lfVkhFQjAwWDIzdmcyUjFmaWt1MVB1QzQtN2pjS0d6MWRXZ3JzZE1Dbl9rWU5aYU1LYVZKTzJqNVhiZHpuNWVlN3lpczhhNU1DU1BVaGI2SnYwMElNNFRLcnlablpTcl9VakszM0sxR2lXdGNZblYtWGZVNzU3eWsyc1JqS0o1R3djR0dxQ0tZNXFJLUVVZTM3Y09kUm5SY3JMaHhmOVU1XzE3d3ByU1k3TXM2cnZMUFg?oc=5&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-            "titulo": "Janaína Figueiredo: Janones vai à Argentina, mas Lula não quer intervir na escolha de peronista - UOL Notícias",
-            "resumo": "Janaína Figueiredo: Janones vai à Argentina, mas Lula não quer intervir na escolha de peronista  UOL Notícias",
-            "data": "02/11/2026 às 17:55 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 21:55:31 GMT",
-            "fonte": "UOL Notícias",
-            "link": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxNeXNGekdoLTlaSDY3R2NSak5uZFVOTXdwb21iZ283YkV4eGhVZi1JQXBaRExVRkVBYU5sak93VHFwUkg1VFAzb2dpV2c5b0IxQmVWX2pfQ0NqMnZGSThvNVM0SFVib3lJX2RWT1FpYWZ5dXFZOW1QUXkwODAtYjJudXhtQ3dUZ3JyMmduYm9sbkQya1VJczB5M0M1aWhyNGZlaHBoUzl3RVNmUTRFNWdpOEhPcXJZNEVMWDBITkgtMGhsNVhweFB1alBLMFBjdXZvNG1LNmhYZHBWYmkt?oc=5&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-            "titulo": "Bitcoin cai após ataque à Binance e mercado aguarda eleições nos EUA - CNN Brasil",
-            "resumo": "Bitcoin cai após ataque à Binance e mercado aguarda eleições nos EUA  CNN Brasil",
-            "data": "02/11/2026 às 17:13 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 21:13:52 GMT",
+            "titulo": "Midterms 2026: Um guia da eleição para quem não é dos EUA - CNN Brasil",
+            "resumo": "Midterms 2026: Um guia da eleição para quem não é dos EUA  CNN Brasil",
+            "data": "02/11/2026 às 18:53 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 22:53:16 GMT",
             "fonte": "CNN Brasil",
-            "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOek9rUzhQbEFTY09CZDhUSmtULUFpS2czZUJWV0V4V3YxUVd5M3lBVExJVmY5NjROblhpRGFjNE0zaDB6QmZSdG1pU0wzYVRSUTZ2OGdHSE5NdW1sVHhwWFA3NHhqZGo5Ny1hZVc2NTRkQ2w3aW9IUHRvQXR2dEowdWRxa2V6ZFhKbXdCdjMzc1R1bk9zWFI1US1MVFB0QV82OGxBSXRDTzhvNlcyVmxFRkVNQlpuQ0tJQ01rX1VB?oc=5&hl=en-US&gl=US&ceid=US:en"
+            "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPWExCMXA2N0RvTW96M01wNDM5VWQ4MVlRTXNFOWs5UWI2bktfZk5oR3NVX2tUUU41VVktUlZ1STNfSlJvTmpONy1kalhJeXNuQ3JnRzlFSlFKeGxvWUZtNGs3NzktNnJPcjhjUEFjVllQRmRxYVJMZE40SW9FTGlSUkxBSEVNd3hDZ3NodG1OdXhJNmhOS2tLdVMxOA?oc=5&hl=en-US&gl=US&ceid=US:en"
         },
         {
-            "titulo": "Julgamentos de feminicídios crescem 8% no Brasil em 2026 - R7",
-            "resumo": "Julgamentos de feminicídios crescem 8% no Brasil em 2026  R7",
-            "data": "02/11/2026 às 17:07 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 21:07:21 GMT",
+            "titulo": "Parlamentares governistas aumentam críticas a mercado antes de reunião do Copom - R7",
+            "resumo": "Parlamentares governistas aumentam críticas a mercado antes de reunião do Copom  R7",
+            "data": "02/11/2026 às 18:35 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 22:35:20 GMT",
             "fonte": "R7",
-            "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNWWZhSkVyUWktOFJRdk9VUDN5VWRSVGIwNWw0REJEeDZPazNpTGlTa3FDWWNWWUpXS1ZuT09tOVdHNUl2VEtIcUdaT1hYeF9sZ1VfYmdFY2g3Nk1HbWVSN1JESnphRDZabmE2T3d0X2NkZVhNNy1hdHU3UkQtQUFWTlBIUmJKTEl1OWc3eTRKWkczVkpoc3piREIwWGxxazlvcGQ0czVVbmpaTGpjV01VMnd3VHdfUTVoRGFB?oc=5&hl=en-US&gl=US&ceid=US:en"
+            "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOWlBKTFg3OGNsWl9qVFJua1JKZklnbTNQXy1qblZSTkR6VG5TcG9GSFprQkxrYTZ5VmRWcDFsdVp1THRNUlhicjdTazI2Q0QtVEJaY3M0TXEwYnNkbDJ5Y2ljVm83SW5hNnVSbC03UXpsUHcxQzJCdTJTd1ltX2k1cVdGYVVOaU5KTXMxakN3LWdFUm9aMDVSWFVPVjZiRU94RmtuM0NXOF9VMnF0WmVuOGw5cWEyaXZVQTI5X1NDdw?oc=5&hl=en-US&gl=US&ceid=US:en"
         },
         {
-            "titulo": "Família, babá e amigos: mortos em queda de jato nos EUA são identificados - Metrópoles",
-            "resumo": "Família, babá e amigos: mortos em queda de jato nos EUA são identificados  Metrópoles",
-            "data": "02/11/2026 às 16:54 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 20:54:00 GMT",
+            "titulo": "Chega de família: Britney desabafa contra ex e irmã e promete romper de vez - UOL",
+            "resumo": "Chega de família: Britney desabafa contra ex e irmã e promete romper de vez  UOL",
+            "data": "02/11/2026 às 17:08 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 21:08:16 GMT",
+            "fonte": "UOL",
+            "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPMGp3NTBnQ01mR1dTRFBIN2VmdzZVQ2oxUDZzVHFGclFOSXhicllQc2MxSWdKbm9uT04wWS12aV9YV0hva2wxTEl3TGdpejN0aUN0TE9TeHZuWHkxLUYzMlNlVklLa2VVSlBLZFRzUkFWRlJoTlpyVGJKQ1NnVDdqMFFRcGxSb3pmUGZOMHZTVDZmSnUtR0NfYU1DWmxjeVBwT1pJTVhKdDVRTWVvLWdLOFJQYWdzSTBQVTZtMkg0OA?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "Homem que deu voadora em idoso foi condenado por matar catador com flechada - UOL Notícias",
+            "resumo": "Homem que deu voadora em idoso foi condenado por matar catador com flechada  UOL Notícias",
+            "data": "02/11/2026 às 17:00 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 21:00:42 GMT",
+            "fonte": "UOL Notícias",
+            "link": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQbFNMX3d6QTJLMzBUdGUyc1VKMXlIZ0FJd3Baa0dUbTRkNnVtWGQ5UDJDWkJvbEZraGZHelgxTGc1a2lOa0ljTmZmX0pnWEk1ZEU0c0pnRWFwdXB0akYtSHduV09fX2lpQVVKNnhjNFBwM3ZaeWg4bC11MUxvekZ0SFNVcy04eGMwdHVEZFc0cng5cUd5V1J0SFQyZE1vb053Ty02dXAtSHhIVVlrZXd1TFU1S0NQTGtETmlsT21MWlZwRmtsRVNhYnYxZmEwanZDbzI4UWJpV2VBS1lGRFMxaWZrYXBzems?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "Jato pode ter se partido no ar antes de cair nos EUA, dizem autoridades - UOL Notícias",
+            "resumo": "Jato pode ter se partido no ar antes de cair nos EUA, dizem autoridades  UOL Notícias",
+            "data": "02/11/2026 às 16:59 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 20:59:54 GMT",
+            "fonte": "UOL Notícias",
+            "link": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOXzZpemJhOWoyV003UGZVTTN5ZmczbnBOMFVfUTBpckZYcUgzYjJEYjctYWZCcEIwYjdVd1ZjcWo2bm8zM0RlYUlvd29DZWJMTGhXS0Q3QXpWbGVZaHlERlo3TUJ5VjMwaXF6a3VURGFvS01uTzRuR2RSRk1CbWF3WFB1ZGttclhtSlRkU0RuMHhZeU1tSGdjeGNYNHJGMko0aXd2UEh2c0JHNExfT29lU2ZxNWhlQ1FadmZUZV9EbFdOejZDRnAxME4wQ190YkI1ZTZGN3d5ay1NZE9Rc1E?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "Jovem é baleado e morre após tentar defender mulher durante discussão em frente a adega na Zona Leste de SP - G1",
+            "resumo": "Jovem é baleado e morre após tentar defender mulher durante discussão em frente a adega na Zona Leste de SP  G1",
+            "data": "02/11/2026 às 16:21 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 20:21:50 GMT",
+            "fonte": "G1",
+            "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxPME5DYUtqZUZOTEFNMG54OU1CSjM5OEVfalRGUFJQbDV1dlZtUnVpT2VTNTludW11dUVGNm4xbEo4UDdBT0N5SWVFZUVVQ2xheU16UV9FWmttN1M4N0ZCd1EwRlVxS2lFcVFWYW1TeDRpMDF3eXBKZGJhWF81Z3VxTF9ENkZYUXFaa1FHeXJ3NHcxbFFnWExZYUU0dTlYSGEzTnlndkUwb284WGdMYTFmVy05N1JHUm9xNFhFVG43MVc5Rk0xYmtUWGhaOXc0THR4VnVXb0E4V1hFM2N5U2VxVHEtX3BNcE9TSGfSAfgBQVVfeXFMTjgzaURKdVNYUmozUENUa0xodVVhM1dhaHdSdmdRZ3ZFcUVWWU1lNElwVVA5U1JIVHoyREF0T0tBNjB4MzRnSFJPdHdPNDdkVFhaZ1JjR2dVbUhQZUh0SFhzZDJCY3NNSnNaYUw0WEZlWVlwUzVfbHZXRU1STlBVczlLY3QtZ3ZYZmdfaWJHaDE0ZUczSVR5MmJTYVo0UGJmU3BQb0YtczVKZ0FJSU5DV005dkxuc1R4Qm9jYU5saHNtVTQ5MkJIazhwUWVyR2RTYzV5YWNqLS1OV3RjS0NxMUdfR1pUX1dPanZzX2t2Qk1UQmxFUFQyeWo?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "Mulher mantida em cárcere privado aproveita consulta médica para pedir socorro e escapar do ex, diz delegado - G1",
+            "resumo": "Mulher mantida em cárcere privado aproveita consulta médica para pedir socorro e escapar do ex, diz delegado  G1",
+            "data": "02/11/2026 às 15:23 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 19:23:44 GMT",
+            "fonte": "G1",
+            "link": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxOOUhQQkJqVHNId2NlNzVFTDl6NUhNMU9hOXRjbXoySzZieVp5R1RYQm9fX1QyT3NjSkpXYWlMeHdLNmlsRnpLYUV3Rm9SRDNmTVRxZno1ZG5tdGdMeWM5Q1FzV1FYLU5YS2xQN2xYc2NzTElsbm54cnpPZGUtbVc1Nmc4bnlFTGI4VzVsWURkVmtaRVZRZ3JrQ09RUTBBZnFHQ0Vma0tkTzNqdFNaTVVqU0FYNlZXcWg3S2xsYkhBRjNaWWs0VW5NNXpDTkJmUDdLQUJDUTdfYkNLQkk2M3MxT2RFUURWQi1JWGQtR1lxNXVFTldH0gGDAkFVX3lxTE05QlU4QWVha1o0ZklMZkJEbXpmWmcyM1JKQjRCYlNwb0EzZGRTNXRkOU5qamY1YWRLWEJJcnY0eUlsalRXMHVnZ1p1OVFqT1Z2b2VkRlpfOWxzTW56LW85SExLaHNQZ2VXbmVOa1VRcEdaamRrUkNjdTFWMmVMWnA0elQ0REhuYkFXelhuSHZxZFVSYUVqRUp5ZkI3QnZSODdkS09udjlldWtsQ2dqcnFweEZYOVdXTGJRTkRCTGJaY0M4U3ZmZ3pxTWthRGs3czlXVERLUmt3SGdua1BYTlRjZWJqMHJhZlhIRmQ1a3FtbjVkVzhwTGlVcFV2d2RyTEliVXM?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "ONU ressalta importância de proteger jornalistas e acesso à informação - R7",
+            "resumo": "ONU ressalta importância de proteger jornalistas e acesso à informação  R7",
+            "data": "02/11/2026 às 15:04 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 19:04:50 GMT",
+            "fonte": "R7",
+            "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNOERXampVdnpzUmJKa3BTUkRKY0VGZ2QzU1h2U040X0NLUnVVVTJXSkZUZWVoSmpqMWVleGNKN3JETFB2dVZmT2ZMTVA1TVNDN3EtdERGWkw1UHFDemp1RW4zejFXMXl0OXI3OVAzUGNIMDhiZFNjd2dueUdxVy0zNEJZNG5EdlI4ZnlFMTZzcXRUQ3duMHRMaXZrN1hibG9JcnRDWlFKOU9rLWVVZmcydzROdTdubWQ0SFE?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "Mercadante gosta da tese de Lara e Roncaglia no BC, mas Durigan resiste - Metrópoles",
+            "resumo": "Mercadante gosta da tese de Lara e Roncaglia no BC, mas Durigan resiste  Metrópoles",
+            "data": "02/11/2026 às 13:49 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 17:49:00 GMT",
             "fonte": "Metrópoles",
-            "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOSnhYeVpYX19lVkt4MTFJQlhwbVc3TDhKYko0YmtNVUdJUVlyNkpka0phdnBtR2tYU2ltT2FvNDVfRzhCOGZlOWgwZHFHVHN5YU8zV2FXaTZuUjYtb3VnQUd1cTR6akg1cTRnT251amR1MXRMQm5wV1VyWjQtVld2MXk0Vk5Yb050cjNlZ1JDYmtBZUJVSmRtSzhZYWREdE1TSElUQ3A1dw?oc=5&hl=en-US&gl=US&ceid=US:en"
+            "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNMGlIR1JCSFhqRG44YmNXTzFuajZyZ0toQnNIWmVKdXRTWjN1UkJ0OXpaUHpoZjFRX2U4ZExBUll1SV91TGlibURNWFBVek1OSE5Fcmt4aUxVQVhDSW8yTXYwc1BlZlJVZi0wV092cXZFSVpsOHI5NDJtUlpBZTA1bm15QWFLTlZYMFdlYTIydGdqUGFjQ3pRM2xRbndTd3BuTzMtd002dGoteHBZcjNSQzJTMEtnTndLZEtBSA?oc=5&hl=en-US&gl=US&ceid=US:en"
         },
         {
-            "titulo": "Aprovação de Trump permanece em 32% a um dia das Midterms, aponta pesquisa - CNN Brasil",
-            "resumo": "Aprovação de Trump permanece em 32% a um dia das Midterms, aponta pesquisa  CNN Brasil",
-            "data": "02/11/2026 às 16:52 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 20:52:39 GMT",
-            "fonte": "CNN Brasil",
-            "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOWGc4TF82bHpzamlLSDMzd25pWWFVSl84U3Vha0hicXAza1FTSVdnVEFIMi1ibUdaY2FMYVZGQ3dYc3ZHbFNWVUlHWDVzRkExWmcwYjAxeUFPdGtTVE1CSENueXhCZDB6Q05nMjRwejRkdnZqZmJ5aVk2cl9ic25MR1c4bw?oc=5&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-            "titulo": "Trump chama candidatos democratas de 'extremistas' em ato pré-eleições - UOL Notícias",
-            "resumo": "Trump chama candidatos democratas de 'extremistas' em ato pré-eleições  UOL Notícias",
-            "data": "02/11/2026 às 16:49 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 20:49:11 GMT",
-            "fonte": "UOL Notícias",
-            "link": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNM3VGWkdUMExIbm15QVFzMnVzSFMzYXpSaHFGWUxqdGplMlFLX1JfTHU2VDVlbVc0T3B1eEp1RG9OUXJkbVFoaXpNYWEtVWJXQmdsbHlpd1BUQmEwMEFBaUlMZ3ItVlBpSnlRbWowc3RJeHk2WEJEbk9QUjVlN0VYZ2FKektXNlZPUXZSVEhwc0l5Qmd4Sm1TT2E4TzdUR3hYbFE0UW1oWUhPX2RUcjhDVWJ0WlUxWnp1R0drR3o0c0FYenVNTWNEMWxPNTJPcmc?oc=5&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-            "titulo": "Novas regras do SAC exigem atendimento humano diário - R7",
-            "resumo": "Novas regras do SAC exigem atendimento humano diário  R7",
-            "data": "02/11/2026 às 16:31 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 20:31:44 GMT",
+            "titulo": "Defesa de Vorcaro pede soltura de banqueiro à Comissão Interamericana de Direitos Humanos - R7",
+            "resumo": "Defesa de Vorcaro pede soltura de banqueiro à Comissão Interamericana de Direitos Humanos  R7",
+            "data": "02/11/2026 às 11:45 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 15:45:59 GMT",
             "fonte": "R7",
-            "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNbE1wa2ItNnlTdTd3bS1TWkZveW53SnNFdDF1WkdnY0hFYmszUGREazlBclZDcmFtbERqVnhONGJqWm4zc0cxenVwSV9BSjdlaHJ6czJBUk9VTTBaWk1idHpDMXBWTWgyTWs1cGZWR2dWY3czZ21LNkh5NmtsNUFaU1lUUHdBcjlhb2l6dURiaHc2bGdEUWg3ZzVGUEZPcENqRlVTdTR5NkJoZTVOaTg4Z1prRFg?oc=5&hl=en-US&gl=US&ceid=US:en"
+            "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPT1pTSGVlcGlFNElDX2p4YkNtaDZtYUFaaTlTVWtQNkxlSmNpV252QW15clNoZ3RaNzJsekwtTnRpRmJwVFhFUERJc2hTSDBKbXVUYjhFYlIybUZ2WUxXWDZpLWFtcUtJcnhvMU5KN3lZODVvN0c1SGF2ZlNWZkUzY3Q3M19aYmt1Ym11U284aUoxMXZvSjdEakpGb3Zaa3RsbDBHNnJic29uNHpNRjA1R3pwNkRqVUhrN2FNU3FjY19yQXBESkxvM2NReG0?oc=5&hl=en-US&gl=US&ceid=US:en"
         },
         {
-            "titulo": "BAIC Arcfox T1: rodamos na versão topo de linha do elétrico chinês - CNN Brasil",
-            "resumo": "BAIC Arcfox T1: rodamos na versão topo de linha do elétrico chinês  CNN Brasil",
-            "data": "02/11/2026 às 16:19 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 20:19:32 GMT",
-            "fonte": "CNN Brasil",
-            "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOc01YdlZrcElRWkxjaGp4T3FuQl9za0VCUlJfbEN4eWhUdUJ0bHZRNVJXMlNIcHk5U013eWJ3UGZFMVlPRDdwMHluUnZwRU96Tkd5NjFnUnQxVERSWDNoYW1vSklISDd0RGR3WlNqaXlUeHRvY1hPazVsdkRKeTJ5NUI4Z2sycUliQUdsQ0pMU0ZCam42MnN3TGRPR1BuU3NhQkE?oc=5&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-            "titulo": "Bombardeio russo em escola de vila na Ucrânia mata 26 pessoas, diz governo - CNN Brasil",
-            "resumo": "Bombardeio russo em escola de vila na Ucrânia mata 26 pessoas, diz governo  CNN Brasil",
-            "data": "02/11/2026 às 15:59 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 19:59:46 GMT",
-            "fonte": "CNN Brasil",
-            "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQOXRWeXgxakdLSW41c29YemZ2aTJRTDJwdlFIMGdha213OVFiMkI5VGZXbzlHam92SWRxNWpCLUl1RVNaV0ZNRmxfVEYxb09qMHA1TG5nZmJfYjU1S2VXcWlUbXg4TkZpa0pUY3doZ1BSYVJtcXhJWm9fS2tfbHM3alFwLXRBQnhPMklYcDFGM2tBekFFR0ZCelZhaW5TQTRISEQyRTd0b2dfdw?oc=5&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-            "titulo": "Na Argentina, Janones se reúne com ex-presidente Cristina Kirchner - CNN Brasil",
-            "resumo": "Na Argentina, Janones se reúne com ex-presidente Cristina Kirchner  CNN Brasil",
-            "data": "02/11/2026 às 15:45 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 19:45:24 GMT",
-            "fonte": "CNN Brasil",
-            "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOUUhmUnVMMTg3ZkFJd3BYQTgwYk82VWFYWEZCNmstX2ZMSDU0MFBjLTk2SXYzMWdGSWh2UFRjQTc0cGdpM0loSnZPNlJtVTJCMzNyZ25XbU5OcUhtalEtYlJ6NVRBcWpMa0FENDdtR2I5VkJPTUNKTlFHN1dvem5jd2dWbDdWMmREM3NxamVRQlNRTWJPSkVfZDhsVmxOWTk1a2E5U2JDeEZZRHdwWEE?oc=5&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-            "titulo": "Pai de Vorcaro pede prisão domiciliar com laudo que aponta risco de complicação intestinal - UOL Notícias",
-            "resumo": "Pai de Vorcaro pede prisão domiciliar com laudo que aponta risco de complicação intestinal  UOL Notícias",
-            "data": "02/11/2026 às 15:32 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 19:32:00 GMT",
+            "titulo": "Sem maioria, Netanyahu tenta formar coalizão sem partidos árabes em Israel - UOL Notícias",
+            "resumo": "Sem maioria, Netanyahu tenta formar coalizão sem partidos árabes em Israel  UOL Notícias",
+            "data": "02/11/2026 às 11:31 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 15:31:39 GMT",
             "fonte": "UOL Notícias",
-            "link": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxQelFQWDNIX0Jtc0Q3YVYtVGwxdUNfdTR6ZHRXNHhaZXpxRk1Gdnd2bnd0eTFCY3Y3bG92QUhvTVAxNWVaMWR4Z04yb1RsdWxmekxYV0VySEJLQlA2T1BYTjVPc3JNXy02aElaUnRRYXp2YWxyd0hsSC1Hb2hkSGZaeUg4ejliUUd1NmVJbUpYWTA0cTRwdXhBZDFjNEE0V096Uk40Ulp1UEhGVURhRUdaVktmZ2RUVWdWU2UwRHRDV0hEdEFDc0QyQVRDZW1sQVJyeUljWnBXSmVvS2hDclZmWVJ3NENydDVzeC1GRDlNNTRWT3JtSmVEOQ?oc=5&hl=en-US&gl=US&ceid=US:en"
+            "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPOTFuR2tkYWNURUxkMllKZHlwcWVmQWEwX2Rrd2ZxTlNYZTByTDVsVExhekt6Um90R2pnQzh3VDMxc29NTXhsN0NBa0pkWDZ5eWU3a0QtenpBYXNLX2Y1TWZtSDhKWm5NZ0JhQkN5U2RzUElrSTdHNFVsdHNsWFFVTy0ydUJVZVloaHJvUDVZMi1GNFY0czVLSkxILWdZYmxGZHRXeU5rbzBLTTN5akJRVlNYMFYyTWI0aUVr?oc=5&hl=en-US&gl=US&ceid=US:en"
         },
         {
-            "titulo": "Autoridade dos EUA vê indícios de que avião com filha de brasileiros se despedaçou antes do impacto - G1",
-            "resumo": "Autoridade dos EUA vê indícios de que avião com filha de brasileiros se despedaçou antes do impacto  G1",
-            "data": "02/11/2026 às 15:07 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 19:07:32 GMT",
-            "fonte": "G1",
-            "link": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxOSzFvLXRmcExiNm4xZ2FqYUFoNVBjeHplSFJ4T2FnZGYzbjBlWHRzdjVwdU5KWmtIX3J5b1NiMnRGb0FUbDFGQUhfUGxiNTVrUktwYmYwU05jd3ZidkFtdnpfWWpoV1k5RUZnQk4tUmNha1p6enJ4VkNEdS1iQ2xtODE4Skhlcm12WWpoUk1abGZyb2haVmVwSjdwMVc0aTJUMjN6WE9McVh5ZmRmZEFPMzhqWnhTOUpHdy1aUEpVdFVRcFdjZWpmUEFQeUNCUktscVlibHVLNE1CRGJsb2E4ckZtWjdHQdIB9AFBVV95cUxPN2ZfTXd1MGNEaFF5WV8wYlgxNjAxeUMzM0VqaXZESTE2OG9IdmZKeXA4YTRSQXhTdDNIVXlvalJLVjcwSm40Q2x3ajRqUWpvV1BDaUxxV0NEY2k5VzhtbjRVYTVKUFB2OTN5Tjg5Ti1vQkJOMGhsTERuLVhiemY1TDgweUpqbWl4Y2lETVJIOVlpZU1DcGxDbkNNMFhRLUZwNmdkSjcyRG43Y05UdktJODRWNmpfZF9zcW1fTU55anZLVmhUbTczakJ4aWliTGNmT0QyYUlwMWNaTzl2T1hsTEtMWEkyMFdva0lnMFVCcHdKaUJn?oc=5&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-            "titulo": "Nova carteira de identidade já pode ser solicitada pelo celular. Saiba como - Metrópoles",
-            "resumo": "Nova carteira de identidade já pode ser solicitada pelo celular. Saiba como  Metrópoles",
-            "data": "02/11/2026 às 13:08 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 17:08:00 GMT",
+            "titulo": "Candidato tenta descobrir manipulação nas urnas após receber só 3 mil votos - Metrópoles",
+            "resumo": "Candidato tenta descobrir manipulação nas urnas após receber só 3 mil votos  Metrópoles",
+            "data": "02/11/2026 às 11:00 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 15:00:00 GMT",
             "fonte": "Metrópoles",
-            "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPTS1GcnQ0V0doTDdWQzlIZjZEd0lqbV9sajUtVmw1d05BT2FSWVA2TlJhY1lFeU5TYWpfNHNoUmR2SXZaMFlLaXRNemNLUVduOTJZazlBUkNBdE5rRFI2SnNqVGU5VUcwRHlUaEw5ekJvVHd2NW5RcWhLX3l6eFJRLXV4NW5tcFA2UUdISUNyaTJyOUc2WVlHWDhFUkw3ZFRtdG9aOVZwMEd6dl9C?oc=5&hl=en-US&gl=US&ceid=US:en"
+            "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNeDlYM01zN1lLMklDMVVJX280RjdRYkZBVkN5NnJpUHh0MzZxVFBYUk9OdDhCeXF2WjUwQnNNQnNnWXRJQndRN21oSW9MUVhTelNEbUhnc3d4cDF1NllNSURJZDAzUGZSOU1Cdk1CQVVGTnpmX2FIQlh0WUVwLWFfYjJpcTJDSUJ5al95UUhBX0V5NkpQSWtBc3Q1cG1GNzAzMVZZalFERlh0Y1NDLUR5Vy02aWJEVXVGX1d0Ujk3T2FZMFdFNWhUeA?oc=5&hl=en-US&gl=US&ceid=US:en"
         },
         {
-            "titulo": "Quatro pessoas morrem e duas ficam feridas em acidente após ultrapassagem na BR-277, no Paraná - G1",
-            "resumo": "Quatro pessoas morrem e duas ficam feridas em acidente após ultrapassagem na BR-277, no Paraná  G1",
-            "data": "02/11/2026 às 11:06 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 15:06:58 GMT",
-            "fonte": "G1",
-            "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPZEZlV09fZFZENkJ5cEpHVUNLUm9SVDFSZlJwYzVCOWdBa1B4c3U3SGM3dnVmMlh2c1ZoODNvbGY5NGtxWlhHLTJGT3A4ZDZmUXdwOEhxTkx6SkxSc2hRdnFWRXR3ODFSSllaTEg1ZWhuNmozUnBoNmQ4cTJRQXVPWXlic0cwSlA4OS0tZGppR3NIRnR2UWh3OUEzbU9FQmZlZlRMbXlwR0vSAbcBQVVfeXFMTWJ0ak10cWI3T2lnOU1RQUxIMXJ4a3R1OUlrcUkwdEI1TVhGY2cta3g0N0N3RW13ZkEyTzV0T29xdHRPSldxc2V3VldsckVaZEQzNC14S3o2eEZBdkFNN2dkN29lenh0bTZ1c2RSaHY0TXVzSy1ITktIMEJ1TkRnMzIyVUhEdWhCblRfYU8zUk1SZWlxRHRtX0E2ZGxIdWdndHNrWEt0Nm1EcmRuZ0ZVa2JRV001LVZR?oc=5&hl=en-US&gl=US&ceid=US:en"
+            "titulo": "Camila Queiroz reage após ser envolvida em polêmica com Marina Ruy Barbosa - Metrópoles",
+            "resumo": "Camila Queiroz reage após ser envolvida em polêmica com Marina Ruy Barbosa  Metrópoles",
+            "data": "02/11/2026 às 09:56 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 13:56:00 GMT",
+            "fonte": "Metrópoles",
+            "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQYWhKRFNEMnh4dHFrZ05aN1l3VVlJS0dxZ1oyVzZvWE1mQjlhY1JNclFoWDFCbklCeklYQlg4dW1MSWZuNWJvY0RBNkZqbmpCai1ldi0wQi1veDRWWnZLQjg2NUNVdW9QMzdJNEpBRzN1N2ZHVDB2bWg4M1pFN3VlMWNrTFE4VmNqZDZ6em40U0t4dlpSanZYN19CVzktSFNWWHlCY1JJVmJaZkhMd0NXMkNVY1puUWhFSmVBUHBwR3JIZw?oc=5&hl=en-US&gl=US&ceid=US:en"
         },
         {
-            "titulo": "Turista argentino e instrutor morrem em queda de asa-delta no Rio - G1",
-            "resumo": "Turista argentino e instrutor morrem em queda de asa-delta no Rio  G1",
-            "data": "02/11/2026 às 10:36 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 14:36:34 GMT",
-            "fonte": "G1",
-            "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPSGFqOF92RkZJR040dUxJamUzMDVOaU1GS3ZLbnFxczI5a3drN2xvZWEwQ01Ccm5vX1JfeDVkTGQ4ek1sRmoxcXkxUDBYTTh6eHFnajNmVG9rQmlTcVNURk5oWVQ0MFlqcHN4cmR5NzVoczVKUm9waktyejhubDlldmx3SnJRS0pXRU5admRUWFdlSFFXeUhvNlVOX254cW1DZk1XN3FiOEZLQ0FOd3VWRFdSUmJDclhfSGtIeW1Tb9IBzgFBVV95cUxQNzhoTXF3UW95eWI0V1RFQ1VaTC1XTGlVQm1qeEZnSHg3anN1azBpYWRnMU04ZkRVVTdpMFBXd29GR3E0R2tBdGZPSzFrNllNUzltWnR1OG1FY094M3N1UXlxZG91WU5TTkU1bFRiNW8wREtIQlJrS19Kdm05a1MwYk9oSmVtcW1VS1o2U0NDb0V4VHVHN2VTYjhYUzBoRm1xZ0NNcVBpdzFjMjIxdnp5WjN6S3czQTR4U1ZGQ0NFZjBoeVNtS1d1WTd4cktmdw?oc=5&hl=en-US&gl=US&ceid=US:en"
+            "titulo": "Tifanny se manifesta pela primeira vez após decisão que reforçou proibição - CNN Brasil",
+            "resumo": "Tifanny se manifesta pela primeira vez após decisão que reforçou proibição  CNN Brasil",
+            "data": "02/11/2026 às 09:11 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 13:11:55 GMT",
+            "fonte": "CNN Brasil",
+            "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNZnZfcTlFVG1BUEI3dEtJLVZnRDNFSHBTTTZjUDh3MDBlYm9BQjVVLTUxaUdKVUI3M2hUYzhBMHNSNjhjMlZrTFRGYmNRYXoxREx4TDFEZ295RHpvNXdSalR1MVVQQ0ExSURQaGpoRFptbUllY01qR1ZwNnZjUU92UjEzUEFwTWpKdlZIdjBSNDNyaWNCZ1VBNWt4d3Q2dG9KVDZDQjBvNHoyY0pTUkFNc0VRekZmbWJ1U3RV?oc=5&hl=en-US&gl=US&ceid=US:en"
         },
         {
-            "titulo": "Áudio mostra conversa de piloto com a torre antes de avião cair: ‘Vamos bater no chão e morrer’ - R7",
-            "resumo": "Áudio mostra conversa de piloto com a torre antes de avião cair: ‘Vamos bater no chão e morrer’  R7",
-            "data": "02/11/2026 às 06:50 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 10:50:56 GMT",
+            "titulo": "Discussão entre Fran e Darlin vira briga generalizada em A Fazenda: ‘E se fosse a sua filha?’ - R7",
+            "resumo": "Discussão entre Fran e Darlin vira briga generalizada em A Fazenda: ‘E se fosse a sua filha?’  R7",
+            "data": "02/11/2026 às 09:07 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 13:07:16 GMT",
             "fonte": "R7",
-            "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQTUw5eHRqb3hGVVQ5Q2NoTTJYOHJ3VTZPajhCZDRzdHUtYzJPbV9fNFdNOEJnR2xFcGo4bGt1ZVhtNDZTUDJXSnExX29lY2pVWWVkUEtpMV94cnlfV3N6anNZRWlaaHducmxRZl9RVzFjY19ibjNnMFY3cC0zVTBtckM5WURPcS1wQ2llSVZOaU9XX0hZbFhOOE16ZFZSdGY2alpZSmtxdEhXU3JpWFRtZ19ORGU1T2xfMHdHbVFvVngxM3EyWUNVLVNLRXlKQTJlcWo2VkJhbw?oc=5&hl=en-US&gl=US&ceid=US:en"
+            "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNd1VUQmREOEs5U1JOVGtVVnl0UFpWVGYyeFVIU19GVlBHZHVLNlItX3hDbU9acTB0UEQ5SkMyaUdWVzlhYlRmaTB3dEpSNjBuejFRRXBrR1VKbW50NDMwR2dtR04xUjVhQ29Eb180R1pTS0FGRVZzNmlUbkY3Zm52T0dEc2tHQjBHV214aThydW1nNC0zeDV4d192Wm1xZzg1aEpkWDM4NUJrY0hYZjBsQUIySGNqSnhwMXVFTlp4QUsyVzk1eTBtSkhJX21qZ1ppdHpXYWpkLWJVbDF1Wlcta0l2eF9LUUVmSHc?oc=5&hl=en-US&gl=US&ceid=US:en"
         },
         {
-            "titulo": "Queda de muro no Parque do Carmo mata 1 idosa e deixa feridos na zona leste - Metrópoles",
-            "resumo": "Queda de muro no Parque do Carmo mata 1 idosa e deixa feridos na zona leste  Metrópoles",
+            "titulo": "Jovem vê discussão, tenta proteger mulher de agressão e é morto a tiros - Metrópoles",
+            "resumo": "Jovem vê discussão, tenta proteger mulher de agressão e é morto a tiros  Metrópoles",
+            "data": "02/11/2026 às 07:06 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 11:06:00 GMT",
+            "fonte": "Metrópoles",
+            "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOM0pzeVFHLUkwc2dtMXBlVFBpUVFRZ19xN1dPNS10RWJTQ3ZSS0tGRmh1S1c0V0dnNjNUc3BhaVlORHIycmFSMFUySFA0SUgxaTVIMzNzdnNfQTR0SG9zc0hpLXMydnEzWEpDYU9MT0VsRl9YNGtBOEVqRFJodFBQaTZqTENlWWlHREdLTmhPNkZTUHZxUlZpVDdKQnEtMFhZNDFaY2dTXy0ybjA?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "EUA: áudio registra desespero de copilota de jato que caiu e matou 9 - Metrópoles",
+            "resumo": "EUA: áudio registra desespero de copilota de jato que caiu e matou 9  Metrópoles",
+            "data": "02/11/2026 às 06:43 (GMT-4 Manaus)",
+            "data_original": "Mon, 02 Nov 2026 10:43:00 GMT",
+            "fonte": "Metrópoles",
+            "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPYnlaYXZZZFVjRWxka0ZQeDdhellpajdqM1pIbFJwNVd1cEJIQkRLZDBkRW5qS0RYeU9LRHVmR1RlYlIzTFA3ZXh0OXhOZzY3djBiZ1hLMnl3Zlo2V04xOTNSR2t4LWpieEZtWHV3Slh3YWtjWVJRNERNd0dnbUpMeFM4bW5PZ19lZHM2SjJnTHU1bzFaeENtcC1tckdOYm5Sa3VKaGY1NUlydw?oc=5&hl=en-US&gl=US&ceid=US:en"
+        },
+        {
+            "titulo": "Quiz: O que você sabe sobre as Eleições de Meio de Mandato dos EUA? - CNN Brasil",
+            "resumo": "Quiz: O que você sabe sobre as Eleições de Meio de Mandato dos EUA?  CNN Brasil",
             "data": "02/11/2026 às 06:00 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 10:00:00 GMT",
-            "fonte": "Metrópoles",
-            "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBGTjkxb0RjTWpYZzVRbnJUY1AxQ1Rickd6bnczRV9SRkRQOVNUSk1IZUJ5YnFGRGVmbWdJc1hFWnFKdWhWWHVDR1VuUjAtR3E1TV9yclFXX2Z0Zi1Gd0VIeml3MjdvTWVDWGhpY0dpSkY3MVpNNmY1RA?oc=5&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-            "titulo": "Horóscopo 2026: confira a previsão de hoje (2/11) para seu signo - Metrópoles",
-            "resumo": "Horóscopo 2026: confira a previsão de hoje (2/11) para seu signo  Metrópoles",
-            "data": "02/11/2026 às 01:00 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 05:00:00 GMT",
-            "fonte": "Metrópoles",
-            "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNNEhyRng1MlZIU2NzQ19Nc05OUnUySjQzZXkycTctQlBPQWNfaU1FczJfX2E5Zi1hVVNZNG52NnI4dVJWTEZTSFk4WVFlQzVVM1hLU043VDREbFdlT0FrdkYwaXFYZ2M5V3RVMWJvcmNlUFZJbG85dWJlTmRDMnpqQkw2X0lyYjZZOEFnNENibWR6SHRmNy1Vc0FaOE9wOE9zeWloMWYteUt3OTU3NmpKNE9R?oc=5&hl=en-US&gl=US&ceid=US:en"
-        },
-        {
-            "titulo": "F1 em Interlagos: a história por trás dos nomes de cada curva do circuito - Metrópoles",
-            "resumo": "F1 em Interlagos: a história por trás dos nomes de cada curva do circuito  Metrópoles",
-            "data": "02/11/2026 às 01:00 (GMT-4 Manaus)",
-            "data_original": "Mon, 02 Nov 2026 05:00:00 GMT",
-            "fonte": "Metrópoles",
-            "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNTDVsdTJVdmpabG1HRVFEMXVmWmZFOE9ZbzNmYTJSR3FYbEZmenlYV0JqVGZJQk1TTWw4LUdYbXlrQWxlSW1ZQ2x6SEFLeXdWU3oxYXhNZTlJSzBfc0dWaG9uRUVvbUNiWHNlc0VLQTNIRm9weUcyeXNTVWdtbGtqa3lNX29pYURRelJTaGk1TmRJU0NYMXpTSXY3ZEdpdzZ0Qk1CQ2NMRDA2bWVU?oc=5&hl=en-US&gl=US&ceid=US:en"
+            "data_original": "Mon, 02 Nov 2026 10:00:42 GMT",
+            "fonte": "CNN Brasil",
+            "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOOWNDczJIWVlQZjRyeVB1U09jNFdEZXRxNldfX01JcHBJV3FxN3c4M1hzcXZHREIxbWNpNVdOS21IUFBQenFuS1J1YUNVOW5kVlZGT3R6bU1RTlZJZUl0N0hXeENEM2NROHVwakhRU19rdGhqQWwwUzlfZ0lzSkcyTThydWtWdmN1blBmVG1uU2hhNE5BNy1XTkd1SnYzSXJjMV9UcVZVVDlpMEtvYmc?oc=5&hl=en-US&gl=US&ceid=US:en"
         }
     ]
 }
