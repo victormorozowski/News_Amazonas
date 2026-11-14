@@ -11,10 +11,24 @@ except Exception as e:
     print(f"Aviso ao inicializar GNews: {e}")
     google_news = None
 
-# Categorias dedicadas e mutuamente exclusivas da Polícia Federal
+# Categorias principais consolidadas
 CAT_PF_AMAZONAS = "Polícia Federal - Amazonas"
 CAT_PF_BRASIL = "Polícia Federal - Brasil"
 CATEGORIA_FRONTEIRAS = "Fronteiras, narcotráfico e guerrilhas nos países limítrofes do Amazonas"
+CAT_TRAFICO_AM = "Tráfico de Drogas - Amazonas"
+CAT_SEGURANCA_ESTADUAL_AM = "Segurança Pública Estadual - Amazonas"
+CAT_MEIO_AMBIENTE_AM = "Crimes contra o Meio Ambiente - Amazonas"
+CAT_POLITICOS_AM = "Investigação Policial envolvendo Políticos - Amazonas"
+CAT_NACIONAL = "Principais Notícias do Brasil"
+
+# Categorias remanescentes ainda não fundidas
+TEMAS_BUSCA_RESTANTES = [
+    "Desmatamento Amazonas",
+    "Mandado de prisão Polícia Amazonas",
+    "Operação policial Amazonas",
+    "Pirataria fluvial Amazonas",
+    "Órgãos Federais Amazonas"
+]
 
 BUSCAS_PF_AMAZONAS = [
     "Polícia Federal Amazonas",
@@ -32,25 +46,6 @@ BUSCAS_PF_BRASIL = [
     "Polícia Federal apreensão"
 ]
 
-# Demais temas regionais do Amazonas
-TEMAS_BUSCA_AM = [
-    "Tráfico de drogas Amazonas",
-    "Apreensão de drogas Amazonas",
-    "Segurança Pública Amazonas",
-    "Desmatamento Amazonas",
-    "Queimadas Amazonas",
-    "Garimpo ilegal Amazonas",
-    "Extração de ouro Amazonas",
-    "Mandado de prisão Polícia Amazonas",
-    "Operação policial Amazonas",
-    "Pirataria fluvial Amazonas",
-    "Investigação política Amazonas",
-    "Polícia Civil Amazonas",
-    "Polícia Militar Amazonas",
-    "Órgãos Federais Amazonas"
-]
-
-# Buscas ocultas direcionadas para fronteiras e países limítrofes
 BUSCAS_FRONTEIRAS = [
     "narcotráfico fronteira Colômbia Peru Venezuela Amazonas",
     "guerrilha FARC ELN fronteira Brasil Amazonas",
@@ -59,7 +54,42 @@ BUSCAS_FRONTEIRAS = [
     "Sendero Luminoso Tren de Aragua fronteira Brasil"
 ]
 
-# Buscas ocultas para reforçar atenção ao CM7 sem criar aba própria
+BUSCAS_TRAFICO_AM = [
+    "Tráfico de drogas Amazonas",
+    "Apreensão de drogas Amazonas",
+    "DENARC Polícia Civil Amazonas drogas",
+    "Polícia Militar apreende drogas Manaus Amazonas",
+    "apreensão skunk cocaína maconha rio Solimões Amazonas",
+    "tráfico de entorpecentes Manaus Amazonas"
+]
+
+BUSCAS_SEGURANCA_ESTADUAL_AM = [
+    "Segurança Pública Amazonas",
+    "Polícia Civil Amazonas",
+    "Polícia Militar Amazonas",
+    "SSP-AM Manaus Amazonas",
+    "ROCAM Força Tática Manaus Amazonas",
+    "delegacia polícia Manaus Amazonas prisão",
+    "homicídio crime Manaus Amazonas polícia"
+]
+
+BUSCAS_MEIO_AMBIENTE = [
+    "Garimpo ilegal Amazonas",
+    "Extração de ouro Amazonas",
+    "Queimadas Amazonas",
+    "Incêndio florestal Amazônia Região Norte",
+    "Focos de queimadas floresta amazônica",
+    "Crime ambiental IBAMA ICMBio Amazonas"
+]
+
+BUSCAS_POLITICOS_AM = [
+    "Investigação política Amazonas",
+    "Operação policial prefeito vereador deputado Amazonas",
+    "Prisão prefeito vereador deputado secretário Amazonas",
+    "Corrupção desvio verba investigação Manaus Amazonas",
+    "MPAM MPF investigação político Amazonas"
+]
+
 BUSCAS_OCULTAS_CM7 = [
     "site:cm7brasil.com polícia",
     "site:cm7brasil.com polícia federal",
@@ -67,7 +97,6 @@ BUSCAS_OCULTAS_CM7 = [
     "site:cm7brasil.com amazonas"
 ]
 
-# Portais prioritários (recebem busca dedicada + prioridade na ordenação)
 DOMINIOS_PRIORITARIOS = [
     "cm7brasil.com",
     "g1.globo.com",
@@ -89,14 +118,13 @@ FONTES_NACIONAIS_PRIORITARIAS = [
     {"nome": "CNN Brasil", "termo": "site:cnnbrasil.com.br política OR polícia OR economia OR justiça"}
 ]
 
-# Buscas nacionais abertas para não ignorar outros portais relevantes
 BUSCAS_NACIONAIS_ABERTAS = [
     "STF Supremo Justiça decisão Brasil",
     "Política Governo Congresso Brasil",
     "Economia Banco Central Receita Federal Brasil"
 ]
 
-MUNICIPIOS_AM = [
+MUNICIPIOS_E_INDICADORES_AM = [
     "alvarães", "amaturá", "anamã", "anori", "apuí", "atalaia do norte", "autazes",
     "barcelos", "barreirinha", "benjamin constant", "beruri", "boa vista do ramos",
     "boca do acre", "borba", "caapiranga", "canutama", "carauari", "careiro",
@@ -109,7 +137,16 @@ MUNICIPIOS_AM = [
     "são gabriel da cachoeira", "são paulo de olivença", "são sebastião do uatumã",
     "silves", "tabatinga", "tapauá", "tefé", "tonantins", "uarini", "urucará",
     "urucurituba", "amazonas", "alto solimões", "rio negro", "rio solimões",
-    "vale do javari"
+    "vale do javari", "pc-am", "pcam", "pmam", "pm-am", "ssp-am", "sspam",
+    "aleam", "tjam", "mpam", "tce-am", "tre-am", "ipaam", "cbmam", "detran-am"
+]
+
+REGIAO_NORTE_E_PAN_AMAZONIA = MUNICIPIOS_E_INDICADORES_AM + [
+    "amazônia", "amazonia", "floresta amazônica", "amazônico", "amazônica",
+    "região norte", "acre", "rio branco", "amapá", "macapá", "pará", "belém",
+    "santarém", "altamira", "itaituba", "rondônia", "porto velho", "roraima",
+    "boa vista", "tocantins", "palmas", "bolívia", "peru", "colômbia", "colombia",
+    "venezuela", "equador", "guiana", "suriname", "guiana francesa", "pan-amazônia"
 ]
 
 OUTROS_ESTADOS_CAPITAIS = [
@@ -123,25 +160,82 @@ OUTROS_ESTADOS_CAPITAIS = [
     "sergipe", "aracaju", "espírito santo", "vitória", "brasília", "distrito federal"
 ]
 
-CERNE_REGIONAL = [
-    "polícia", "policial", "delegado", "delegada", "pf", "prf", "federal", "civil",
-    "militar", "operação", "investigação", "investigado", "prisão", "preso", "presa",
-    "apreensão", "apreendido", "droga", "drogas", "entorpecente", "cocaína", "maconha",
-    "skunk", "tráfico", "traficante", "facção", "comando vermelho", "pcc", "crime",
-    "criminoso", "homicídio", "assassinato", "tiroteio", "baleado", "assalto", "roubo",
-    "sequestro", "golpe", "estelionato", "fraude", "corrupção", "desvio", "garimpo",
-    "ouro", "desmatamento", "queimada", "ambiental", "ibama", "icmbio", "funai",
-    "indígena", "pirataria", "fluvial", "embarcação", "fronteira", "justiça",
-    "ministério público", "mpf", "mpam", "tjam", "tre-am", "juiz", "desembargador",
-    "governo", "prefeitura", "prefeito", "governador", "deputado", "senador", "vereador",
-    "aleam", "tce", "tcu", "cgu", "corregedoria", "segurança", "ssp", "danielle mady"
+TERMOS_TRAFICO = [
+    "tráfico", "traficante", "traficantes", "narcotráfico", "droga", "drogas",
+    "entorpecente", "entorpecentes", "cocaína", "maconha", "skunk", "pasta base",
+    "oxi", "crack", "haxixe", "ecstasy", "mdma", "lança-perfume", "tabletes de",
+    "tijolos de", "quilos de droga", "tonelada de droga", "apreensão de drogas",
+    "apreende drogas", "boca de fumo", "laboratório de refino", "mula do tráfico",
+    "denarc", "drrco", "drco"
 ]
+
+CERNE_SEGURANCA_ESTADUAL = [
+    "polícia civil", "pc-am", "pcam", "polícia militar", "pmam", "pm-am",
+    "ssp-am", "sspam", "secretaria de segurança pública", "rocam", "força tática",
+    "coe", "cicom", "ronda no bairro", "dip", "distrito integrado de polícia",
+    "dehs", "derfd", "depca", "deccm", "delegado", "delegada", "delegacia",
+    "viatura", "policiamento", "bombeiros", "cbmam", "seap", "sistema prisional",
+    "homicídio", "assassinato", "latrocínio", "feminicídio", "tiroteio", "baleado",
+    "disparos de arma", "assalto", "roubo", "furto", "arrastão", "sequestro",
+    "cárcere privado", "extorsão", "estelionato", "golpe", "violência doméstica",
+    "maria da penha", "estupro", "facção", "comando vermelho", "pcc",
+    "família do norte", "fdn", "tribunal do crime", "porte ilegal de arma",
+    "arma de fogo", "fuzil", "pistola", "prisão em flagrante", "mandado de prisão",
+    "foragido", "operação policial", "segurança pública"
+]
+
+TERMOS_QUEIMADA_FOGO = [
+    "queimada", "queimadas", "incêndio", "incêndios", "fogo na floresta",
+    "fogo na mata", "focos de calor", "focos de incêndio", "fumaça de queimada",
+    "nuvem de fumaça", "brigadista", "combate ao fogo", "queima ilegal"
+]
+
+TERMOS_MEIO_AMBIENTE_GERAL = TERMOS_QUEIMADA_FOGO + [
+    "garimpo", "garimpeiro", "garimpeiros", "extração de ouro",
+    "extração ilegal de ouro", "draga", "dragas", "balsa de garimpo", "mercúrio",
+    "mineração ilegal", "crime ambiental", "crimes ambientais", "ibama", "icmbio",
+    "ipaam", "batalhão ambiental", "bpamb", "dema", "madeira ilegal", "desmatamento",
+    "fauna", "pesca ilegal", "pirarucu ilegal", "quelônios", "terra indígena",
+    "yanomami", "vale do javari"
+]
+
+TERMOS_POLITICOS = [
+    "político", "políticos", "política", "prefeito", "prefeita", "ex-prefeito",
+    "ex-prefeita", "vice-prefeito", "vereador", "vereadora", "ex-vereador",
+    "deputado", "deputada", "ex-deputado", "senador", "senadora", "ex-senador",
+    "governador", "ex-governador", "vice-governador", "secretário municipal",
+    "secretário estadual", "ex-secretário", "assessor", "assessora", "ex-assessor",
+    "chefe de gabinete", "parlamentar", "candidato", "candidata", "gestor público",
+    "agente político", "aliado de", "ligado a", "parente de", "esposa do prefeito",
+    "filho do prefeito", "empresário ligado", "câmara municipal",
+    "assembleia legislativa", "aleam", "prefeitura"
+]
+
+TERMOS_CRIME_INVESTIGACAO_POLITICA = [
+    "investigação", "investigado", "investigada", "inquérito", "prisão", "preso",
+    "presa", "mandado", "busca e apreensão", "operação", "indiciado", "indiciada",
+    "acusado", "acusada", "denunciado", "denunciada", "réu", "crime", "crimes",
+    "corrupção", "desvio", "peculato", "lavagem de dinheiro", "improbidade",
+    "fraude em licitação", "superfaturamento", "propina", "rachadinha",
+    "compra de votos", "caixa dois", "crime eleitoral", "afastado do cargo",
+    "afastamento", "cassação", "gaeco", "cecor", "drcco", "pf", "polícia federal",
+    "polícia civil", "mpf", "mpam", "tce-am"
+]
+
+CERNE_REGIONAL = list(set(
+    TERMOS_TRAFICO + CERNE_SEGURANCA_ESTADUAL + TERMOS_MEIO_AMBIENTE_GERAL +
+    TERMOS_CRIME_INVESTIGACAO_POLITICA + [
+        "polícia", "policial", "federal", "civil", "militar", "apreensão",
+        "apreendido", "pirataria", "fluvial", "embarcação", "fronteira",
+        "justiça", "ministério público", "juiz", "desembargador", "danielle mady"
+    ]
+))
 
 CERNE_FRONTEIRA = CERNE_REGIONAL + [
     "guerrilha", "guerrilheiro", "guerrilheiros", "farc", "eln", "sendero luminoso",
     "tren de aragua", "dissidentes", "cartel", "narcotráfico", "narcotraficante",
     "narco", "contrabando", "descaminho", "exército", "forças armadas", "soberania",
-    "migração", "refugiados", "paramilitar", "armamento", "fuzil", "munição"
+    "migração", "refugiados", "paramilitar", "armamento", "munição"
 ]
 
 CERNE_NACIONAL = CERNE_REGIONAL + [
@@ -208,7 +302,6 @@ TERMOS_RUIDO = [
 
 
 def limpar_titulo_sem_fonte(titulo):
-    """Remove o sufixo ' - Nome do Portal' adicionado pelo Google News para não falsificar filtro geográfico."""
     if not titulo:
         return ""
     partes = titulo.rsplit(" - ", 1)
@@ -256,84 +349,151 @@ def tem_mencao_pf(texto):
 def tem_vinculo_amazonas(titulo, resumo):
     titulo_limpo = limpar_titulo_sem_fonte(titulo)
     texto_analise = f"{titulo_limpo} {resumo}".lower()
-    return any(re.search(rf'\b{re.escape(mun)}\b', texto_analise) for mun in MUNICIPIOS_AM)
+    return any(re.search(rf'\b{re.escape(mun)}\b', texto_analise) for mun in MUNICIPIOS_E_INDICADORES_AM)
+
+
+def cita_outro_estado_sem_am(titulo, resumo):
+    titulo_limpo = limpar_titulo_sem_fonte(titulo)
+    texto = f"{titulo_limpo} {resumo}".lower()
+    tem_am = tem_vinculo_amazonas(titulo, resumo)
+    cita_outro = any(re.search(rf'\b{re.escape(est)}\b', texto) for est in OUTROS_ESTADOS_CAPITAIS)
+    return cita_outro and not tem_am
+
+
+def eh_noticia_queimada(titulo, resumo):
+    titulo_limpo = limpar_titulo_sem_fonte(titulo)
+    texto = f"{titulo_limpo} {resumo}".lower()
+    return any(q in texto for q in TERMOS_QUEIMADA_FOGO)
 
 
 def validar_pf_amazonas(titulo, resumo, link):
-    """Aceita APENAS atuação da Polícia Federal dentro do Amazonas."""
     if eh_ruido_absoluto(titulo, resumo, link):
         return False
-
     titulo_limpo = limpar_titulo_sem_fonte(titulo)
     texto = f"{titulo_limpo} {resumo}"
-
     if not tem_mencao_pf(texto):
         return False
-
     return tem_vinculo_amazonas(titulo, resumo)
 
 
 def validar_pf_brasil(titulo, resumo, link):
-    """Aceita APENAS atuação da Polícia Federal no restante do Brasil (exclui Amazonas)."""
     if eh_ruido_absoluto(titulo, resumo, link):
         return False
-
     titulo_limpo = limpar_titulo_sem_fonte(titulo)
     texto = f"{titulo_limpo} {resumo}"
     texto_low = texto.lower()
-
     if not tem_mencao_pf(texto):
         return False
-
-    # Exclusão estrita: se envolver o Amazonas, vai apenas para 'Polícia Federal - Amazonas'
     if tem_vinculo_amazonas(titulo, resumo):
         return False
-
-    # Exclui polícias federais estrangeiras sem relação com o Brasil
     estrangeiras = ["polícia federal argentina", "polícia federal da argentina", "polícia federal mexicana", "polícia federal do méxico"]
     if any(est in texto_low for est in estrangeiras):
         return False
-
     return True
+
+
+def validar_trafico_amazonas(titulo, resumo, link):
+    """Apreensões e tráfico de drogas no Amazonas em âmbito estadual/integrado (não PF)."""
+    if eh_ruido_absoluto(titulo, resumo, link):
+        return False
+    titulo_limpo = limpar_titulo_sem_fonte(titulo)
+    texto = f"{titulo_limpo} {resumo}".lower()
+
+    if tem_mencao_pf(texto):
+        return False
+    if not tem_vinculo_amazonas(titulo, resumo):
+        return False
+    if cita_outro_estado_sem_am(titulo, resumo):
+        return False
+
+    return any(t in texto for t in TERMOS_TRAFICO)
+
+
+def validar_seguranca_estadual_amazonas(titulo, resumo, link):
+    """Segurança pública estadual no Amazonas, PC-AM e PMAM (exclui PF)."""
+    if eh_ruido_absoluto(titulo, resumo, link):
+        return False
+    titulo_limpo = limpar_titulo_sem_fonte(titulo)
+    texto = f"{titulo_limpo} {resumo}".lower()
+
+    if tem_mencao_pf(texto):
+        return False
+    if not tem_vinculo_amazonas(titulo, resumo):
+        return False
+    if cita_outro_estado_sem_am(titulo, resumo):
+        return False
+
+    return any(c in texto for c in CERNE_SEGURANCA_ESTADUAL)
+
+
+def validar_meio_ambiente(titulo, resumo, link):
+    """
+    Garimpo ilegal/ouro/crimes ambientais no AM + qualquer notícia de queimada/incêndio/fogo
+    envolvendo Amazônia, Floresta Amazônica, Amazonas, Região Norte ou países pan-amazônicos.
+    """
+    if eh_ruido_absoluto(titulo, resumo, link):
+        return False
+    titulo_limpo = limpar_titulo_sem_fonte(titulo)
+    texto = f"{titulo_limpo} {resumo}".lower()
+
+    # Ramo A: Queimadas / Incêndios / Fogo na Amazônia, AM, Região Norte ou países pan-amazônicos
+    if eh_noticia_queimada(titulo, resumo):
+        return any(re.search(rf'\b{re.escape(loc)}\b', texto) for loc in REGIAO_NORTE_E_PAN_AMAZONIA)
+
+    # Ramo B: Garimpo ilegal, extração de ouro e demais crimes ambientais no Amazonas
+    if not tem_vinculo_amazonas(titulo, resumo):
+        return False
+    if cita_outro_estado_sem_am(titulo, resumo):
+        return False
+
+    return any(m in texto for m in TERMOS_MEIO_AMBIENTE_GERAL)
+
+
+def validar_politicos_amazonas(titulo, resumo, link):
+    """Investigação, prisão, operação ou crimes envolvendo políticos e aliados no Amazonas."""
+    if eh_ruido_absoluto(titulo, resumo, link):
+        return False
+    titulo_limpo = limpar_titulo_sem_fonte(titulo)
+    texto = f"{titulo_limpo} {resumo}".lower()
+
+    if not tem_vinculo_amazonas(titulo, resumo):
+        return False
+    if cita_outro_estado_sem_am(titulo, resumo):
+        return False
+
+    tem_politico = any(p in texto for p in TERMOS_POLITICOS)
+    tem_acao_criminal = any(c in texto for c in TERMOS_CRIME_INVESTIGACAO_POLITICA)
+    return tem_politico and tem_acao_criminal
 
 
 def validar_noticia_regional(titulo, resumo, link):
     if eh_ruido_absoluto(titulo, resumo, link):
         return False
-
     titulo_limpo = limpar_titulo_sem_fonte(titulo)
     texto = f"{titulo_limpo} {resumo}".lower()
 
     if not any(cerne in texto for cerne in CERNE_REGIONAL):
         return False
-
-    tem_am = tem_vinculo_amazonas(titulo, resumo)
-    cita_outro_estado = any(re.search(rf'\b{re.escape(est)}\b', texto) for est in OUTROS_ESTADOS_CAPITAIS)
-
-    if cita_outro_estado and not tem_am:
+    if cita_outro_estado_sem_am(titulo, resumo):
         return False
-
     return True
 
 
 def validar_noticia_fronteira(titulo, resumo, link):
     if eh_ruido_absoluto(titulo, resumo, link):
         return False
-
     titulo_limpo = limpar_titulo_sem_fonte(titulo)
     texto = f"{titulo_limpo} {resumo}".lower()
 
     tem_fronteira_ou_pais = any(loc in texto for loc in PAISES_LIMITROFES_E_FRONTEIRA)
     if not tem_fronteira_ou_pais:
         return False
-
     return any(cerne in texto for cerne in CERNE_FRONTEIRA)
 
 
 def validar_noticia_nacional(titulo, resumo, link):
     if eh_ruido_absoluto(titulo, resumo, link):
         return False
-
     titulo_limpo = limpar_titulo_sem_fonte(titulo)
     texto = f"{titulo_limpo} {resumo}".lower()
     return any(cerne in texto for cerne in CERNE_NACIONAL)
@@ -390,6 +550,53 @@ def normalizar_titulo_dedup(titulo):
     return re.sub(r'[^a-z0-9]', '', base)[:60]
 
 
+def coletar_categoria(buscas, validador, dados_existentes, chave_cat, links_usados, titulos_usados, msg_vazio, marcar_queimada=False):
+    lista = []
+    if isinstance(dados_existentes.get(chave_cat), list):
+        for n in dados_existentes[chave_cat]:
+            l, t, r = n.get('link', ''), n.get('titulo', ''), n.get('resumo', '')
+            chave_t = normalizar_titulo_dedup(t)
+            if validador(t, r, l) and l not in links_usados and chave_t not in titulos_usados:
+                links_usados.add(l)
+                titulos_usados.add(chave_t)
+                if marcar_queimada:
+                    n['alerta_queimada'] = eh_noticia_queimada(t, r)
+                lista.append(n)
+
+    for termo in buscas:
+        try:
+            artigos = google_news.get_news(termo)
+            if artigos:
+                for artigo in artigos:
+                    link = artigo.get('url', '#')
+                    titulo = artigo.get('title', 'Sem Título')
+                    resumo = artigo.get('description', '') or f"Notícia referente a {chave_cat}."
+                    chave_tit = normalizar_titulo_dedup(titulo)
+
+                    if link in links_usados or chave_tit in titulos_usados:
+                        continue
+                    if not validador(titulo, resumo, link):
+                        continue
+
+                    links_usados.add(link)
+                    titulos_usados.add(chave_tit)
+                    obj = {
+                        'titulo': titulo,
+                        'resumo': resumo,
+                        'data': formatar_data_brasil(artigo.get('published date', '')),
+                        'data_original': str(artigo.get('published date', '')),
+                        'fonte': artigo.get('publisher', {}).get('title', 'Fonte'),
+                        'link': link
+                    }
+                    if marcar_queimada:
+                        obj['alerta_queimada'] = eh_noticia_queimada(titulo, resumo)
+                    lista.append(obj)
+        except Exception:
+            pass
+
+    return ordenar_com_prioridade(lista) if lista else msg_vazio
+
+
 def buscar_noticias():
     if not google_news:
         return
@@ -402,203 +609,86 @@ def buscar_noticias():
         except Exception:
             pass
 
-    # Migra notícias antigas de PF para as novas categorias separadas e remove abas obsoletas
-    abas_pf_antigas = [
-        "Polícia Federal Amazonas",
-        "Superintendência Polícia Federal Amazonas",
-        "Superintendente da Polícia Federal no Amazonas Danielle Mady",
-        "Operações Polícia Federal Amazonas"
-    ]
-    antigas_pf = []
-    for aba_antiga in abas_pf_antigas:
-        itens = dados_existentes.pop(aba_antiga, [])
-        if isinstance(itens, list):
-            antigas_pf.extend(itens)
-
-    dados_existentes.pop("site:cm7brasil.com polícia", None)
-    dados_existentes.pop("site:cm7brasil.com amazonas", None)
-
-    if not isinstance(dados_existentes.get(CAT_PF_AMAZONAS), list):
-        dados_existentes[CAT_PF_AMAZONAS] = []
-    if not isinstance(dados_existentes.get(CAT_PF_BRASIL), list):
-        dados_existentes[CAT_PF_BRASIL] = []
-
-    for item in antigas_pf:
-        t, r, l = item.get('titulo', ''), item.get('resumo', ''), item.get('link', '')
-        if validar_pf_amazonas(t, r, l):
-            dados_existentes[CAT_PF_AMAZONAS].append(item)
-        elif validar_pf_brasil(t, r, l):
-            dados_existentes[CAT_PF_BRASIL].append(item)
-
-    # Controle de duplicidade por categoria (permite que a mesma notícia esteja em PF-Brasil e Principais Notícias do Brasil, mas NUNCA em PF-AM e PF-BR juntas)
-    links_pf_global = set()
-    titulos_pf_global = set()
-
-    for cat_pf, validador in [(CAT_PF_AMAZONAS, validar_pf_amazonas), (CAT_PF_BRASIL, validar_pf_brasil)]:
-        limpas = []
-        for n in dados_existentes.get(cat_pf, []):
-            l, t, r = n.get('link', ''), n.get('titulo', ''), n.get('resumo', '')
-            chave_t = normalizar_titulo_dedup(t)
-            if validador(t, r, l) and l not in links_pf_global and chave_t not in titulos_pf_global:
-                links_pf_global.add(l)
-                titulos_pf_global.add(chave_t)
-                limpas.append(n)
-        dados_existentes[cat_pf] = limpas
+    # Migração automática de categorias antigas fundidas/renomeadas
+    mapa_migracao = {
+        CAT_TRAFICO_AM: ["Tráfico de drogas Amazonas", "Apreensão de drogas Amazonas"],
+        CAT_SEGURANCA_ESTADUAL_AM: ["Segurança Pública Amazonas", "Polícia Civil Amazonas", "Polícia Militar Amazonas"],
+        CAT_MEIO_AMBIENTE_AM: ["Garimpo ilegal Amazonas", "Extração de ouro Amazonas", "Queimadas Amazonas"],
+        CAT_POLITICOS_AM: ["Investigação política Amazonas"]
+    }
+    for nova_cat, antigas in mapa_migracao.items():
+        if not isinstance(dados_existentes.get(nova_cat), list):
+            dados_existentes[nova_cat] = []
+        for ant in antigas:
+            itens = dados_existentes.pop(ant, [])
+            if isinstance(itens, list):
+                dados_existentes[nova_cat].extend(itens)
 
     relatorio_geral = {}
 
-    # 1. Polícia Federal - Amazonas (Estritamente Amazonas)
-    noticias_pf_am = list(dados_existentes[CAT_PF_AMAZONAS])
-    for termo_pf_am in BUSCAS_PF_AMAZONAS:
-        try:
-            artigos = google_news.get_news(termo_pf_am)
-            if artigos:
-                for artigo in artigos:
-                    link = artigo.get('url', '#')
-                    titulo = artigo.get('title', 'Sem Título')
-                    resumo = artigo.get('description', '') or "Atuação da Polícia Federal no Amazonas."
-                    chave_tit = normalizar_titulo_dedup(titulo)
-
-                    if link in links_pf_global or chave_tit in titulos_pf_global:
-                        continue
-                    if not validar_pf_amazonas(titulo, resumo, link):
-                        continue
-
-                    links_pf_global.add(link)
-                    titulos_pf_global.add(chave_tit)
-                    noticias_pf_am.append({
-                        'titulo': titulo,
-                        'resumo': resumo,
-                        'data': formatar_data_brasil(artigo.get('published date', '')),
-                        'data_original': str(artigo.get('published date', '')),
-                        'fonte': artigo.get('publisher', {}).get('title', 'Fonte'),
-                        'link': link
-                    })
-        except Exception:
-            pass
-
-    relatorio_geral[CAT_PF_AMAZONAS] = ordenar_com_prioridade(noticias_pf_am) if noticias_pf_am else "Sem atualizações relevantes da PF no Amazonas nas últimas 24h."
-
-    # 2. Polícia Federal - Brasil (Estritamente fora do Amazonas)
-    noticias_pf_br = list(dados_existentes[CAT_PF_BRASIL])
-    for termo_pf_br in BUSCAS_PF_BRASIL:
-        try:
-            artigos = google_news.get_news(termo_pf_br)
-            if artigos:
-                for artigo in artigos:
-                    link = artigo.get('url', '#')
-                    titulo = artigo.get('title', 'Sem Título')
-                    resumo = artigo.get('description', '') or "Atuação nacional da Polícia Federal."
-                    chave_tit = normalizar_titulo_dedup(titulo)
-
-                    if link in links_pf_global or chave_tit in titulos_pf_global:
-                        continue
-                    if not validar_pf_brasil(titulo, resumo, link):
-                        continue
-
-                    links_pf_global.add(link)
-                    titulos_pf_global.add(chave_tit)
-                    noticias_pf_br.append({
-                        'titulo': titulo,
-                        'resumo': resumo,
-                        'data': formatar_data_brasil(artigo.get('published date', '')),
-                        'data_original': str(artigo.get('published date', '')),
-                        'fonte': artigo.get('publisher', {}).get('title', 'Fonte'),
-                        'link': link
-                    })
-        except Exception:
-            pass
-
-    relatorio_geral[CAT_PF_BRASIL] = ordenar_com_prioridade(noticias_pf_br) if noticias_pf_br else "Sem atualizações relevantes da PF no restante do país nas últimas 24h."
+    # 1 e 2. Polícia Federal - Amazonas e Polícia Federal - Brasil (mutuamente exclusivas)
+    links_pf = set()
+    titulos_pf = set()
+    relatorio_geral[CAT_PF_AMAZONAS] = coletar_categoria(
+        BUSCAS_PF_AMAZONAS, validar_pf_amazonas, dados_existentes, CAT_PF_AMAZONAS,
+        links_pf, titulos_pf, "Sem atualizações relevantes da PF no Amazonas nas últimas 24h."
+    )
+    relatorio_geral[CAT_PF_BRASIL] = coletar_categoria(
+        BUSCAS_PF_BRASIL, validar_pf_brasil, dados_existentes, CAT_PF_BRASIL,
+        links_pf, titulos_pf, "Sem atualizações relevantes da PF no restante do país nas últimas 24h."
+    )
 
     # 3. Fronteiras, narcotráfico e guerrilhas nos países limítrofes do Amazonas
     links_fronteira = set()
     titulos_fronteira = set()
-    noticias_fronteira = []
-    if isinstance(dados_existentes.get(CATEGORIA_FRONTEIRAS), list):
-        for n in dados_existentes[CATEGORIA_FRONTEIRAS]:
-            l, t, r = n.get('link', ''), n.get('titulo', ''), n.get('resumo', '')
-            chave_t = normalizar_titulo_dedup(t)
-            if validar_noticia_fronteira(t, r, l) and l not in links_fronteira and chave_t not in titulos_fronteira:
-                links_fronteira.add(l)
-                titulos_fronteira.add(chave_t)
-                noticias_fronteira.append(n)
+    relatorio_geral[CATEGORIA_FRONTEIRAS] = coletar_categoria(
+        BUSCAS_FRONTEIRAS, validar_noticia_fronteira, dados_existentes, CATEGORIA_FRONTEIRAS,
+        links_fronteira, titulos_fronteira, "Sem atualizações relevantes nas últimas 24h."
+    )
 
-    for termo_fronteira in BUSCAS_FRONTEIRAS:
-        try:
-            artigos_front = google_news.get_news(termo_fronteira)
-            if artigos_front:
-                for artigo in artigos_front:
-                    link = artigo.get('url', '#')
-                    titulo = artigo.get('title', 'Sem Título')
-                    resumo = artigo.get('description', '') or "Monitoramento de fronteira e países limítrofes."
-                    chave_tit = normalizar_titulo_dedup(titulo)
+    # 4. Tráfico de Drogas - Amazonas (âmbito estadual/integrado, sem PF)
+    links_trafico = set(links_pf)
+    titulos_trafico = set(titulos_pf)
+    relatorio_geral[CAT_TRAFICO_AM] = coletar_categoria(
+        BUSCAS_TRAFICO_AM, validar_trafico_amazonas, dados_existentes, CAT_TRAFICO_AM,
+        links_trafico, titulos_trafico, "Sem atualizações relevantes nas últimas 24h."
+    )
 
-                    if link in links_fronteira or chave_tit in titulos_fronteira:
-                        continue
-                    if not validar_noticia_fronteira(titulo, resumo, link):
-                        continue
+    # 5. Segurança Pública Estadual - Amazonas (PC-AM, PMAM e ocorrências estaduais, sem PF)
+    links_seg_est = set(links_pf)
+    titulos_seg_est = set(titulos_pf)
+    relatorio_geral[CAT_SEGURANCA_ESTADUAL_AM] = coletar_categoria(
+        BUSCAS_SEGURANCA_ESTADUAL_AM, validar_seguranca_estadual_amazonas, dados_existentes, CAT_SEGURANCA_ESTADUAL_AM,
+        links_seg_est, titulos_seg_est, "Sem atualizações relevantes nas últimas 24h."
+    )
 
-                    links_fronteira.add(link)
-                    titulos_fronteira.add(chave_tit)
-                    noticias_fronteira.append({
-                        'titulo': titulo,
-                        'resumo': resumo,
-                        'data': formatar_data_brasil(artigo.get('published date', '')),
-                        'data_original': str(artigo.get('published date', '')),
-                        'fonte': artigo.get('publisher', {}).get('title', 'Fonte'),
-                        'link': link
-                    })
-        except Exception:
-            pass
+    # 6. Crimes contra o Meio Ambiente - Amazonas (com flag alerta_queimada)
+    links_meio_amb = set()
+    titulos_meio_amb = set()
+    relatorio_geral[CAT_MEIO_AMBIENTE_AM] = coletar_categoria(
+        BUSCAS_MEIO_AMBIENTE, validar_meio_ambiente, dados_existentes, CAT_MEIO_AMBIENTE_AM,
+        links_meio_amb, titulos_meio_amb, "Sem atualizações relevantes nas últimas 24h.",
+        marcar_queimada=True
+    )
 
-    relatorio_geral[CATEGORIA_FRONTEIRAS] = ordenar_com_prioridade(noticias_fronteira) if noticias_fronteira else "Sem atualizações relevantes nas últimas 24h."
+    # 7. Investigação Policial envolvendo Políticos - Amazonas
+    links_politicos = set()
+    titulos_politicos = set()
+    relatorio_geral[CAT_POLITICOS_AM] = coletar_categoria(
+        BUSCAS_POLITICOS_AM, validar_politicos_amazonas, dados_existentes, CAT_POLITICOS_AM,
+        links_politicos, titulos_politicos, "Sem atualizações relevantes nas últimas 24h."
+    )
 
-    # 4. Demais Temas Regionais do Amazonas
-    links_regionais = set(links_pf_global)
-    titulos_regionais = set(titulos_pf_global)
+    # 8. Demais Categorias Remanescentes do Amazonas
+    links_restantes = set(links_pf | links_trafico | links_seg_est)
+    titulos_restantes = set(titulos_pf | titulos_trafico | titulos_seg_est)
+    for tema in TEMAS_BUSCA_RESTANTES:
+        relatorio_geral[tema] = coletar_categoria(
+            [tema], validar_noticia_regional, dados_existentes, tema,
+            links_restantes, titulos_restantes, "Sem atualizações relevantes nas últimas 24h."
+        )
 
-    for tema in TEMAS_BUSCA_AM:
-        noticias_tema = []
-        if isinstance(dados_existentes.get(tema), list):
-            for n in dados_existentes[tema]:
-                l, t, r = n.get('link', ''), n.get('titulo', ''), n.get('resumo', '')
-                chave_t = normalizar_titulo_dedup(t)
-                if validar_noticia_regional(t, r, l) and l not in links_regionais and chave_t not in titulos_regionais:
-                    links_regionais.add(l)
-                    titulos_regionais.add(chave_t)
-                    noticias_tema.append(n)
-
-        try:
-            artigos = google_news.get_news(tema)
-            if artigos:
-                for artigo in artigos:
-                    link = artigo.get('url', '#')
-                    titulo = artigo.get('title', 'Sem Título')
-                    resumo = artigo.get('description', '') or f"Notícia referente a {tema}."
-                    chave_tit = normalizar_titulo_dedup(titulo)
-
-                    if link in links_regionais or chave_tit in titulos_regionais:
-                        continue
-                    if not validar_noticia_regional(titulo, resumo, link):
-                        continue
-
-                    links_regionais.add(link)
-                    titulos_regionais.add(chave_tit)
-                    noticias_tema.append({
-                        'titulo': titulo,
-                        'resumo': resumo,
-                        'data': formatar_data_brasil(artigo.get('published date', '')),
-                        'data_original': str(artigo.get('published date', '')),
-                        'fonte': artigo.get('publisher', {}).get('title', 'Fonte'),
-                        'link': link
-                    })
-        except Exception:
-            pass
-
-        relatorio_geral[tema] = ordenar_com_prioridade(noticias_tema) if noticias_tema else "Sem atualizações relevantes nas últimas 24h."
-
-    # 5. Varredura Oculta e Prioritária no CM7 (roteada com precisão para a aba correta)
+    # 9. Varredura Oculta e Prioritária no CM7 (roteando para a categoria exata)
     for busca_cm7 in BUSCAS_OCULTAS_CM7:
         try:
             artigos_cm7 = google_news.get_news(busca_cm7)
@@ -618,51 +708,43 @@ def buscar_noticias():
                         'link': link
                     }
 
-                    # Roteamento estrito de PF (Amazonas vs Brasil)
+                    def injetar(cat, l_set, t_set, flag_fogo=False):
+                        if link not in l_set and chave_tit not in t_set:
+                            l_set.add(link)
+                            t_set.add(chave_tit)
+                            item = dict(noticia_obj)
+                            if flag_fogo:
+                                item['alerta_queimada'] = eh_noticia_queimada(titulo, resumo)
+                            if not isinstance(relatorio_geral.get(cat), list):
+                                relatorio_geral[cat] = []
+                            relatorio_geral[cat].append(item)
+                            relatorio_geral[cat] = ordenar_com_prioridade(relatorio_geral[cat])
+
                     if validar_pf_amazonas(titulo, resumo, link):
-                        if link not in links_pf_global and chave_tit not in titulos_pf_global:
-                            links_pf_global.add(link)
-                            titulos_pf_global.add(chave_tit)
-                            if not isinstance(relatorio_geral.get(CAT_PF_AMAZONAS), list):
-                                relatorio_geral[CAT_PF_AMAZONAS] = []
-                            relatorio_geral[CAT_PF_AMAZONAS].append(noticia_obj)
-                            relatorio_geral[CAT_PF_AMAZONAS] = ordenar_com_prioridade(relatorio_geral[CAT_PF_AMAZONAS])
-                        continue
+                        injetar(CAT_PF_AMAZONAS, links_pf, titulos_pf)
+                    elif validar_pf_brasil(titulo, resumo, link):
+                        injetar(CAT_PF_BRASIL, links_pf, titulos_pf)
 
-                    if validar_pf_brasil(titulo, resumo, link):
-                        if link not in links_pf_global and chave_tit not in titulos_pf_global:
-                            links_pf_global.add(link)
-                            titulos_pf_global.add(chave_tit)
-                            if not isinstance(relatorio_geral.get(CAT_PF_BRASIL), list):
-                                relatorio_geral[CAT_PF_BRASIL] = []
-                            relatorio_geral[CAT_PF_BRASIL].append(noticia_obj)
-                            relatorio_geral[CAT_PF_BRASIL] = ordenar_com_prioridade(relatorio_geral[CAT_PF_BRASIL])
-                        continue
+                    if validar_trafico_amazonas(titulo, resumo, link):
+                        injetar(CAT_TRAFICO_AM, links_trafico, titulos_trafico)
+                    elif validar_seguranca_estadual_amazonas(titulo, resumo, link):
+                        injetar(CAT_SEGURANCA_ESTADUAL_AM, links_seg_est, titulos_seg_est)
 
-                    if link in links_regionais or chave_tit in titulos_regionais:
-                        continue
-                    if not validar_noticia_regional(titulo, resumo, link):
-                        continue
+                    if validar_meio_ambiente(titulo, resumo, link):
+                        injetar(CAT_MEIO_AMBIENTE_AM, links_meio_amb, titulos_meio_amb, flag_fogo=True)
 
-                    links_regionais.add(link)
-                    titulos_regionais.add(chave_tit)
-                    texto_comb = f"{limpar_titulo_sem_fonte(titulo)} {resumo}".lower()
-                    aba_destino = "Tráfico de drogas Amazonas" if any(p in texto_comb for p in ["droga", "entorpecente", "cocaína", "maconha", "skunk", "tráfico"]) else "Segurança Pública Amazonas"
-
-                    if not isinstance(relatorio_geral.get(aba_destino), list):
-                        relatorio_geral[aba_destino] = []
-                    relatorio_geral[aba_destino].append(noticia_obj)
-                    relatorio_geral[aba_destino] = ordenar_com_prioridade(relatorio_geral[aba_destino])
+                    if validar_politicos_amazonas(titulo, resumo, link):
+                        injetar(CAT_POLITICOS_AM, links_politicos, titulos_politicos)
         except Exception:
             pass
 
-    # 6. Varredura Nacional: Portais Prioritários + Buscas Abertas
+    # 10. Varredura Nacional: Portais Prioritários + Buscas Abertas
     links_nacionais = set()
     titulos_nacionais = set()
     noticias_brasil = []
 
-    if isinstance(dados_existentes.get("Principais Notícias do Brasil"), list):
-        for n in dados_existentes["Principais Notícias do Brasil"]:
+    if isinstance(dados_existentes.get(CAT_NACIONAL), list):
+        for n in dados_existentes[CAT_NACIONAL]:
             l, t, r = n.get('link', ''), n.get('titulo', ''), n.get('resumo', '')
             chave_t = normalizar_titulo_dedup(t)
             if validar_noticia_nacional(t, r, l) and l not in links_nacionais and chave_t not in titulos_nacionais:
@@ -696,43 +778,36 @@ def buscar_noticias():
                         'link': link
                     }
 
-                    # Roteia notícias da PF capturadas nos portais nacionais para a aba PF correta (sem misturar)
+                    def espelhar(cat, l_set, t_set, flag_fogo=False):
+                        if link not in l_set and chave_tit not in t_set:
+                            l_set.add(link)
+                            t_set.add(chave_tit)
+                            item = dict(noticia_obj)
+                            if flag_fogo:
+                                item['alerta_queimada'] = eh_noticia_queimada(titulo, resumo)
+                            if not isinstance(relatorio_geral.get(cat), list):
+                                relatorio_geral[cat] = []
+                            relatorio_geral[cat].append(item)
+                            relatorio_geral[cat] = ordenar_com_prioridade(relatorio_geral[cat])
+
                     if validar_pf_amazonas(titulo, resumo, link):
-                        if link not in links_pf_global and chave_tit not in titulos_pf_global:
-                            links_pf_global.add(link)
-                            titulos_pf_global.add(chave_tit)
-                            if not isinstance(relatorio_geral.get(CAT_PF_AMAZONAS), list):
-                                relatorio_geral[CAT_PF_AMAZONAS] = []
-                            relatorio_geral[CAT_PF_AMAZONAS].append(noticia_obj)
-                            relatorio_geral[CAT_PF_AMAZONAS] = ordenar_com_prioridade(relatorio_geral[CAT_PF_AMAZONAS])
+                        espelhar(CAT_PF_AMAZONAS, links_pf, titulos_pf)
                     elif validar_pf_brasil(titulo, resumo, link):
-                        if link not in links_pf_global and chave_tit not in titulos_pf_global:
-                            links_pf_global.add(link)
-                            titulos_pf_global.add(chave_tit)
-                            if not isinstance(relatorio_geral.get(CAT_PF_BRASIL), list):
-                                relatorio_geral[CAT_PF_BRASIL] = []
-                            relatorio_geral[CAT_PF_BRASIL].append(noticia_obj)
-                            relatorio_geral[CAT_PF_BRASIL] = ordenar_com_prioridade(relatorio_geral[CAT_PF_BRASIL])
+                        espelhar(CAT_PF_BRASIL, links_pf, titulos_pf)
 
-                    # Duplica para Fronteiras se citar países limítrofes com narcotráfico/guerrilha
                     if validar_noticia_fronteira(titulo, resumo, link):
-                        if link not in links_fronteira and chave_tit not in titulos_fronteira:
-                            links_fronteira.add(link)
-                            titulos_fronteira.add(chave_tit)
-                            if not isinstance(relatorio_geral.get(CATEGORIA_FRONTEIRAS), list):
-                                relatorio_geral[CATEGORIA_FRONTEIRAS] = []
-                            relatorio_geral[CATEGORIA_FRONTEIRAS].append(noticia_obj)
-                            relatorio_geral[CATEGORIA_FRONTEIRAS] = ordenar_com_prioridade(relatorio_geral[CATEGORIA_FRONTEIRAS])
+                        espelhar(CATEGORIA_FRONTEIRAS, links_fronteira, titulos_fronteira)
 
-                    # Duplica para Segurança Pública Amazonas se citar Manaus/AM
-                    if tem_vinculo_amazonas(titulo, resumo) and validar_noticia_regional(titulo, resumo, link):
-                        if link not in links_regionais and chave_tit not in titulos_regionais:
-                            links_regionais.add(link)
-                            titulos_regionais.add(chave_tit)
-                            if not isinstance(relatorio_geral.get("Segurança Pública Amazonas"), list):
-                                relatorio_geral["Segurança Pública Amazonas"] = []
-                            relatorio_geral["Segurança Pública Amazonas"].append(noticia_obj)
-                            relatorio_geral["Segurança Pública Amazonas"] = ordenar_com_prioridade(relatorio_geral["Segurança Pública Amazonas"])
+                    if validar_trafico_amazonas(titulo, resumo, link):
+                        espelhar(CAT_TRAFICO_AM, links_trafico, titulos_trafico)
+                    elif validar_seguranca_estadual_amazonas(titulo, resumo, link):
+                        espelhar(CAT_SEGURANCA_ESTADUAL_AM, links_seg_est, titulos_seg_est)
+
+                    if validar_meio_ambiente(titulo, resumo, link):
+                        espelhar(CAT_MEIO_AMBIENTE_AM, links_meio_amb, titulos_meio_amb, flag_fogo=True)
+
+                    if validar_politicos_amazonas(titulo, resumo, link):
+                        espelhar(CAT_POLITICOS_AM, links_politicos, titulos_politicos)
 
                     if link not in links_nacionais and chave_tit not in titulos_nacionais:
                         links_nacionais.add(link)
@@ -742,7 +817,7 @@ def buscar_noticias():
         except Exception:
             pass
 
-    relatorio_geral["Principais Notícias do Brasil"] = ordenar_com_prioridade(noticias_brasil) if noticias_brasil else "Sem atualizações válidas."
+    relatorio_geral[CAT_NACIONAL] = ordenar_com_prioridade(noticias_brasil) if noticias_brasil else "Sem atualizações válidas."
 
     with open('noticias_atualizadas.json', 'w', encoding='utf-8') as f:
         json.dump(relatorio_geral, f, ensure_ascii=False, indent=4)
